@@ -1,0 +1,14 @@
+{% extends  'main/base.html' %}
+
+{% block  title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+    {%  if user.is_authenticated %}
+        <h1>Home page content</h1>
+        <p><a href="/logout">Logout</a> </p>
+    {% else %}
+        <p>Login <a href="/login">Here</a> </p>
+    {%  endif %}
+{% endblock %}
