@@ -2,7 +2,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models  import Post, Item
 from .forms import CreateNewPost
+from rest_framework import generics
 # Create your views here.
+from .serializers import PostSerializer
+
+
+class PostView(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
 
 
 def landing(response):

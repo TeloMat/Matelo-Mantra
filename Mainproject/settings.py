@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'main.apps.MainConfig',
     'rest_framework',
+    'frontend.apps.FrontendConfig'
 ]
 
 MIDDLEWARE = [
@@ -59,8 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',
-            os.path.join(BASE_DIR, 'reactapp/build')
+            BASE_DIR / 'templates'
         ]
         ,
         'APP_DIRS': True,
@@ -132,7 +132,4 @@ CRISPY_TEMPLATE_PACK="bootstrap4"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'reactapp/build/static')
 
-]
