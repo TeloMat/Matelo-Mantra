@@ -5,5 +5,6 @@ from frontend.views import index
 
 urlpatterns = [
     path('', index),
+    path('Post', index),
 
 ]

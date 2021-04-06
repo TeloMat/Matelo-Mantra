@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import PostView
+from .views import PostView, CreatePostView
 
 urlpatterns = [
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path("", views.landing, name="landing"),
     path("create/", views.create, name="create"),
     path("view/", views.view, name="view"),
-    path("postview/", PostView.as_view())
+    path("postview/", PostView.as_view()),
+    path("Createview/", CreatePostView.as_view())
 
 ]
