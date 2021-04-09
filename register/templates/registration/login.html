@@ -8,7 +8,7 @@
 {% load crispy_forms_tags %}
 
 
-{%  block content %}
+{%  block unauthenticated %}
     <form method="POST" class="form-group">
         {% csrf_token %}
         {{ form|crispy }}

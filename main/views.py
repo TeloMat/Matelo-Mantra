@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -31,51 +31,63 @@ class CreatePostView(APIView):
 
 
 def landing(response):
-    return redirect("/home")
+    return redirect("/api/home")
 
 
 
 def index(response, id):
+    if not response.user.is_authenticated:
+        return HttpResponseForbidden()
     post = Post.objects.get(id=id)
-    if post in response.user.post_set.all():
-
-        if response.method== "POST":
-            if response.POST.get("save"):
-                for item in post.item_set.all():
-                    if response.POST.get("c" + str(item.id)) == "clicked":
-                        item.private = True
-                    else:
-                        item.private = False
-                    item.save()
-            elif response.POST.get("newItem"):
-                txt = response.POST.get("new")
-                if len(txt) > 2:
-                    post.item_set.create(description=txt, private=False)
+    # if redirecting from edit
+    if response.method == "POST":
+        if response.POST.get("save"):
+            for item in post.item_set.all():
+                if response.POST.get("c" + str(item.id)) == "clicked":
+                    item.private = True
                 else:
-                    print("invalid input")
+                    item.private = False
+                item.save()
+        elif response.POST.get("newItem"):
+            txt = response.POST.get("new")
+            if len(txt) > 2:
+                post.item_set.create(description=txt, private=False)
+            else:
+                print("invalid input")
 
-        return render(response, "main/post.html", { "post" : post})
+        return render(response, "main/post.html", {"post": post})
     return render(response, "main/view.html", {})
 
+
+def editPost(response, id):
+    pass
+
+def listPost(response):
+    if response.user.is_authenticated:
+        pList = Post.objects.filter()
+
+        return render(response, "main/postList.html", {"list": pList})
+    return HttpResponseForbidden()
 
 def home(response):
     return render(response, "main/home.html", {})
 
 
-def create(response):
-#    response.user
+
+
+def createPost(response):
     if response.method == "POST":
         form = CreateNewPost(response.POST)
         if form.is_valid():
             n = form.cleaned_data["name"]
-            p = Post(name=n)
+            t = form.cleaned_data["text"]
+            pub = form.cleaned_data["public"]
+            p = Post(name=n, text=t, public=pub)
             p.save()
-            response.user.post_set.add(p)
-
-        return HttpResponseRedirect("/%i" %p.id)
+            return HttpResponseRedirect("/api/%i" %p.id)
     else:
         form = CreateNewPost()
-    return render(response, "main/create.html", {"form":form})
+    return render(response, "main/postCreate.html", {"form":form})
 
 
 def view(response):
