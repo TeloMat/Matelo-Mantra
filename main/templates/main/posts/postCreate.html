@@ -1,0 +1,34 @@
+{%  extends "main/base.html" %}
+
+
+{% block title %}
+        Create new Post
+
+{% endblock %}
+{% block content %}
+        Create Post
+
+    <form method="post" action="/api/post/create/" class="form-group">
+
+        {% csrf_token %}
+        <div class="form-group">
+                {{ form.name.label }}
+                {{ form.name}}
+        </div>
+        <div class="form-group">
+                {{ form.text.label }}
+                {{ form.text }}
+        </div>
+
+        <div class="form-check">
+                {{ form.public.label }}
+                {{ form.public }}
+        </div>
+
+
+            <button type="submit", name="save" class="btn btn-success">
+                Create new
+            </button>
+
+    </form>
+{% endblock %}

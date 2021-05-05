@@ -2,16 +2,18 @@
 
 
 {% block title %}
-    Create new Post
+        Edit Post
+
 {% endblock %}
 {% block content %}
-    Create Post
-    <form method="post" action="../create/" class="form-group">
+        Edit Post
+
+    <form method="post" action="/api/post/{{ form.id }}" class="form-group">
 
         {% csrf_token %}
         <div class="form-group">
                 {{ form.name.label }}
-                {{ form.name }}
+                {{ form.name}}
         </div>
         <div class="form-group">
                 {{ form.text.label }}
@@ -22,15 +24,10 @@
                 {{ form.public.label }}
                 {{ form.public }}
         </div>
-            <div class="input-group-prepend">
-
-            </div>
-
 
             <button type="submit", name="save" class="btn btn-success">
-                Create new
+                Save changes
             </button>
 
-{% comment %}    <button type="submit", name="Add">Create</button>{% endcomment %}
     </form>
 {% endblock %}
