@@ -20,11 +20,12 @@ Post list
         {% else %}
     <small>private </small>
     {% endif %}
+    <a href="/api/post/{{ p.id }}/delete" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
   </a>
-
-
-
 
     {% endfor %}
         </div>
+
+
+    <a href="/api/post/create">  <div class="col-md-3 border-right">Create new post</div>  </a>
 {% endblock %}
