@@ -12,14 +12,14 @@ class Post(models.Model):
         return "Title: " + self.name
 
 
-class credit(models.Model):
+class PostCredit(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     contributor = models.CharField(max_length=50, )
     contribution = models.CharField(max_length=200, blank=True)
     def __str__(self):
         return self.contributor + ": " + self.contribution
 
-class tag(models.Model):
+class PostTag(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     val = models.CharField(max_length=15)
 

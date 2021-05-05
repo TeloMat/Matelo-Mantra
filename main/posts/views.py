@@ -1,8 +1,8 @@
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
-from main.forms import EditPost, CreateNewPost
-from .model import Post
+from .forms import EditPost, CreateNewPost, AddPostCredit, AddPostTag
+from .models import Post, PostTag
 
 
 def indexPost(response, id):
@@ -20,8 +20,12 @@ def indexPost(response, id):
             return redirect('/api/post')
 
     form = EditPost(post)
+    tagForm = AddPostTag()
+    creditForm = AddPostCredit()
 
-    return render(response, "main/posts/post.html", {"form": form})
+    return render(response, "main/posts/post.html",
+                  {"post": post, "form": form,
+                   "tagForm": tagForm, "creditForm": creditForm})
 
 def deletePost(response, id):
     if not response.user.is_authenticated:
@@ -54,4 +58,20 @@ def createPost(response):
     return render(response, "main/posts/postCreate.html", {"form":form})
 
 
+def addPostTag(response, id):
+    form = AddPostTag(response.POST)
+    if form.is_valid():
+        post = Post.objects.get(id=id)
+        tag_val= form.cleaned_data["val"]
+        post.posttag_set.create(val=tag_val)
 
+    return redirect("/api/post/"+str(id))
+
+def addPostCredit(response, id):
+    form = AddPostCredit(response.POST)
+    if form.is_valid():
+        post = Post.objects.get(id=id)
+        contributor = form.cleaned_data["contributor"]
+        contribution = form.cleaned_data["contribution"]
+        post.postcredit_set.create(contributor=contributor, contribution=contribution)
+    return redirect("/api/post/"+str(id))

@@ -1,10 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
-from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .posts.views import *
 
-from .forms import CreateNewPost, EditPost
 from rest_framework import generics, status
 # Create your views here.
 from .serializers import PostSerializer, CreatePostSerializer

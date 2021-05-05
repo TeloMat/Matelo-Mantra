@@ -1,27 +1,3 @@
 from django import forms
+from .posts import forms
 
-
-
-class CreateNewPost(forms.Form):
-    name = forms.CharField(label="Post title", max_length=200)
-    text = forms.CharField(label="Post text", widget=forms.Textarea)
-    public = forms.BooleanField(label="Make public", required=False)
-
-
-class EditPost(forms.Form):
-    def __init__(self, post, *args, **kwargs):
-        super(EditPost, self).__init__(*args, **kwargs)
-        self.fields['name'] = forms.CharField(label="Post title", widget=forms.TextInput(attrs={'value': post.name}))
-        self.fields['text'] = forms.CharField(label="Post text", required=False,
-                                              widget=forms.Textarea(attrs={'placeholder': post.text}))
-        self.id = post.id
-        if post.public == True:
-            self.fields['public'] = forms.BooleanField(label="Make public", required=False,
-                                                       widget=forms.CheckboxInput(attrs={'checked': 'checked'}))
-        else:
-            self.fields['public'] = forms.BooleanField(label="Make public", required=False,
-                                                       widget=forms.CheckboxInput())
-
-    name = forms.CharField()
-    text = forms.CharField()
-    public = forms.BooleanField()

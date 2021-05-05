@@ -1,32 +1,73 @@
 {%  extends "main/base.html" %}
+{% load crispy_forms_filters %}
 
 
 {% block title %}
         Edit Post
-
 {% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
+        <div class="h2">
+
         Edit Post
+    </div>
+    <br>
 
     <form method="post" action="/api/post/{{ form.id }}" class="form-group">
 
         {% csrf_token %}
-        <div class="form-group">
-                {{ form.name.label }}
-                {{ form.name}}
-        </div>
-        <div class="form-group">
-                {{ form.text.label }}
-                {{ form.text }}
-        </div>
+        {{ form|crispy }}
 
-        <div class="form-check">
-                {{ form.public.label }}
-                {{ form.public }}
-        </div>
 
             <button type="submit", name="save" class="btn btn-success">
                 Save changes
+            </button>
+    </form>
+    <hr style="border-top: 1px solid #8c8b8b">
+
+
+    <div class="h4"> Post tags :</div>
+    {% for t in post.posttag_set.all %}
+     <div class="btn btn-outline-primary">
+       {{  t.val }}
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+
+    <div class="h5">
+
+        Add new Tag
+    </div>
+    <form method="post" action="/api/post/{{ form.id }}/addTag" class="form-group">
+        {% csrf_token %}
+        {{ tagForm|crispy }}
+            <button type="submit", name="save" class="btn btn-success">
+                Add
+            </button>
+
+    </form>
+    <hr style="border-top: 1px solid #8c8b8b">
+
+    <div class="h4"> Post Credits :</div>
+    {% for c in post.postcredit_set.all %}
+     <div class="btn btn-outline-primary">
+       <h6>{{  c.contributor }}
+           <small>{{ c.contribution }}</small>
+       </h6>
+    </div>
+    {% endfor %}
+    <br>
+    <br>
+
+    <div class="h5">
+        Add credit
+     </div>
+    <form method="post" action="/api/post/{{ form.id }}/addCredit" class="form-group">
+        {% csrf_token %}
+        {{ creditForm|crispy }}
+            <button type="submit", name="save" class="btn btn-success">
+                Add
             </button>
 
     </form>
