@@ -7,7 +7,13 @@ Post list
 {% endblock %}
 
 {% block content %}
+    <div class="h2">
+        Writings
+    </div>
+    <br>
+    <a href="/api/post/create">  <div class="col-md-3 border-right">Create new post</div>  </a>
     <div class="list-group">
+
     {% for p in list %}
   <a href="/api/post/{{ p.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
@@ -27,5 +33,4 @@ Post list
         </div>
 
 
-    <a href="/api/post/create">  <div class="col-md-3 border-right">Create new post</div>  </a>
 {% endblock %}

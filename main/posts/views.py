@@ -2,7 +2,7 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from .forms import EditPost, CreateNewPost, AddPostCredit, AddPostTag
-from .models import Post, PostTag
+from .models import Post
 
 
 def indexPost(response, id):
@@ -36,7 +36,7 @@ def deletePost(response, id):
 
 def listPost(response):
     if response.user.is_authenticated:
-        pList = Post.objects.filter()
+        pList = Post.objects.all()
 
         return render(response, "main/posts/postList.html", {"list": pList})
     return HttpResponseForbidden()
@@ -44,6 +44,8 @@ def listPost(response):
 
 
 def createPost(response):
+    if not response.user.is_authenticated:
+        return HttpResponseForbidden()
     if response.method == "POST":
         form = CreateNewPost(response.POST)
         if form.is_valid():
@@ -53,8 +55,7 @@ def createPost(response):
             p = Post(name=n, text=t, public=pub)
             p.save()
             return HttpResponseRedirect("/api/post")
-    else:
-        form = CreateNewPost()
+    form = CreateNewPost()
     return render(response, "main/posts/postCreate.html", {"form":form})
 
 
@@ -62,7 +63,7 @@ def addPostTag(response, id):
     form = AddPostTag(response.POST)
     if form.is_valid():
         post = Post.objects.get(id=id)
-        tag_val= form.cleaned_data["val"]
+        tag_val = form.cleaned_data["val"]
         post.posttag_set.create(val=tag_val)
 
     return redirect("/api/post/"+str(id))

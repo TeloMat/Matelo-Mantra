@@ -1,0 +1,29 @@
+{%  extends "main/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+        Edit Album
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="h2">
+            Edit Album
+    </div>
+
+
+    <form method="post" action="/api/travels/{{ form.id }}" class="form-group">
+
+        {% csrf_token %}
+        {{ form|crispy }}
+
+
+            <button type="submit", name="save" class="btn btn-success">
+                Save changes
+            </button>
+    </form>
+
+     <hr style="border-top: 1px solid #8c8b8b">
+
+
+
+{% endblock %}

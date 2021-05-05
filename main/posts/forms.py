@@ -10,9 +10,13 @@ class CreateNewPost(forms.Form):
 class EditPost(forms.Form):
     def __init__(self, post, *args, **kwargs):
         super(EditPost, self).__init__(*args, **kwargs)
-        self.fields['name'] = forms.CharField(label="Post title", widget=forms.TextInput(attrs={'value': post.name}))
-        self.fields['text'] = forms.CharField(label="Post text", required=False,
-                                              widget=forms.Textarea(attrs={'placeholder': post.text}))
+        self.fields['name'] = forms.CharField(label="Post title",
+                                              widget=forms.TextInput(attrs={'value': post.name}))
+        self.fields['text'] = forms.CharField(label="Post text",
+                                              required=False,
+                                              widget=forms.Textarea(
+                                                  attrs={'placeholder': post.text}
+                                              ))
         self.id = post.id
         if post.public == True:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,

@@ -22,6 +22,5 @@ class PostCredit(models.Model):
 class PostTag(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     val = models.CharField(max_length=15)
-
     def __str__(self):
         return self.val

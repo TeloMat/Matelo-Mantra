@@ -1,0 +1,17 @@
+{% extends "main/base.html"%}
+
+{% block title %}
+    Create new Picture album
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    Create album
+    <form method="post" action="/api/travels/create/" class="form-group" >
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit", name="save" class="btn btn-success">
+        Create new
+    </button>
+    </form>
+
+{% endblock %}
