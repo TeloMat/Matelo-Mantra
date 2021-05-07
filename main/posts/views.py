@@ -17,7 +17,7 @@ def indexPost(response, id):
             post.text = form.cleaned_data["text"]
             post.public = form.cleaned_data["public"]
             post.save()
-            return redirect('/api/post')
+            return redirect('/api/post/')
 
     form = EditPost(post)
     tagForm = AddPostTag()
@@ -31,7 +31,7 @@ def deletePost(response, id):
     if not response.user.is_authenticated:
         return HttpResponseForbidden()
     Post.objects.get(id=id).delete()
-    return redirect('/api/post')
+    return redirect('/api/post/')
 
 
 def listPost(response):
@@ -54,7 +54,7 @@ def createPost(response):
             pub = form.cleaned_data["public"]
             p = Post(name=n, text=t, public=pub)
             p.save()
-            return HttpResponseRedirect("/api/post")
+            return HttpResponseRedirect("/api/post/")
     form = CreateNewPost()
     return render(response, "main/posts/postCreate.html", {"form":form})
 

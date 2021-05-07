@@ -29,7 +29,10 @@ def indexAlbum(response, id):
             album.text = form.cleaned_data["description"]
             album.public = form.cleaned_data["public"]
             album.save()
-            return redirect('/api/travels')
+            if (response.FILES.get('thumbnail')):
+                album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
+                album.save()
+            return HttpResponseRedirect("/api/travels/")
 
     form = EditAlbum(album)
     # tagForm = ()
@@ -59,7 +62,9 @@ def createAlbum(response):
             album.title = cd.get('title')
             album.public = cd.get('public')
             album.description = cd.get('description')
-            album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
+            if (response.FILES.get('thumbnail')):
+                album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
+                album.save()
             album.save()
             return HttpResponseRedirect("/api/travels/")
     form = CreateNewAlbum()
@@ -71,4 +76,4 @@ def deleteAlbum(response, id):
         return HttpResponseForbidden()
     PictureAlbum.objects.get(id=id).delete()
 
-    return redirect('/api/travels')
+    return redirect('/api/travels/')
