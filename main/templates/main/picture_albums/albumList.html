@@ -14,27 +14,27 @@ Travel Album list
 
         <a href="/api/travels/create/">  <div class="col-md-3 border-right">Create new Album</div> </a>
 
-    {% for p in list %}
-    <a href="/api/travels/{{ p.id }}"
-       class="list-group-item list-group-item-action flex-column align-items-start">
+
 
        <div class="card-group">
+       {% for p in list %}
+
           <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
+        <a href="/api/travels/{{ p.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+              {% if p.thumbnail %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{p.thumbnail }}" alt="Card image cap">
+            {% endif %}
               <h5 class="card-title">{{ p.title }}</h5>
               <p class="card-text">{{ p.description }}</p>
               <p class="card-text"><small class="text-muted">{{ p.created_at }}</small></p>
-                <li class="list-inline-item">
-        <button class="btn btn-danger btn-sm rounded-0" type="button"
-                data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i> Delete</button>
-            </li>
+        <a href="/api/travels/{{ p.id }}/delete" class="btn btn-danger btn-sm rounded-0" type="button"
+                data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+
+        </a>
             </div>
-          </div>
+        {% endfor %}
         </div>
-    </a>
 
 
-    {% endfor %}
 
 {% endblock %}

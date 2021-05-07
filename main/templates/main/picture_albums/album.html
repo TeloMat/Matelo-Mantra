@@ -10,8 +10,8 @@
             Edit Album
     </div>
 
-
-    <form method="post" action="/api/travels/{{ form.id }}" class="form-group">
+    <div><img class="card-img-top" src="{{ MEDIA_URL }}{{album.thumbnail }}" alt="Card image cap"></div>
+    <form method="post" action="/api/travels/{{ form.id }}" class="form-group" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form|crispy }}

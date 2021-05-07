@@ -52,19 +52,21 @@ def createAlbum(response):
     if not response.user.is_authenticated:
         return HttpResponseForbidden()
     if response.method == "POST":
-        form = CreateNewAlbum(response.POST)
+        form = CreateNewAlbum(response.POST, response.FILES)
         if form.is_valid():
-            title = form.cleaned_data["title"]
-            desc = form.cleaned_data["description"]
-            pub = form.cleaned_data["public"]
-            album = PictureAlbum(title=title, description=desc, public=pub)
+            cd = form.cleaned_data
+            album = PictureAlbum()
+            album.title = cd.get('title')
+            album.public = cd.get('public')
+            album.description = cd.get('description')
+            album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
             album.save()
             return HttpResponseRedirect("/api/travels/")
     form = CreateNewAlbum()
     return render(response, "main/picture_albums/albumCreate.html", {"form": form})
 
 
-def deleteAlbum(response):
+def deleteAlbum(response, id):
     if not response.user.is_authenticated:
         return HttpResponseForbidden()
     PictureAlbum.objects.get(id=id).delete()

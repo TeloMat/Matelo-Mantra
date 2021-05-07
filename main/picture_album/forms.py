@@ -1,10 +1,14 @@
 from django import forms
 
+from main.picture_album.models import PictureAlbum
+
 
 class CreateNewAlbum(forms.Form):
+
     title = forms.CharField(label="Album title", max_length=200)
     description = forms.CharField(label="Album description", widget=forms.Textarea)
     public = forms.BooleanField(label="Make public", required=False)
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
 
 class EditAlbum(forms.Form):
@@ -28,3 +32,5 @@ class EditAlbum(forms.Form):
     title = forms.CharField()
     description = forms.CharField()
     public = forms.BooleanField()
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
+
