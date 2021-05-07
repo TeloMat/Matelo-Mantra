@@ -34,3 +34,7 @@ class EditAlbum(forms.Form):
     public = forms.BooleanField()
     thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
+
+class AddAlbumPicture(forms.Form):
+    caption = forms.CharField(label="Caption", max_length=255)
+    photo = forms.ImageField(label="Photo")

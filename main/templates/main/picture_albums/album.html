@@ -21,8 +21,31 @@
                 Save changes
             </button>
     </form>
+    <hr style="border-top: 1px solid #8c8b8b">
+    <div class="h3">
+            Add pictures to this album
+    </div>
+    <form method="post" action="/api/travels/{{ form.id }}/addImage" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
 
-     <hr style="border-top: 1px solid #8c8b8b">
+        {{ picForm|crispy }}
+        <button type="submit", name="save" class="btn btn-success">
+                Add
+        </button>
+    </form>
+
+        <hr style="border-top: 1px solid #8c8b8b">
+
+    {% for p in album.picture_set.all %}
+          <div class="card">
+              {% if p.photo %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{ p.photo }}" alt="Card image cap">
+            {% endif %}
+       <a href="/api/travels/{{ p.id }}/deleteImg" class="btn btn-danger btn-sm rounded-0" type="button"
+                data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+
+
+    {% endfor %}
 
 
 
