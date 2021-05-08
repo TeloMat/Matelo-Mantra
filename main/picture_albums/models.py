@@ -22,5 +22,6 @@ class Picture(models.Model):
 class PictureTag(models.Model):
     album = models.ForeignKey(PictureAlbum, on_delete=models.CASCADE, null=True)
     val = models.CharField(max_length=15)
+
     def __str__(self):
         return self.val

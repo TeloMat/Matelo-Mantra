@@ -3,7 +3,8 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from . import views
 from .posts import urls as posts
-from .picture_album import urls as pAlbums
+from .picture_albums import urls as pAlbums
+from .music_albums import urls as mAlbums
 
 #from .views import PostView, CreatePostView
 from .posts import urls
@@ -13,6 +14,7 @@ urlpatterns = [
     path("", views.landing, name="landing"),
     path("home/", views.home, name="Home"),
     path("post/", include(posts)),
-    path("travels/", include(pAlbums))
+    path("travels/", include(pAlbums)),
+    path("music/", include(mAlbums)),
 
 ]

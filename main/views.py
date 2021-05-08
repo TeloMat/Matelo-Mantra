@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .posts.views import *
-from .picture_album.views import *
+from .picture_albums.views import *
 
 from rest_framework import generics, status
 # Create your views here.

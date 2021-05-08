@@ -3,8 +3,8 @@ from random import random
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
-from .forms import CreateNewPAlbum, EditPAlbum, AddPAlbumPicture, AddPAlbumTag
-from .models import PictureAlbum, Picture
+from .forms import *
+from .models import *
 
 
 # def indexAlbum(response, id):
@@ -30,10 +30,9 @@ def indexPAlbum(response, id):
             album.title = form.cleaned_data["title"]
             album.text = form.cleaned_data["description"]
             album.public = form.cleaned_data["public"]
+            if response.FILES.get('thumbnail'):
+                album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
             album.save()
-            if (response.FILES.get('thumbnail')):
-                album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
-                album.save()
             return HttpResponseRedirect("/api/travels/")
 
     form = EditPAlbum(album)
@@ -43,12 +42,12 @@ def indexPAlbum(response, id):
     return render(response, "main/picture_albums/album.html",
                   {"album": album, "form": form, "picForm": picForm, "tagForm": tagForm})
 
+
 def listPAlbum(response):
     if response.user.is_authenticated:
         albumList = PictureAlbum.objects.all()
         return render(response, "main/picture_albums/albumList.html", {"list": albumList})
     return HttpResponseForbidden()
-
 
 
 def createPAlbum(response):
@@ -62,8 +61,8 @@ def createPAlbum(response):
             album.title = cd.get('title')
             album.public = cd.get('public')
             album.description = cd.get('description')
-            if (response.FILES.get('thumbnail')):
-                album.thumbnail.save(album.title + "_tb", response.FILES.get('thumbnail'))
+            if response.FILES.get('thumbnail'):
+                album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
             album.save()
             return HttpResponseRedirect("/api/travels/")
     form = CreateNewPAlbum()
@@ -76,7 +75,7 @@ def deletePAlbum(response, id):
     album = PictureAlbum.objects.get(id=id)
     album.thumbnail.delete()
     album.delete()
-    return redirect('/api/travels/')
+    return HttpResponseRedirect('/api/travels/')
 
 
 def addPAlbumImage(response, id):
@@ -88,9 +87,10 @@ def addPAlbumImage(response, id):
     if form.is_valid():
         album = PictureAlbum.objects.get(id=id)
         cd = form.cleaned_data
-        album.picture_set.create(caption=cd.get('caption'), photo=response.FILES.get('photo'))
+        album.picture_set.create(caption=cd.get('caption'),
+                                 photo=response.FILES.get('photo'))
 
-    return HttpResponseRedirect("/api/travels/"+str(id))
+    return HttpResponseRedirect("/api/travels/" + str(id))
 
 
 def deletePAlbumImg(response, id):
@@ -99,7 +99,7 @@ def deletePAlbumImg(response, id):
     picture = Picture.objects.get(id=id)
     picture.photo.delete()
     picture.delete()
-    return redirect('/api/travels/'+str(id))
+    return redirect('/api/travels/' + str(id))
 
 
 def addPAlbumTag(response, id):
@@ -111,7 +111,7 @@ def addPAlbumTag(response, id):
         tag_val = form.cleaned_data["val"]
         album.picturetag_set.create(val=tag_val)
 
-    return HttpResponseRedirect("/api/travels/"+str(id))
+    return HttpResponseRedirect("/api/travels/" + str(id))
 
 
 def displayPicture(response, id):

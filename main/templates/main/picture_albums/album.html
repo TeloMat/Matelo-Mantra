@@ -36,7 +36,7 @@
         Add new Tag
     </div>
 
-    <form method="post" action="/api/travels/{{ form.id }}/addTag" class="form-group">
+    <form method="post" action="/api/travels/{{ form.id }}/addTag/" class="form-group">
         {% csrf_token %}
         {{ tagForm|crispy }}
             <button type="submit", name="save" class="btn btn-success">
@@ -57,7 +57,7 @@
     {% for p in album.picture_set.all %}
           <div class="card">
               {% if p.photo %}
-                  <a href="/api/travels/pic/{{ p.id }}">
+                  <a href="/api/travels/pic/{{ p.id }}/">
             <img class="card-img-top" src="{{ MEDIA_URL }}{{ p.photo }}" alt="Card image cap">
             </a>
               {% endif %}
@@ -71,7 +71,7 @@
     <div class="h3">
             Add pictures to this album
     </div>
-    <form method="post" action="/api/travels/{{ form.id }}/addImage" class="form-group" enctype="multipart/form-data">
+    <form method="post" action="/api/travels/{{ form.id }}/addImage/" class="form-group" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ picForm|crispy }}

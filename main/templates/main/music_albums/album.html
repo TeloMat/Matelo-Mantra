@@ -1,0 +1,32 @@
+{%  extends "main/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+        Edit Album
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+     <div class="h2">
+            Edit Album
+    </div>
+
+    <div><img class="card-img-top" src="{{ MEDIA_URL }}{{album.cover }}" alt="Card image cap"></div>
+    <form method="post" action="/api/music/{{ form.id }}/" class="form-group" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form|crispy }}
+
+
+            <button type="submit", name="save" class="btn btn-success">
+                Save changes
+            </button>
+    </form>
+
+        <hr style="border-top: 1px solid #8c8b8b">
+    <div class="h4"> Album tags :</div>
+    {% for t in album.picturetag_set.all %}
+    <div class="btn btn-outline-primary">
+       {{  t.val }}
+    </div>
+    {% endfor %}
+{% endblock %}

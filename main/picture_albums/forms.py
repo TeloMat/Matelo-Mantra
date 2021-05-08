@@ -1,12 +1,12 @@
 from django import forms
 
-from main.picture_album.models import PictureAlbum
+from main.picture_albums.models import PictureAlbum
 
 
 class CreateNewPAlbum(forms.Form):
-
-    title = forms.CharField(label="Album title", max_length=200)
-    description = forms.CharField(label="Album description", widget=forms.Textarea)
+    title = forms.CharField(label="Album title", max_length=50)
+    description = forms.CharField(label="Album description",
+                                  widget=forms.Textarea, max_length=250)
     public = forms.BooleanField(label="Make public", required=False)
     thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
@@ -15,16 +15,20 @@ class EditPAlbum(forms.Form):
     def __init__(self, album, *args, **kwargs):
         super(EditPAlbum, self).__init__(*args, **kwargs)
         self.fields['title'] = forms.CharField(label="Album title",
-                                               widget=forms.TextInput(attrs={'value': album.title}))
+                                               widget=forms.TextInput(
+                                                   attrs={'value': album.title}
+                                               ))
         self.fields['description'] = forms.CharField(label="Album description",
                                                      required=False,
                                                      widget=forms.Textarea(
                                                          attrs={'placeholder': album.title}
                                                      ))
         self.id = album.id
-        if album.public == True:
+        if album.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,
-                                                       widget=forms.CheckboxInput(attrs={'checked': 'checked'}))
+                                                       widget=forms.CheckboxInput(
+                                                           attrs={'checked': 'checked'}
+                                                       ))
         else:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,
                                                        widget=forms.CheckboxInput())
@@ -36,7 +40,7 @@ class EditPAlbum(forms.Form):
 
 
 class AddPAlbumPicture(forms.Form):
-    caption = forms.CharField(label="Caption", max_length=255)
+    caption = forms.CharField(label="Caption", max_length=255, widget=forms.Textarea)
     photo = forms.ImageField(label="Photo")
 
 

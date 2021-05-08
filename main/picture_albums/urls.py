@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path("", views.listPAlbum, name="listPAlbum"),
     path("create/", views.createPAlbum, name="createPAlbum"),
-    path("<int:id>", views.indexPAlbum, name="indexPAlbum"),
+    path("<int:id>/", views.indexPAlbum, name="indexPAlbum"),
     path("<int:id>/delete", views.deletePAlbum, name="deletePAlbum"),
     path("<int:id>/addImage", views.addPAlbumImage, name="addPAlbumImage"),
     path("<int:id>/deleteImg", views.deletePAlbumImg, name="deletePAlbumImage"),

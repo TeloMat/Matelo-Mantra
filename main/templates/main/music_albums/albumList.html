@@ -3,16 +3,16 @@
 
 
 {% block title %}
-Travel Album list
+Music Album list
 {% endblock %}
 
 {% block content %}
-<div class="h2">
-    Travels
+    <div class="h2">
+    Music
 </div>
         <br>
 
-        <a href="/api/travels/create/">  <div class="col-md-3 border-right">Create new Album</div> </a>
+        <a href="/api/music/create/">  <div class="col-md-3 border-right">Create new Album</div> </a>
 
 
 
@@ -20,21 +20,21 @@ Travel Album list
        {% for p in list %}
 
           <div class="card">
-        <a href="/api/travels/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
-              {% if p.thumbnail %}
-            <img class="card-img-top" src="{{ MEDIA_URL }}{{p.thumbnail }}" alt="Card image cap">
+        <a href="/api/music/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
+              {% if p.cover %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{p.cover }}" alt="Card image cap">
             {% endif %}
               <h5 class="card-title">{{ p.title }}</h5>
+            <h5 class="card-title"><small class="text-muted">{{ p.artist }}</small></h5>
+
               <p class="card-text">{{ p.description }}</p>
               <p class="card-text"><small class="text-muted">{{ p.created_at }}</small></p>
-        <a href="/api/travels/{{ p.id }}/delete/" class="btn btn-danger btn-sm rounded-0" type="button"
+        <a href="/api/music/{{ p.id }}/delete" class="btn btn-danger btn-sm rounded-0" type="button"
                 data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
 
         </a>
             </div>
         {% endfor %}
         </div>
-
-
 
 {% endblock %}
