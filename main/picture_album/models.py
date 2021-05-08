@@ -17,3 +17,10 @@ class Picture(models.Model):
     caption = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='travels/pictures', blank=False)
+
+
+class PictureTag(models.Model):
+    album = models.ForeignKey(PictureAlbum, on_delete=models.CASCADE, null=True)
+    val = models.CharField(max_length=15)
+    def __str__(self):
+        return self.val

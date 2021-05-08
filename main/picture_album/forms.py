@@ -3,7 +3,7 @@ from django import forms
 from main.picture_album.models import PictureAlbum
 
 
-class CreateNewAlbum(forms.Form):
+class CreateNewPAlbum(forms.Form):
 
     title = forms.CharField(label="Album title", max_length=200)
     description = forms.CharField(label="Album description", widget=forms.Textarea)
@@ -11,9 +11,9 @@ class CreateNewAlbum(forms.Form):
     thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
 
-class EditAlbum(forms.Form):
+class EditPAlbum(forms.Form):
     def __init__(self, album, *args, **kwargs):
-        super(EditAlbum, self).__init__(*args, **kwargs)
+        super(EditPAlbum, self).__init__(*args, **kwargs)
         self.fields['title'] = forms.CharField(label="Album title",
                                                widget=forms.TextInput(attrs={'value': album.title}))
         self.fields['description'] = forms.CharField(label="Album description",
@@ -35,6 +35,10 @@ class EditAlbum(forms.Form):
     thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
 
-class AddAlbumPicture(forms.Form):
+class AddPAlbumPicture(forms.Form):
     caption = forms.CharField(label="Caption", max_length=255)
     photo = forms.ImageField(label="Photo")
+
+
+class AddPAlbumTag(forms.Form):
+    val = forms.CharField(label="tag", max_length=15, required=True)

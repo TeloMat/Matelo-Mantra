@@ -66,7 +66,7 @@ def addPostTag(response, id):
         tag_val = form.cleaned_data["val"]
         post.posttag_set.create(val=tag_val)
 
-    return redirect("/api/post/"+str(id))
+    return HttpResponseRedirect("/api/post/"+str(id))
 
 def addPostCredit(response, id):
     form = AddPostCredit(response.POST)
@@ -75,4 +75,4 @@ def addPostCredit(response, id):
         contributor = form.cleaned_data["contributor"]
         contribution = form.cleaned_data["contribution"]
         post.postcredit_set.create(contributor=contributor, contribution=contribution)
-    return redirect("/api/post/"+str(id))
+    return HttpResponseRedirect("/api/post/"+str(id))
