@@ -54,8 +54,9 @@ def indexMAlbum(response, id):
             return HttpResponseRedirect("/api/music/")
 
     form = EditMAlbum(album)
+    songForm = AddNewSong()
     return render(response, "main/music_albums/album.html", {"album": album,
-                                                             "form": form})
+                                                             "form": form, "songForm": songForm})
 
 
 def deleteMAlbum(response, id):
@@ -72,7 +73,7 @@ def createSong(response, id):
         return HttpResponseForbidden()
 
     form = AddNewSong(response.POST, response.FILES)
-    if not response.FILES('track'):
+    if not response.FILES.get('track'):
         return HttpResponseForbidden()
     if form.is_valid():
         album = MusicAlbum.objects.get(id=id)
@@ -83,16 +84,35 @@ def createSong(response, id):
             track=response.FILES.get('track')
         )
 
-    return HttpResponseRedirect("/api/music/" + str(id))
+    return HttpResponseRedirect("/api/music/" + str(id) + "/")
 
 
 def indexSong(response, id):
     if not response.user.is_authenticated:
         return HttpResponseForbidden()
-    return None
+    song = Song.objects.get(id=id)
+    if response.method == "POST":
+        form = EditSong(Song, response.POST, response.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            album = MusicAlbum.objects.filter(id=song.album_id)
+            song.title = cd.get('title')
+            if cd.get('description'):
+                song.description = cd.get('description')
+            if cd.get('track'):
+                song.track = cd.get('track')
+            song.save()
+            return HttpResponseRedirect("/api/music/" + str(song.album_id) + "/")
+    form = EditSong(song)
+    return render(response, "main/music_albums/albumSong.html",
+                  {"song": song, "form": form})
 
 
 def deleteSong(response, id):
     if not response.user.is_authenticated:
         return HttpResponseForbidden()
-    return None
+    song = Song.objects.get(id=id)
+    album_id = song.album_id
+    song.track.delete()
+    song.delete()
+    return HttpResponseRedirect('/api/music/' + str(album_id) + '/')

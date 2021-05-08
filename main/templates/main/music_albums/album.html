@@ -23,10 +23,27 @@
     </form>
 
         <hr style="border-top: 1px solid #8c8b8b">
-    <div class="h4"> Album tags :</div>
-    {% for t in album.picturetag_set.all %}
-    <div class="btn btn-outline-primary">
-       {{  t.val }}
-    </div>
+    <div class="h4"> Album songs :</div>
+    {% for t in album.song_set.all %}
+    <ul class="list-group list-group-flush">
+         <li class="list-group-item"><a href="/api/music/songs/{{ t.id }}/">{{ t.title }}</a></li>
+        <li class="list-group-item"> <audio src="{{ t.track.url }}" controls></audio> <a href="/api/music/songs/{{ t.id }}/delete/" class="btn btn-danger btn-sm rounded-0" type="button"
+                data-toggle="tooltip" data-placement="top" title="Delete">Delete</a></li>
+    </ul>
     {% endfor %}
+    <br>
+    <br>
+    <div class="h4"> Add new songs to this album :</div>
+        <form method="post" action="/api/music/{{ form.id }}/createSong/" class="form-group" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+                {{ songForm|crispy }}
+
+    <button type="submit", name="save" class="btn btn-success">
+                Add new song
+            </button>
+        </form>
+
+
 {% endblock %}

@@ -1,0 +1,23 @@
+{%  extends "main/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    Edit song
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+      <div class="h2">
+            Edit Song
+    </div>
+    <form method="post" action="/api/music/songs/{{ form.id }}/" class="form-group" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form|crispy }}
+
+
+            <button type="submit", name="save" class="btn btn-success">
+                Save changes
+            </button>
+    </form>
+
+{% endblock %}

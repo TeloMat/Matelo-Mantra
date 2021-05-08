@@ -14,14 +14,17 @@ class EditMAlbum(forms.Form):
     def __init__(self, album, *args, **kwargs):
         super(EditMAlbum, self).__init__(*args, **kwargs)
         self.fields['title'] = forms.CharField(label="Album title",
+                                               max_length=50,
                                                widget=forms.TextInput(
                                                    attrs={'value': album.title}
                                                ))
         self.fields['artist'] = forms.CharField(label="Artist",
+                                                max_length=50,
                                                 widget=forms.TextInput(
                                                     attrs={'value': album.artist}))
         self.fields['description'] = forms.CharField(label="Album description",
                                                      required=False,
+                                                     max_length=250,
                                                      widget=forms.Textarea(
                                                          attrs={'placeholder': album.title}
                                                      ))
@@ -45,4 +48,27 @@ class EditMAlbum(forms.Form):
 class AddNewSong(forms.Form):
     title = forms.CharField(label="Song Title", max_length=50)
     description = forms.CharField(label="Description", max_length=250, required=False, widget=forms.Textarea)
+    track = forms.FileField(label="Track")
+
+
+class EditSong(forms.Form):
+    def __init__(self, song, *args, **kwargs):
+        super(EditSong, self).__init__(*args,**kwargs)
+        self.fields['title'] = forms.CharField(label="Song title",
+                                               widget=forms.TextInput(
+                                                   attrs={'value': song.title}
+                                               ),
+                                               max_length=50
+                                               )
+        self.fields['description'] = forms.CharField(label="Description",
+                                                     widget=forms.Textarea(
+                                                         attrs={'placeholder': song.description}
+                                                     ),
+                                                     required= False,
+                                                     max_length=250
+                                                     )
+        self.id = song.id
+
+    title = forms.CharField()
+    description = forms.CharField()
     track = forms.FileField(label="Track")
