@@ -28,7 +28,7 @@ class CreatePostView(APIView):
 
 
 def landing(response):
-    return redirect("/api/home")
+    return redirect("/api/home/")
 
 
 

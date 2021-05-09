@@ -7,14 +7,16 @@ from .models import *
 
 def listMAlbum(response):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     albumList = MusicAlbum.objects.all()
     return render(response, "main/music_albums/albumList.html", {"list": albumList})
 
 
 def createMAlbum(response):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     if response.method == "POST":
         form = CreateNewMAlbum(response.POST, response.FILES)
         if form.is_valid():
@@ -36,7 +38,8 @@ def createMAlbum(response):
 
 def indexMAlbum(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     album = MusicAlbum.objects.get(id=id)
 
     if response.method == "POST":
@@ -61,7 +64,8 @@ def indexMAlbum(response, id):
 
 def deleteMAlbum(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     album = MusicAlbum.objects.get(id=id)
     album.cover.delete()
     album.delete()
@@ -70,7 +74,7 @@ def deleteMAlbum(response, id):
 
 def createSong(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
 
     form = AddNewSong(response.POST, response.FILES)
     if not response.FILES.get('track'):
@@ -81,6 +85,7 @@ def createSong(response, id):
         album.song_set.create(
             title=cd.get('title'),
             description=cd.get('description'),
+            artists=cd.get('artists'),
             track=response.FILES.get('track')
         )
 
@@ -89,14 +94,15 @@ def createSong(response, id):
 
 def indexSong(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     song = Song.objects.get(id=id)
     if response.method == "POST":
         form = EditSong(Song, response.POST, response.FILES)
         if form.is_valid():
             cd = form.cleaned_data
-            album = MusicAlbum.objects.filter(id=song.album_id)
             song.title = cd.get('title')
+            song.artists = cd.get('artists')
             if cd.get('description'):
                 song.description = cd.get('description')
             if cd.get('track'):
@@ -110,7 +116,8 @@ def indexSong(response, id):
 
 def deleteSong(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     song = Song.objects.get(id=id)
     album_id = song.album_id
     song.track.delete()

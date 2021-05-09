@@ -7,7 +7,7 @@ from .models import Post
 
 def indexPost(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
     post = Post.objects.get(id=id)
     # if redirecting from edit
     if response.method == "POST":
@@ -29,7 +29,7 @@ def indexPost(response, id):
 
 def deletePost(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
     Post.objects.get(id=id).delete()
     return redirect('/api/post/')
 
@@ -39,13 +39,12 @@ def listPost(response):
         pList = Post.objects.all()
 
         return render(response, "main/posts/postList.html", {"list": pList})
-    return HttpResponseForbidden()
-
+    return HttpResponseRedirect('/login/')
 
 
 def createPost(response):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
     if response.method == "POST":
         form = CreateNewPost(response.POST)
         if form.is_valid():
@@ -60,6 +59,8 @@ def createPost(response):
 
 
 def addPostTag(response, id):
+    if not response.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     form = AddPostTag(response.POST)
     if form.is_valid():
         post = Post.objects.get(id=id)
@@ -69,6 +70,8 @@ def addPostTag(response, id):
     return HttpResponseRedirect("/api/post/"+str(id))
 
 def addPostCredit(response, id):
+    if not response.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
     form = AddPostCredit(response.POST)
     if form.is_valid():
         post = Post.objects.get(id=id)

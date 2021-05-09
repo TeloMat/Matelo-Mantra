@@ -21,7 +21,7 @@ from .models import *
 
 def indexPAlbum(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
     album = PictureAlbum.objects.get(id=id)
     # if redirecting from edit
     if response.method == "POST":
@@ -47,12 +47,13 @@ def listPAlbum(response):
     if response.user.is_authenticated:
         albumList = PictureAlbum.objects.all()
         return render(response, "main/picture_albums/albumList.html", {"list": albumList})
-    return HttpResponseForbidden()
+    return HttpResponseRedirect('/login/')
 
 
 def createPAlbum(response):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     if response.method == "POST":
         form = CreateNewPAlbum(response.POST, response.FILES)
         if form.is_valid():
@@ -71,7 +72,8 @@ def createPAlbum(response):
 
 def deletePAlbum(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     album = PictureAlbum.objects.get(id=id)
     album.thumbnail.delete()
     album.delete()
@@ -80,7 +82,8 @@ def deletePAlbum(response, id):
 
 def addPAlbumImage(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     form = AddPAlbumPicture(response.POST, response.FILES)
     if not response.FILES.get('photo'):
         return HttpResponseForbidden()
@@ -95,7 +98,8 @@ def addPAlbumImage(response, id):
 
 def deletePAlbumImg(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     picture = Picture.objects.get(id=id)
     picture.photo.delete()
     picture.delete()
@@ -104,7 +108,8 @@ def deletePAlbumImg(response, id):
 
 def addPAlbumTag(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     form = AddPAlbumTag(response.POST)
     if form.is_valid():
         album = PictureAlbum.objects.get(id=id)
@@ -116,7 +121,8 @@ def addPAlbumTag(response, id):
 
 def displayPicture(response, id):
     if not response.user.is_authenticated:
-        return HttpResponseForbidden()
+        return HttpResponseRedirect('/login/')
+
     picture = Picture.objects.get(id=id)
     url = picture.photo.url
     return HttpResponseRedirect(url)

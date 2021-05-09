@@ -8,6 +8,7 @@ from .music_albums import urls as mAlbums
 
 #from .views import PostView, CreatePostView
 from .posts import urls
+from .views import PostView
 
 urlpatterns = [
 
@@ -16,5 +17,6 @@ urlpatterns = [
     path("post/", include(posts)),
     path("travels/", include(pAlbums)),
     path("music/", include(mAlbums)),
+    path("test/", PostView().as_view())
 
 ]

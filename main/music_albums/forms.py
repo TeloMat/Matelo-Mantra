@@ -47,13 +47,14 @@ class EditMAlbum(forms.Form):
 
 class AddNewSong(forms.Form):
     title = forms.CharField(label="Song Title", max_length=50)
+    artists = forms.CharField(label="Artists", max_length=100)
     description = forms.CharField(label="Description", max_length=250, required=False, widget=forms.Textarea)
     track = forms.FileField(label="Track")
 
 
 class EditSong(forms.Form):
     def __init__(self, song, *args, **kwargs):
-        super(EditSong, self).__init__(*args,**kwargs)
+        super(EditSong, self).__init__(*args, **kwargs)
         self.fields['title'] = forms.CharField(label="Song title",
                                                widget=forms.TextInput(
                                                    attrs={'value': song.title}
@@ -64,11 +65,18 @@ class EditSong(forms.Form):
                                                      widget=forms.Textarea(
                                                          attrs={'placeholder': song.description}
                                                      ),
-                                                     required= False,
+                                                     required=False,
                                                      max_length=250
                                                      )
+        self.fields['artists'] = forms.CharField(label="artists",
+                                                 widget=forms.TextInput(
+                                                     attrs={'value': song.artists}
+                                                 ),
+                                                 max_length=100
+                                                 )
         self.id = song.id
 
     title = forms.CharField()
+    artists = forms.CharField()
     description = forms.CharField()
-    track = forms.FileField(label="Track")
+    track = forms.FileField(label="Track", required=False)

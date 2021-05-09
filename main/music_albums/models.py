@@ -13,6 +13,7 @@ class MusicAlbum(models.Model):
 class Song(models.Model):
     album = models.ForeignKey(MusicAlbum, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
+    artists = models.CharField(max_length=100, default="Matelo Mantra")
     description = models.CharField(max_length=250, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     track = models.FileField(upload_to='music/tracks')
