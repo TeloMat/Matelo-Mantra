@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'main.apps.MainConfig',
     'rest_framework',
-    'frontend.apps.FrontendConfig'
+    'webpack_loader',
+    # 'frontend.apps.FrontendConfig'
 ]
 
 MIDDLEWARE = [
@@ -56,11 +57,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Mainproject.urls'
 
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates'
+            TEMPLATES_DIR
         ]
         ,
         'APP_DIRS': True,
@@ -128,10 +132,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CRISPY_TEMPLATE_PACK="bootstrap4"
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/', # must end with slash
+        'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
+    }
+}
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "/api/"
 LOGOUT_REDIRECT_URL = "/api/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/'
+

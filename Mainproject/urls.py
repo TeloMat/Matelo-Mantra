@@ -17,6 +17,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+
 from register import views as v
 
 urlpatterns = [
@@ -24,6 +26,7 @@ urlpatterns = [
     path('account/', include("register.urls")),
     path('api/', include("main.urls")),
     path('', include("django.contrib.auth.urls")),
-    path('index/', include("frontend.urls")),
+    # path('index/', include("frontend.urls")),
+    path('', TemplateView.as_view(template_name='index.html'), name="app"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
