@@ -1,20 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Body></Body>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Body from "@/components/Body";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Body,
   }
 }
 </script>
 
 <style>
+.body{
+
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,5 +25,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  z-index: -20;
 }
 </style>
