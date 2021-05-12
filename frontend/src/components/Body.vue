@@ -1,17 +1,20 @@
 <template>
   <div id="page">
     <div class="wrapper">
-
-      <Menu>    </Menu>
+      <Menu></Menu>
+      <Description></Description>
+      <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script>
 import Menu from "@/components/Menu";
+import Description from "@/components/Description";
+import Footer from "@/components/Footer";
 export default {
   name: "Body",
-  components: {Menu}
+  components: {Footer, Description, Menu}
 }
 </script>
 
@@ -20,6 +23,7 @@ export default {
     overflow: hidden;
     height: fit-content;
     background-image: url("../assets/background3.jpg");
+    z-index: -2;
   }
 
 

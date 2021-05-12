@@ -15,8 +15,22 @@ export default {
 </script>
 
 <style>
-.body{
-
+html {
+  position: relative;
+  min-height: 100vh;
+}
+body {
+  position: absolute;
+  top: -70px;
+  right: 0;
+  left: 0;
+  color: white;
+  font-family: 'Play', sans-serif;
+  max-width: 2560px;
+  margin: 0 auto;
+  min-width: 960px;
+  height:100%;
+  padding:0;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
