@@ -13,10 +13,10 @@ from .views import PostView
 urlpatterns = [
 
     path("", views.landing, name="landing"),
-    path("home", views.home, name="Home"),
-    path("post", include(posts)),
-    path("travels", include(pAlbums)),
-    path("music", include(mAlbums)),
-    path("test", PostView().as_view())
+    path("home/", views.home, name="Home"),
+    path("post/", include(posts)),
+    path("travels/", include(pAlbums)),
+    path("music/", include(mAlbums)),
+    path("test/", PostView().as_view())
 
 ]

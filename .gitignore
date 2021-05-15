@@ -1,6 +1,7 @@
 /frontend/node_modules/
 /db.sqlite3
-/media/
 /venv/
 /frontend/webpack-stats.json
 /frontend/src/assets/website/
+/media/music/
+/media/travels/

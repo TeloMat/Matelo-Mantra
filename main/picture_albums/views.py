@@ -93,7 +93,7 @@ def addPAlbumImage(response, id):
         album.picture_set.create(caption=cd.get('caption'),
                                  photo=response.FILES.get('photo'))
 
-    return HttpResponseRedirect("/api/travels/" + str(id))
+    return HttpResponseRedirect("/api/travels/" + str(id)+"/")
 
 
 def deletePAlbumImg(response, id):

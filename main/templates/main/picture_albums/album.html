@@ -11,7 +11,7 @@
     </div>
 
     <div><img class="card-img-top" src="{{ MEDIA_URL }}{{album.thumbnail }}" alt="Card image cap"></div>
-    <form method="post" action="/api/travels/{{ form.id }}" class="form-group" enctype="multipart/form-data">
+    <form method="post" action="/api/travels/{{ form.id }}/" class="form-group" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form|crispy }}
@@ -63,7 +63,7 @@
               {% endif %}
 
         <p class="card-text">{{ p.caption }}</p>
-       <a href="/api/travels/{{ p.id }}/deleteImg" class="btn btn-danger btn-sm rounded-0" type="button">Delete</a>
+       <a href="/api/travels/{{ p.id }}/deleteImg/" class="btn btn-danger btn-sm rounded-0" type="button">Delete</a>
 
                </div>
     {% endfor %}

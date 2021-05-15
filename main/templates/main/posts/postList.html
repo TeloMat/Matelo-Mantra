@@ -11,7 +11,7 @@ Post list
         Writings
     </div>
     <br>
-    <a href="/api/post/create">  <div class="col-md-3 border-right">Create new post</div>  </a>
+    <a href="/api/post/create/">  <div class="col-md-3 border-right">Create new post</div>  </a>
     <div class="list-group">
 
     {% for p in list %}
@@ -26,7 +26,7 @@ Post list
         {% else %}
     <small>private </small>
     {% endif %}
-    <a href="/api/post/{{ p.id }}/delete" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+    <a href="/api/post/{{ p.id }}/delete/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
   </a>
 
     {% endfor %}

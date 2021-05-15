@@ -13,7 +13,7 @@
     </div>
     <br>
 
-    <form method="post" action="/api/post/{{ form.id }}" class="form-group">
+    <form method="post" action="/api/post/{{ form.id }}/" class="form-group">
 
         {% csrf_token %}
         {{ form|crispy }}
@@ -39,7 +39,7 @@
 
         Add new Tag
     </div>
-    <form method="post" action="/api/post/{{ form.id }}/addTag" class="form-group">
+    <form method="post" action="/api/post/{{ form.id }}/addTag/" class="form-group">
         {% csrf_token %}
         {{ tagForm|crispy }}
             <button type="submit", name="save" class="btn btn-success">
@@ -63,7 +63,7 @@
     <div class="h5">
         Add credit
      </div>
-    <form method="post" action="/api/post/{{ form.id }}/addCredit" class="form-group">
+    <form method="post" action="/api/post/{{ form.id }}/addCredit/" class="form-group">
         {% csrf_token %}
         {{ creditForm|crispy }}
             <button type="submit", name="save" class="btn btn-success">
