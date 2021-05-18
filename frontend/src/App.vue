@@ -1,24 +1,47 @@
 <template>
-  <Body></Body>
+
+  <router-view/>
 </template>
 
 <script>
 
-import Body from "@/components/Body";
+
+// const Home = {template: '<Body></Body>'}
+
+
+// const routes = {
+//   '/': Home
+// }
+
+// new Vue({
+//   el: '#app',
+//   data: {
+//     currentRoute: window.location.pathname
+//   },
+//   computed:{
+//     ViewComponent (){
+//       return routes[this.currentRoute]
+//     }
+//   },
+//   render(h){
+//     return h(this.ViewComponent)
+//   }
+// })
 
 export default {
   name: 'App',
   components: {
-    Body,
   }
 }
 </script>
 
 <style>
+
 html {
   position: relative;
   min-height: 100vh;
 }
+
 body {
   position: absolute;
   top: -70px;
@@ -40,5 +63,7 @@ body {
   color: #2c3e50;
   margin-top: 60px;
   z-index: -20;
+  width: 100%;
+  overflow: hidden;
 }
 </style>

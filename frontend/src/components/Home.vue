@@ -1,30 +1,23 @@
 <template>
-  <div id="page">
+    <Background/>
     <div class="wrapper">
       <Menu></Menu>
-      <Description></Description>
-      <Footer></Footer>
     </div>
-  </div>
+    <Footer></Footer>
 </template>
 
 <script>
 import Menu from "@/components/Menu";
-import Description from "@/components/Description";
 import Footer from "@/components/Footer";
+import Background from "@/components/Background";
 export default {
-  name: "Body",
-  components: {Footer, Description, Menu}
+  name: "Home",
+  components: {Background, Footer, Menu}
 }
 </script>
 
 <style scoped>
-  #page{
-    overflow: hidden;
-    height: fit-content;
-    background-image: url("../assets/background3.jpg");
-    z-index: -2;
-  }
+
 
 
  .wrapper{

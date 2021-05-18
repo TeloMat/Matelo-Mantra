@@ -4,9 +4,10 @@
     <div class="grid_container">
 <!--      <div class="grid_background"><img src="../assets/background4.jpg" alt="Error loading img"> </div>-->
       <div class="grid_content">
-        <div class="grid_content_item"><img id="musician" src="../assets/music.jpg" alt="Error loading img"> <div class="grid_content_item_text">Musician</div></div>
-        <div class="grid_content_item"><img src="../assets/travel.jpg" alt="Error loading img"><div class="grid_content_item_text"> Traveler</div></div>
-        <div class="grid_content_item"><img src="../assets/writer.jpg" alt="Error loading img"><div class="grid_content_item_text">Writer</div></div>
+        <div class="grid_content_item">        <router-link to=Musician>
+<img id="musician" src="../assets/music.jpg" alt="Error loading img"> </router-link><div class="grid_content_item_text">Musician</div></div>
+        <div class="grid_content_item"><router-link to=travels> <img src="../assets/travel.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text"> Traveler</div></div>
+        <div class="grid_content_item"><router-link to=writer><img src="../assets/writer.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text">Writer</div></div>
       </div>
 
     </div>
@@ -34,12 +35,13 @@ export default {
     max-width: none;
     height: 100%;
     margin: 0 -140%;
+
   }
 
   .grid_container{
     margin: 0;
-    height: 90vh;
     position: relative;
+    width: 100%;
   }
 
   .grid_background{
@@ -61,6 +63,7 @@ export default {
   }
 
   .grid_content{
+    width: 100%;
     margin : 0;
     display: grid;
     grid-auto-rows: 2fr;

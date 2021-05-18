@@ -1,25 +1,25 @@
 <template>
   <div class="bar">
-    <div class="bar_msg">
-      <p>
-      Like my content? consider sharing it with your friends!
-      </p>
+    <div class="bar_msg wrapper">
+      <img src="../assets/thumbsup.png">          Like my content? consider sharing it with your friends!
     </div>
+    <div class="bar_content wrapper">
 
-    <div class="bar_social">
-    <a href="#" class="fa fa-instagram"></a>
+      <div class="bar_social">
+      <a class="fa fa-instagram"></a>
 
-    </div>
+      </div>
 
-    <div class="bar_social">
-       <a href="#" class="fa fa-facebook"></a>
-    </div>
-    <div class="bar_social">
-      <a href="#" class="fa fa-twitter"></a>
+      <div class="bar_social">
+         <a href="#" class="fa fa-facebook"></a>
+      </div>
+      <div class="bar_social">
+        <a href="#" class="fa fa-twitter"></a>
 
-    </div>
-    <div class="bar_social">
-      <a href="#" class="fa fa-youtube"></a>
+      </div>
+      <div class="bar_social">
+        <a href="#" class="fa fa-youtube"></a>
+      </div>
     </div>
   </div>
 </template>
@@ -33,24 +33,46 @@ name: "Footer"
 <style scoped>
 
   .bar{
-    display: inline-block;
+    width: 100vw;
+    background: #ebdeca;
     text-align: left;
-    width: 100%;
-  }
-  .bar p{
+    height: fit-content;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    margin-right: 0;
     font-family: "Brush Script MT";
-    text-align: left;
+    text-align: center;
     font-size: 35px;
+  }
+
+
+  .bar_msg{
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .bar_msg img{
+    width: 40px;
+    height: 40px;
+    padding-bottom: -5px;
+  }
+  .bar_content{
+    margin: 0;
+    display: grid;
+    grid-row: 1;
+    grid-template-columns: 10% 10% 10% 10%;
+    grid-column-gap: 20%;
+
+  }
+  .bar_content div{
+    float: left;
   }
   .bar_msg{
     order: 1;
-
   }
 
   .bar_social{
-    display: flex;
-    flex-direction: row;
-    font-size: 20px;
+    font-size: 25px;
     width: 50px;
     height: 50px;
     text-align: center;
@@ -59,14 +81,10 @@ name: "Footer"
   }
   .fa{
     order: 2;
-
-    padding-top: 25px;
-    padding-right: 10px;
-    padding-left: 10px;
-
-    border-radius: 100%;
+    padding: 10px 0;
+    border-radius: 10px;
     text-align: center;
-    height: 100%;
+    margin: 20% 20%;
     width: 100%;
   }
   .fa-instagram{
@@ -84,6 +102,15 @@ name: "Footer"
   .fa-facebook{
     background: #3B5998;
     color: white;
+  }
+  .wrapper{
+    margin-right: auto; /* 1 */
+    margin-left:  auto; /* 1 */
+
+    max-width: 960px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left:  10px;
   }
 
 </style>
