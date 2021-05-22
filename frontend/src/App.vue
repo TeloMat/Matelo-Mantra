@@ -44,7 +44,7 @@ html {
 
 body {
   position: absolute;
-  top: -70px;
+  top: -60px;
   right: 0;
   left: 0;
   color: white;
@@ -66,4 +66,13 @@ body {
   width: 100%;
   overflow: hidden;
 }
+.wrapper{
+    margin-right: auto; /* 1 */
+    margin-left:  auto; /* 1 */
+
+    max-width: 1060px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left:  10px;
+  }
 </style>

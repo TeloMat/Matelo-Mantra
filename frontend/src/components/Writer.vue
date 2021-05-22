@@ -1,12 +1,14 @@
 <template>
 <Background/>
+  <Menu-bar/>
 </template>
 
 <script>
 import Background from "@/components/Background";
+import MenuBar from "@/components/MenuBar";
 export default {
 name: "Writer",
-  components: {Background}
+  components: {MenuBar, Background}
 }
 </script>
 

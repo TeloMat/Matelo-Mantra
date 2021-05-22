@@ -1,16 +1,31 @@
 <template>
   <Background/>
-  <div>test</div>
+  <MenuBar/>
+  <div class="wrapper">
+    <div class="panel-title"><h1>Music</h1></div>
+    <div class="recycler-view">
+    <AlbumVIew/>
+    <AlbumVIew/>
+
+    </div>
+  </div>
 </template>
 
 <script>
 import Background from "@/components/Background";
+import AlbumVIew from "@/components/AlbumVIew";
+import MenuBar from "@/components/MenuBar";
 export default {
   name: "Musician",
-  components: {Background}
+  components: {MenuBar, AlbumVIew, Background}
 }
 </script>
 
 <style scoped>
+
+.panel-title h1{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8vh;
+}
 
 </style>
