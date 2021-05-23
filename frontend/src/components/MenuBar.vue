@@ -1,7 +1,7 @@
 <template>
 <div class="topnav">
   <router-link to="/"><div class="home" ><img src="../assets/Matelo_Mantra_VF_(2).png"> </div></router-link>
-  <router-link to=Musician><div> Musician </div></router-link>
+  <router-link to=music><div> Musician </div></router-link>
   <router-link to=travels><div> Traveler </div></router-link>
   <router-link to=writer><div> Writer </div></router-link>
   <div id="icon_container">

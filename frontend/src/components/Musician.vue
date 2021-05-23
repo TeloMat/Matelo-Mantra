@@ -13,7 +13,7 @@
 
 <script>
 import Background from "@/components/Background";
-import AlbumVIew from "@/components/AlbumVIew";
+import AlbumVIew from "@/components/MusicAlbumVIew";
 import MenuBar from "@/components/MenuBar";
 export default {
   name: "Musician",

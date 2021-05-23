@@ -4,7 +4,7 @@
     <div class="grid_container">
 <!--      <div class="grid_background"><img src="../assets/background4.jpg" alt="Error loading img"> </div>-->
       <div class="grid_content">
-        <div class="grid_content_item">        <router-link to=Musician>
+        <div class="grid_content_item">        <router-link to=music>
 <img id="musician" src="../assets/music.jpg" alt="Error loading img"> </router-link><div class="grid_content_item_text">Musician</div></div>
         <div class="grid_content_item"><router-link to=travels> <img src="../assets/travel.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text"> Traveler</div></div>
         <div class="grid_content_item"><router-link to=writer><img src="../assets/writer.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text">Writer</div></div>

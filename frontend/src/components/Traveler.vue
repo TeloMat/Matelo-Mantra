@@ -2,7 +2,6 @@
   <Background/>
   <MenuBar/>
   <div class="wrapper">
-
   </div>
 </template>
 

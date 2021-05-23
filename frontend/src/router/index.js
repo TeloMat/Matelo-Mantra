@@ -4,6 +4,7 @@ import Musician from "@/components/Musician";
 import Traveler from "@/components/Traveler";
 import PageNotFound from "@/components/PageNotFound";
 import Writer from "@/components/Writer";
+import MusicPage from "@/components/MusicPage";
 
 const routes = [
     {
@@ -12,7 +13,7 @@ const routes = [
         component: Home,
     },
     {
-        path: "/musician",
+        path: "/music",
         name: "Musician",
         component: Musician,
     },
@@ -25,6 +26,11 @@ const routes = [
         path: '/writer',
         name: 'Writer',
         component: Writer,
+    },
+    {
+        path: "/music_details",
+        name: "Music_details",
+        component: MusicPage,
     },
     {
         path: '/:catchAll(.*)*',

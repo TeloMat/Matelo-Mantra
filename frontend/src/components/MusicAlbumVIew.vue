@@ -1,9 +1,11 @@
 <template>
   <div class="album_card">
-    <div class="album_title"><p>Music to be murdered by - Side B</p></div>
+    <router-link to=music_details><div class="album_title"><p>Music to be murdered by - Side B</p></div></router-link>
     <div class="album_content">
+      <div class="album_details">
       <div class="album_cover"><img src="../assets/album1.jpg"></div>
       <div class="album_credits">Credits :<br> producer : Matelo Mantra <br> Writer : Matelo Mantra</div>
+      </div>
       <div class="album_songs">
         <div class="song">
           <div class="song_number">1</div>
@@ -142,6 +144,11 @@ name: "AlbumVIew"
   display: block;
   height: 70vh;
   margin: 30px 0;
+  overflow: auto;
+}
+.album_card a{
+  text-decoration: none;
+
 }
 .album_title{
   width: 93%;
@@ -150,10 +157,12 @@ name: "AlbumVIew"
   border: outset 1px;
   padding: 15px 20px;
   font-size: 35px;
+
   background-color: #8c8b8b;
 }
 .album_title p{
   margin: 0;
+  color: black;
 }
 .album_content{
   display: flex;
@@ -161,10 +170,16 @@ name: "AlbumVIew"
   width: 100%;
   height: 100%;
 }
+.album_details{
+  margin: 2.5% auto;
+  width: 40%;
+  height: 100%;
+
+}
 .album_cover{
-  margin: 1vw 1vw;
-  height: 350px;
-  width: 350px;
+  height: 60%;
+  width: fit-content;
+  max-width: 100%;
   overflow: hidden;
   border-radius: 1vw;
 }
@@ -174,13 +189,11 @@ name: "AlbumVIew"
   margin: 0 -140%;
 }
 .album_credits{
-  padding: 15px 15px;
-  margin-top: 1vw;
-  margin-bottom: auto;
-  margin-left: 1vw;
+  padding: 2.5% 2.5%;
+  margin: 2.5% 0;
   text-align: left;
-  width: 320px;
-  height: auto;
+  width: 95%;
+  height: 16.5%;
   overflow: scroll;
   border-radius: 1vw;
   border: 2px outset #333333;
@@ -188,11 +201,11 @@ name: "AlbumVIew"
 }
 
 .album_songs{
-  margin: 15px auto;
-  padding: 15px 15px;
+  margin: 2.5% auto;
+  padding: 2.5% 2.5%;
   border-radius: 1vw;
   width: 50%;
-  height: 77%;
+  height: 90%;
   background-color: #333333;
   color: #dddddd;
   display: block;
