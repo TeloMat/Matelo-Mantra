@@ -137,25 +137,24 @@ name: "AlbumVIew"
 
 <style scoped>
 .album_card{
-  background-color: #D3D3D3;
-  border: 2px outset #966F33;
+  background-color: rgba(211, 211, 211, 0.5);
   border-radius: 3vh;
   padding: 1vw 1vw;
   display: block;
   height: 70vh;
   margin: 30px 0;
   overflow: hidden;
+  box-shadow: 0px 10px 20px 5px grey;
 }
 
 .album_title{
   width: 93%;
   margin: 0 auto;
-  border-radius: 1vw;
-  border: outset 1px;
+  border-radius: 25px;
   padding: 15px 20px;
   font-size: 35px;
+  background-color: rgba(129, 116, 116, 0.7);
 
-  background-color: #8c8b8b;
 }
 .album_title p{
   margin: 0;
@@ -178,7 +177,7 @@ name: "AlbumVIew"
   width: fit-content;
   max-width: 100%;
   overflow: hidden;
-  border-radius: 1vw;
+  border-radius: 15px;
   margin-bottom: 10% ;
 }
 .album_cover img{
@@ -190,12 +189,12 @@ name: "AlbumVIew"
   padding: 5% 5%;
   margin: 7.5% 0;
   text-align: left;
-  width:  90%;
+  width: 90%;
   height: 25%;
   overflow: scroll;
-  border-radius: 1vw;
-  border: 2px outset #333333;
-  background-color: #dddddd;
+  font-family: Impact;
+  border-radius: 25px;
+  background-color: rgba(140, 139, 139,0.5);
 }
 
 .album_songs{

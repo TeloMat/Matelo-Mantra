@@ -6,6 +6,7 @@ import PageNotFound from "@/components/PageNotFound";
 import Writer from "@/components/Writer";
 import MusicPage from "@/components/MusicPage";
 import PicAlbumPage from "@/components/PicAlbumPage";
+import PostPage from "@/components/PostPage";
 
 const routes = [
     {
@@ -37,6 +38,11 @@ const routes = [
         path: "/album_details",
         name: "Album_details",
         component: PicAlbumPage
+    },
+    {
+        path: "/post_details",
+        name: "Post_details",
+        component: PostPage,
     },
     {
         path: '/:catchAll(.*)*',
