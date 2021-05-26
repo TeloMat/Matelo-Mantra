@@ -75,4 +75,15 @@ body {
     padding-right: 10px; /* 3 */
     padding-left:  10px;
   }
+.panel-title h1{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8vh;
+}
+p{
+  margin: 0;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
 </style>

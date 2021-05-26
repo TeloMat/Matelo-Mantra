@@ -23,9 +23,6 @@ export default {
 
 <style scoped>
 
-.panel-title h1{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 8vh;
-}
+
 
 </style>

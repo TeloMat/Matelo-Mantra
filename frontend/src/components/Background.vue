@@ -21,6 +21,6 @@ name: "Background"
     position: fixed;
     z-index: -2;
     padding: 0;
-
+    transform: scale(2);
   }
 </style>
