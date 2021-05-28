@@ -25,7 +25,7 @@ name: "PostView"
   height: 60vh;
   margin: 30px 0;
   flex-flow: column wrap;
-
+   box-shadow: 0px 10px 20px 5px grey;
 }
 .post_title{
   border-radius: 25px;

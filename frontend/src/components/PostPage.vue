@@ -87,7 +87,6 @@ export default {
   max-width: 100%;
   overflow: hidden;
   border-radius: 25px;
-
   margin: 0 -140%;
 }
 .post_text{

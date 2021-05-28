@@ -42,7 +42,7 @@ name: "Traveler",
 }
 .grid_case{
   margin: 2% 2%;
-  max-width: 33vw;
+  max-width: 100%;
   height: 33vh;
   border: 2px outset #333333 ;
   box-shadow: 10px 10px 10px 5px grey;
