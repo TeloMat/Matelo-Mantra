@@ -95,8 +95,9 @@ export default {
     min-width: 100%;
     max-width: none;
     height: 100%;
-    margin: 0 -140%;
     transition: transform 0.5s; /* Animation */
+    margin: 0 -110%;
+    left: -30%;
   }
 
   /*.grid_content_item img *:hover{*/
