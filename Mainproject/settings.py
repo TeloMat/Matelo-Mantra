@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c_l7&*68n#b3hn5recfd3@)pcfsbmf73z*7%cvm9$@lhu1xhcd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = []
 
@@ -148,3 +148,6 @@ LOGOUT_REDIRECT_URL = "/api/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
