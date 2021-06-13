@@ -13,7 +13,7 @@
 
 <script>
 import Background from "@/components/Background";
-import AlbumVIew from "@/components/MusicAlbumVIew";
+import AlbumVIew from "@/components/Musician/MusicAlbumVIew";
 import MenuBar from "@/components/MenuBar";
 export default {
   name: "Musician",
@@ -21,8 +21,18 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
 
+  @media only screen and (max-width: 600px) {
+  .panel-title{
+    margin-top: 25vh;
+  }
+  .panel-title h1{
+    font-size: 90px;
 
+  }
+}
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <img class="container_img" src="../assets/album2.jpg">
+      <img class="container_img" src="../../assets/album2.jpg">
     <div class="album_text">
       <p class="text">Album text placeholder textwero thjwoeihrq iewht[qowieht thqwe[oihtrq[woe oqwhe</p>
     </div>
@@ -52,7 +52,7 @@ export default {
   background-color: rgba(129, 116, 116, 0.3);
 
 
-  margin: -70% 15% 15% 15%;
+  margin: -60% 5% 5% 5%;
 }
 
 .container:hover .album_text{
@@ -77,7 +77,7 @@ export default {
 .album_button{
   visibility: hidden;
   width: 40%;
-  margin: 10% 25%;
+  margin: 5% 27.5%;
   padding: 5% 5%;
   border-radius: 25px;
   color: #1e3136ff;

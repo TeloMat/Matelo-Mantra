@@ -7,7 +7,7 @@
       <div class="album_info">
 
         <div class="album_thumbnail">
-          <img src="../assets/album2.jpg">
+          <img src="../../assets/album2.jpg">
         </div>
         <div class="album_text">
           <div class="album_title">
@@ -39,7 +39,7 @@
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
-import PictureAlbumView from "@/components/PictureAlbumView";
+import PictureAlbumView from "@/components/Traveler/PictureAlbumView";
 
 export default {
 name: "PicAlbumPage",
@@ -51,8 +51,8 @@ name: "PicAlbumPage",
 .main-container{
   width: 100%;
   height: 100%;
-  border: 2px outset #966F33;
   border-radius: 25px;
+  box-shadow: 5px 5px 20px 5px grey;
   background-color: rgba(179, 160, 111, 0.5);
 }
 
@@ -65,7 +65,7 @@ name: "PicAlbumPage",
 .album_thumbnail{
   max-width: 45%;
   width: fit-content;
-  height: 75%;
+  height: 80%;
   overflow: hidden;
   margin: 2.5% 2.5%;
   box-shadow: 5px 5px 20px 5px grey;
@@ -75,19 +75,22 @@ name: "PicAlbumPage",
   max-width: 100%;
 }
 .album_text{
-  margin: 2.5%;
-  max-width: 47.5%
+  margin: 2.5% 2.5% 5% 2.5%;
+  width: auto;
+  max-width: 45%;
+  max-height: 70%;
 }
 .album_text p{
+  margin-top: 5px;
   font-size: 24px;
   text-align: center;
 }
 .album_title{
   padding: 2% 10%;
-  margin-bottom: 2.5%;
+  margin-bottom: 5%;
   border-radius: 25px;
   background-color: rgba(255, 255,255,0.3);
-
+  height: 15%;
   color: #1e3136ff;
   font-size: 25px;
   font-family: Impact;
@@ -99,7 +102,7 @@ name: "PicAlbumPage",
 
 .album_description{
   padding: 2% 5%;
-  height: 35%;
+  max-height: 75%;
   margin: 5% 0;
   overflow: scroll;
   border-radius: 25px;

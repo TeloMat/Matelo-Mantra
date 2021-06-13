@@ -4,7 +4,7 @@
   <div class="wrapper">
      <div class="post_card">
     <div class="post_content">
-    <div class="post_cover"><img src="../assets/album1.jpg"></div>
+    <div class="post_cover"><img src="../../assets/album1.jpg"></div>
       <div class="post_info">
 
       <router-link to=post_details><div class="post_title"><p>Post title</p></div></router-link>

@@ -16,7 +16,7 @@
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
-import PostView from "@/components/PostView";
+import PostView from "@/components/Writer/PostView";
 export default {
 name: "Writer",
   components: {PostView, MenuBar, Background}

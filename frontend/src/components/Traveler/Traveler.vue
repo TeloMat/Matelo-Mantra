@@ -22,7 +22,7 @@
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
-import PictureAlbumView from "@/components/PictureAlbumView";
+import PictureAlbumView from "@/components/Traveler/PictureAlbumView";
 export default {
 name: "Traveler",
   components: {PictureAlbumView, MenuBar, Background},

@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router"
 import Home from "@/components/Home"
-import Musician from "@/components/Musician";
-import Traveler from "@/components/Traveler";
+import Musician from "@/components/Musician/Musician";
+import Traveler from "@/components/Traveler/Traveler";
 import PageNotFound from "@/components/PageNotFound";
-import Writer from "@/components/Writer";
-import MusicPage from "@/components/MusicPage";
-import PicAlbumPage from "@/components/PicAlbumPage";
-import PostPage from "@/components/PostPage";
+import Writer from "@/components/Writer/Writer";
+import MusicPage from "@/components/Musician/MusicPage";
+import PicAlbumPage from "@/components/Traveler/PicAlbumPage";
+import PostPage from "@/components/Writer/PostPage";
 
 const routes = [
     {

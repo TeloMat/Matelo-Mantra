@@ -10,6 +10,7 @@ RUN mkdir -p $DockerHOME
 WORKDIR $DockerHOME
 
 ADD . /
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -17,13 +18,11 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 # copy whole project to your docker home directory. COPY . $DockerHOME
 # run this command to install all dependencies
-RUN ls
 RUN pip install -r requirements.txt
-CMD cd frontend
-CMD npm run serve
-CMD ..
-RUN cd ..
+
+RUN python manage.py migrate
+
 # port where the Django app runs
-EXPOSE 8000
+EXPOSE $PORT
 # start server
 CMD python manage.py runserver
