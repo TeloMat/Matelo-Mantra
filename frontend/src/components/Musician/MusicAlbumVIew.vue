@@ -139,9 +139,9 @@ name: "AlbumVIew"
 .album_card{
   background-color: rgba(211, 211, 211, 0.5);
   border-radius: 3vh;
-  padding: 1vw 1vw;
+  padding: 4vh 1vw;
   display: block;
-  height: 70vh;
+  height: 75vh;
   margin: 30px 0;
   overflow: hidden;
   box-shadow: 0px 10px 20px 5px grey;
@@ -202,7 +202,7 @@ name: "AlbumVIew"
   padding: 2.5% 2.5%;
   border-radius: 1vw;
   width: 50%;
-  height: 75%;
+  height: 73.5%;
   background-color: #333333;
   color: #dddddd;
   display: block;
@@ -252,8 +252,10 @@ name: "AlbumVIew"
       height: fit-content;
       padding: 2% 5%;
       width: 85%;
-      margin-top: 5%;
+      margin-top: 2%;
       margin-bottom: 2.5%;
+      border-radius: 200px;
+
 
     }
     .album_title p{
@@ -293,6 +295,7 @@ name: "AlbumVIew"
       font-size: 25px;
     }
     .album_songs{
+      border-radius: 30px;
       width: 90%;
       height: 40vh;
       margin-top: -10%;
@@ -320,6 +323,9 @@ name: "AlbumVIew"
     }
     .song_artist{
       font-size: 40px;
+    }
+    .song_duration{
+      font-size: 35px;
     }
   }
 </style>

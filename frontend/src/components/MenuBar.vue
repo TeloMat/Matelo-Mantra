@@ -28,7 +28,7 @@ body {
 }
 
 .topnav {
-  width: 105vw;
+  width: 110%;
   height: 80px;
   overflow: hidden;
   display: flex;

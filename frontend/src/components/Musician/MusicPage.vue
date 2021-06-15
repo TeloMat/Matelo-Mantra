@@ -150,8 +150,7 @@ export default {
 
 <style scoped>
 .album_card{
-  background-color: #D3D3D3;
-  border: 2px outset #966F33;
+  background-color: rgba(211, 211, 211, 0.5);
   border-radius: 3vh;
   padding: 1vw 1vw;
   display: block;
@@ -162,10 +161,10 @@ export default {
   width: 90%;
   margin: 0 auto;
   border-radius: 1vw;
-  border: inset 1px #2c7363;
   padding: 15px 20px;
   font-size: 35px;
-  background-color: #8c8b8b;
+  background-color: rgba(129, 116, 116, 0.7);
+
 }
 .album_title p{
   margin: 0;
@@ -205,7 +204,6 @@ export default {
   overflow: scroll;
   height: 30%;
   border-radius: 10px;
-  border: 2px outset #333333;
   background-color: #dddddd;
 }
 .album_description{
@@ -217,7 +215,6 @@ export default {
   color: white;
   height: auto;
   max-height: 52.5%;
-  border: 2px outset #966F33;
   border-radius: 10px;
   overflow: scroll;
 }
@@ -283,4 +280,87 @@ export default {
 ::-webkit-scrollbar-corner{
   background: rgba(0,0,0,0);
 }
+
+
+  @media only screen and (max-width: 600px) {
+    .album_card{
+      margin-top: 100px;
+      height: fit-content;
+      display: inline-block;
+      width: 90%;
+
+      padding: 5% 2%;
+    }
+
+    .album_title{
+      height: fit-content;
+      width: 80%;
+      padding: 5%;
+      border-radius: 200px;
+    }
+    .album_title p{
+      font-weight: bold;
+      font-size: 50px;
+    }
+    .album_content{
+      flex-flow: row wrap;
+      height: 90%;
+    }
+    .album_text{
+      width: 45%;
+      height: 50vh;
+    }
+    .album_credits{
+      font-size: 35px;
+      width: 100%;
+    }
+    .album_description {
+      width: 100%;
+
+      overflow: scroll;
+    }
+    .album_description p{
+      font-size: 35px;
+    }
+    .album_cover{
+      border-radius: 35px;
+      width: auto;
+      height: 50vh;
+      margin-left: 2.5%;
+
+    }
+    .album_songs{
+      border-radius: 30px;
+      width: 90%;
+      height: 80vh;
+      margin-bottom: 0;
+      overflow: scroll;
+    }
+
+    .song{
+      display: flex;
+      width: 100%;
+      flex-flow: row nowrap;
+      float: left;
+      justify-content: space-between;
+    }
+    .song_number{
+      font-size: 40px;
+      margin: 5px 5px;
+    }
+    .song_text{
+      margin: 5px 5px;
+      display: block;
+    }
+    .song_title{
+      font-size: 50px;
+    }
+    .song_artist{
+      font-size: 40px;
+    }
+    .song_duration{
+      font-size: 35px;
+    }
+
+  }
 </style>
