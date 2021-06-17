@@ -27,10 +27,20 @@
 //     return h(this.ViewComponent)
 //   }
 // })
-
+// import Vue from 'vue'
+// import axios from 'axios'
+// import VueAxios from 'vue-axios'
+// Vue.use(VueAxios, axios)
 export default {
   name: 'App',
   components: {
+  // },
+  // mounted()
+  // {
+    // Vue.axios.get('127.0.0.1:8000/api/music/list/')
+    // .then((resp) => {
+    //   console.warn(resp)
+    // })
   }
 }
 </script>

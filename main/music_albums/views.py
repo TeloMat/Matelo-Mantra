@@ -1,8 +1,10 @@
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
+from rest_framework import generics
 
 from .forms import *
 from .models import *
+from .serializers import MAlbumSerializer, SongSerializer
 
 
 def listMAlbum(response):
@@ -82,7 +84,7 @@ def createSong(response, id):
     if form.is_valid():
         album = MusicAlbum.objects.get(id=id)
         cd = form.cleaned_data
-        album.song_set.create(
+        album.songs.create(
             title=cd.get('title'),
             description=cd.get('description'),
             artists=cd.get('artists'),
@@ -123,3 +125,20 @@ def deleteSong(response, id):
     song.track.delete()
     song.delete()
     return HttpResponseRedirect('/api/music/' + str(album_id) + '/')
+
+
+def malbum_list(request):
+    if request.method == 'GET':
+        albums = MusicAlbum.objects.filter(public=True)
+        serializer = MAlbumSerializer(albums, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+def song_list(request, id):
+    if request.method == 'GET':
+        album = MusicAlbum.objects.get(id=id)
+        if album.public == False:
+            return JsonResponse()
+        songs = Song.objects.filter(album_id= id)
+        serializer = SongSerializer(songs, many=True)
+        return JsonResponse(serializer.data, safe=False)
