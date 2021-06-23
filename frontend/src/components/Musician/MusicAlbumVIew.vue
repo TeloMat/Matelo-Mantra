@@ -1,13 +1,13 @@
 <template>
   <div class="album_card">
-    <router-link to=music_details><div class="album_title"><p>{{ album.title }}</p></div></router-link>
+    <router-link :to="{ name: 'Music_details', params: {id: album.id}}"><div class="album_title"><p>{{ album.title }}</p></div></router-link>
     <div class="album_content">
       <div class="album_details">
       <div class="album_cover"><img :src="album.cover" ></div>
       <div class="album_credits">Credits :<br> Artist : {{ album.artist }}</div>
       </div>
       <div class="album_songs">
-        <div class="song" :key="song.id" v-for="song in album.songs">
+        <div  class="song" :key="song.id" v-for="song in album.songs">
           <div class="song_number">{{ album.songs.indexOf(song)}}</div>
           <div class="song_text">
             <div class="song_title">{{ song.title }}</div>
@@ -22,10 +22,15 @@
 </template>
 
 <script>
+
 export default {
   name: "AlbumVIew",
+  components:{
+  },
   props:{
     album: Object
+  },
+  methods: {
   }
 
 

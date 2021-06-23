@@ -3,148 +3,80 @@
   <MenuBar/>
   <div class="wrapper">
     <div class="album_card">
-    <div class="album_title"><p>Music to be murdered by - Side B</p></div>
+    <div class="album_title"><p>{{album.title}}</p></div>
     <div class="album_content">
-      <div class="album_cover"><img src="../../assets/album1.jpg"></div>
+      <div class="album_cover"><img :src="album.cover"></div>
       <div class="album_text">
-      <div class="album_credits">Credits :<br> producer : Matelo Mantra <br> Writer : Matelo Mantra</div>
+      <div class="album_credits">Credits :<br>Artist : {{ album.artist }}</div>
       <div class="album_description"><p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        {{album.description}}
       </p>
       </div>
       </div>
     </div>
 
     <div class="album_songs">
-        <div class="song">
-          <div class="song_number">1</div>
+        <div class="song" v-on:click="play(song.id)"  :key="song.id" v-for="song in album.songs" >
+          <div class="song_number">{{ album.songs.indexOf(song)}}</div>
           <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
+            <div class="song_title"><p>{{ song.title }}</p></div>
+            <div class="song_artist"><small>{{ song.artists }}</small></div>
           </div>
 
           <div class="song_duration">1:22</div>
         </div>
-        <div class="song">
-          <div class="song_number">2</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
 
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">3</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">4</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">5</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">6</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">7</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">8</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">9</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div><div class="song">
-          <div class="song_number">10</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">11</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">12</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
-        </div>
-        <div class="song">
-          <div class="song_number">13</div>
-          <div class="song_text">
-            <div class="song_title"><p>Alfred - intro</p></div>
-            <div class="song_artist"><small>Matelo mantra</small></div>
-          </div>
-
-          <div class="song_duration">1:22</div>
         </div>
 
     </div>
   </div>
-  </div>
+
 
 </template>
 
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
+import Vue from 'vue'
 export default {
   name: "MusicPage",
-  components: {MenuBar, Background}
+  components: {MenuBar, Background},
+  props:['id'],
+  data(){
+    return{
+      album: []
+    }
+  },
+  methods:{
+    async fetchData(id){
+      const res = await fetch("http://localhost:8000/api/music/Albums/"+ id+ "/")
+      return await res.json()
+    },
+    async fetchSong(id){
+      const res = await fetch("http://localhost:8000/api/music/Albums/songs/"+ id+ "/")
+      return await res.json()
+    },
+    // async play(id){
+    //   Vue.component({
+    //     name: "AudioPlayer",
+    //     data(){
+    //       return {
+    //         song1 : this.fetchSong(id)
+    //       }
+    //     },
+    //     props: {
+    //       song : this.data()
+    //     },
+    //     template : '<audio id="audio-player"><source :src="song.track" type="audio">Your browser does not support the audio tag.</audio>'
+    //   })
+    //
+    // }
+
+  },
+  async created(){
+    this.album = await this.fetchData(this.$route.params.id)
+  },
+
 }
 </script>
 

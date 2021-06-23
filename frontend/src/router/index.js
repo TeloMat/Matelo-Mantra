@@ -30,8 +30,9 @@ const routes = [
         component: Writer,
     },
     {
-        path: "/music_details",
+        path: "/music/:id",
         name: "Music_details",
+        props: true,
         component: MusicPage,
     },
     {

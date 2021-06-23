@@ -4,7 +4,7 @@ from rest_framework import generics
 
 from .forms import *
 from .models import *
-from .serializers import MAlbumSerializer, SongSerializer
+from .serializers import MAlbumSerializer, SongSerializer, SongPlayerSerializer
 
 
 def listMAlbum(response):
@@ -133,12 +133,28 @@ def malbum_list(request):
         serializer = MAlbumSerializer(albums, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+def malbum(request, id):
+    if request.method == 'GET':
+        album = MusicAlbum.objects.get(public=True, id=id)
+        serializer = MAlbumSerializer(album)
+        return JsonResponse(serializer.data)
+    return JsonResponse()
+
 
 def song_list(request, id):
     if request.method == 'GET':
         album = MusicAlbum.objects.get(id=id)
-        if album.public == False:
+        if album.public == True:
             return JsonResponse()
         songs = Song.objects.filter(album_id= id)
         serializer = SongSerializer(songs, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+def song(request, id):
+    if request.method =='GET':
+        song = Song.objects.get(id=id)
+        album = MusicAlbum.objects.get(id=song.album_id)
+        if album.public == True:
+            serializer = SongPlayerSerializer(song)
+            return JsonResponse(serializer.data, safe=True)
+    return JsonResponse()

@@ -4,7 +4,7 @@
   <div class="wrapper">
     <div class="panel-title"><h1>Music</h1></div>
     <div class="recycler-view">
-    <AlbumVIew :key="album.id" v-for="album in albums" :album="album"/>
+    <AlbumVIew  v-for="album in albums" :key="album.id"  :album="album"/>
 
     </div>
   </div>
@@ -24,14 +24,12 @@ export default {
   },
   methods:{
     async fetchAlbums(){
-      const res = await fetch('http://127.0.0.1:8000/api/music/list/')
-      const data = await res.json()
-      return data
+      const res = await fetch('http://localhost:8000/api/music/Albums/list/')
+      return await res.json()
     }
   },
   async created() {
     this.albums = await this.fetchAlbums()
-    console.log(this.albums)
   }
 }
 </script>

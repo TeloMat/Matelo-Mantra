@@ -8,16 +8,16 @@ class SongPlayerSerializer(serializers.ModelSerializer):
     album = serializers.StringRelatedField(read_only=True)
     class Meta:
         model = Song
-        fields = ('title', 'album', 'artists', 'description', 'track')
+        fields = ('title', 'album', 'artists', 'track')
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('title', 'artists', 'description')
+        fields = ('id', 'title', 'artists', 'description')
 
 
 class MAlbumSerializer(serializers.ModelSerializer):
-    songs = SongPlayerSerializer(many=True, read_only=True)
+    songs = SongSerializer(many=True, read_only=True)
     cover = serializers.ImageField()
     class Meta:
         model = MusicAlbum

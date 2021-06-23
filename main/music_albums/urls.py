@@ -12,8 +12,9 @@ urlpatterns = [
     path("<int:id>/createSong/", views.createSong, name="createSong"),
     path("songs/<int:id>/", views.indexSong, name="indexSong"),
     path("songs/<int:id>/delete/", views.deleteSong, name="deleteSong"),
-    path("list/", views.malbum_list, name="restMalbumsList"),
-    path("songs/album=<int:id>", views.song_list, name="restSongList"),
-
+    path("Albums/list/", views.malbum_list, name="restMalbumsList"),
+    path("Albums/<int:id>/", views.malbum, name="restSingleMalbum"),
+    path("Albums/songs/album=<int:id>/", views.song_list, name="restSongList"),
+    path("Albums/songs/<int:id>/", views.song, name="restSong"),
 
 ]
