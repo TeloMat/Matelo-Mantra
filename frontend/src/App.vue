@@ -1,6 +1,6 @@
 <template>
-
   <router-view/>
+  <div :ref="container"></div>
 </template>
 
 <script>

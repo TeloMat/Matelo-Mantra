@@ -1,10 +1,21 @@
 <template>
-<div class="player"></div>
+<div class="player">
+  <audio controls>
+  <source :src="song.track">
+  Your browser does not support the audio tag.
+</audio>
+</div>
 </template>
 
 <script>
 export default {
-  name: "MusicPlayer"
+  name: "MusicPlayer",
+  data:()=>({
+
+  }),
+  methods:{
+
+  }
 }
 </script>
 

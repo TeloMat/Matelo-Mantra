@@ -16,13 +16,15 @@
     </div>
 
     <div class="album_songs">
-        <div class="song" v-on:click="play(song.id)"  :key="song.id" v-for="song in album.songs" >
-          <div class="song_number">{{ album.songs.indexOf(song)}}</div>
+        <div class="song" :key="song.id" v-for="song in album.songs" >
+          <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
           <div class="song_text">
             <div class="song_title"><p>{{ song.title }}</p></div>
             <div class="song_artist"><small>{{ song.artists }}</small></div>
           </div>
-
+          <button  v-on:click="play(song.id)">
+            Play
+          </button>
           <div class="song_duration">1:22</div>
         </div>
 
@@ -37,7 +39,8 @@
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
-import Vue from 'vue'
+import MusicPlayer from "./MusicPlayer";
+import { defineComponent, createApp } from 'vue'
 export default {
   name: "MusicPage",
   components: {MenuBar, Background},
@@ -52,26 +55,22 @@ export default {
       const res = await fetch("http://localhost:8000/api/music/Albums/"+ id+ "/")
       return await res.json()
     },
-    async fetchSong(id){
-      const res = await fetch("http://localhost:8000/api/music/Albums/songs/"+ id+ "/")
+    async fetchSong(id) {
+      const res = await fetch("http://localhost:8000/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
-    // async play(id){
-    //   Vue.component({
-    //     name: "AudioPlayer",
-    //     data(){
-    //       return {
-    //         song1 : this.fetchSong(id)
-    //       }
-    //     },
-    //     props: {
-    //       song : this.data()
-    //     },
-    //     template : '<audio id="audio-player"><source :src="song.track" type="audio">Your browser does not support the audio tag.</audio>'
-    //   })
-    //
-    // }
+    play: async function (id){
+      var song = await this.fetchSong(id)
+      console.log(song)
+      var audio_player = defineComponent({extends: MusicPlayer,
+        data: () => ({song : song})
+      })
+      const div = document.createElement('div');
+      const body = document.body
+      body.appendChild(div);
+      createApp(audio_player).mount(div)
 
+    }
   },
   async created(){
     this.album = await this.fetchData(this.$route.params.id)

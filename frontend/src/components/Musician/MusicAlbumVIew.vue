@@ -8,7 +8,7 @@
       </div>
       <div class="album_songs">
         <div  class="song" :key="song.id" v-for="song in album.songs">
-          <div class="song_number">{{ album.songs.indexOf(song)}}</div>
+          <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
           <div class="song_text">
             <div class="song_title">{{ song.title }}</div>
             <div class="song_artist"><small>{{ song.artists }}</small></div>
