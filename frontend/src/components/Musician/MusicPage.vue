@@ -60,13 +60,20 @@ export default {
       return await res.json()
     },
     play: async function (id){
+      var previous_player = document.getElementById("player-container")
+      if(document.body.contains(previous_player)){
+        previous_player.remove()
+      }
       var song = await this.fetchSong(id)
-      console.log(song)
+      const body = document.body
       var audio_player = defineComponent({extends: MusicPlayer,
-        data: () => ({song : song})
+        data: () => ({
+        song : song,
+        cover: this.album.cover
+        })
       })
       const div = document.createElement('div');
-      const body = document.body
+      div.id = "player-container"
       body.appendChild(div);
       createApp(audio_player).mount(div)
 
@@ -87,6 +94,8 @@ export default {
   display: block;
   height: 150vh;
   margin: 30px 0;
+  box-shadow: 0px 10px 20px 5px grey;
+
 }
 .album_title{
   width: 90%;

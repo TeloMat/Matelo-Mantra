@@ -3,9 +3,9 @@
   <div class="home" ><router-link to="/"><img src="../assets/Matelo_Mantra_VF_(2).png"> </router-link></div>
 
   <div class="menu_items">
-  <router-link  class="item" to=music><div > Musician </div></router-link>
-  <router-link class="item" to=travels><div > Traveler </div></router-link>
-  <router-link class="item" to=writer><div> Writer </div></router-link>
+  <router-link  class="item" :to="{name: 'Musician'}"><div > Musician </div></router-link>
+  <router-link class="item" :to="{name: 'Travels'}"><div > Traveler </div></router-link>
+  <router-link class="item" :to="{name: 'Writer'}"><div> Writer </div></router-link>
   <div id="icon_container">
     <img class="bar-icon" src="../assets/logo.png">
   </div>

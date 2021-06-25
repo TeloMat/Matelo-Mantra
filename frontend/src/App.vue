@@ -87,7 +87,7 @@ body {
   }
 .panel-title h1{
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 8vh;
+  font-size: 45px;
 }
 p{
   margin: 0;
@@ -96,4 +96,19 @@ a{
   text-decoration: none;
   color: white;
 }
+
+
+
+
+
+
+
+#player-container{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+
 </style>
