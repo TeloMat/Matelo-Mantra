@@ -118,6 +118,7 @@ export default {
 }
 .album_title p{
   margin: 0;
+  color: black;
 }
 .album_content{
   margin: 2% 2%;

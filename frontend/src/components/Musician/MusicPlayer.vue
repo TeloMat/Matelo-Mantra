@@ -106,6 +106,7 @@ export default {
     /*height: 5px;*/
     /*left: 0;*/
     /*top: 0;*/
+
     width: 0;
     background-color: #000000;
     height: 3px;

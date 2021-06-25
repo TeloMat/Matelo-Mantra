@@ -26,7 +26,7 @@ export default {
   }
 
   .title{
-    height: 30vh;
+    height: 20vh;
     margin: 20px 30px;
   }
 

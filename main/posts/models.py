@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     name = models.CharField(max_length=200)
     text = models.TextField(max_length=800, blank=True)
+    # thumbnail = models.ImageField(upload_to='posts/thumbnails', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     public = models.BooleanField(default=False)
 
