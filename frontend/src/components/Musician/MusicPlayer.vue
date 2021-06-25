@@ -106,6 +106,7 @@ export default {
     /*height: 5px;*/
     /*left: 0;*/
     /*top: 0;*/
+    width: 0;
     background-color: #000000;
     height: 3px;
 
@@ -134,6 +135,7 @@ export default {
     background-size: 25px 25px ;
 
     background-repeat: no-repeat;
+    background-position: center;
 
   }
 
@@ -151,6 +153,8 @@ export default {
     background-size: 25px 25px;
     background-image: url("../../assets/next.png");
     background-repeat: no-repeat;
+    background-position: center;
+
   }
 
 

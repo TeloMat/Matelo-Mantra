@@ -22,9 +22,9 @@
             <div class="song_title"><p>{{ song.title }}</p></div>
             <div class="song_artist"><small>{{ song.artists }}</small></div>
           </div>
-          <button  v-on:click="play(song.id)">
-            Play
-          </button>
+          <div class="play"  v-on:click="play(song.id)">
+
+          </div>
           <div class="song_duration">1:22</div>
         </div>
 
@@ -87,6 +87,16 @@ export default {
 </script>
 
 <style scoped>
+.play{
+  width: 35px;
+  padding: 5px;
+  height: 35px;
+  background-position: center;
+  background-size: 25px 25px;
+  background-color: inherit;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/play-button-arrowhead.png");
+}
 .album_card{
   background-color: rgba(211, 211, 211, 0.5);
   border-radius: 3vh;
