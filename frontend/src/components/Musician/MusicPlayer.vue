@@ -1,24 +1,27 @@
 <template>
-  <audio id="audio" :src="song.track"> </audio>
+  <audio id="audio" :src="song.track" preload="auto"> </audio>
 
   <div class="player">
-  <div class="player_Music_cover"><img :src="cover"></div>
-  <div class="player_Music_text">
-    <div class="player_Music_name">
-      {{song.title}}
+    <div class="player_Music_cover"><img :src="cover"></div>
+    <div class="player_Music_text">
+      <div class="player_Music_name">
+        {{song.title}}
+      </div>
+      <div class="player_Music_artist">
+         <small> {{song.artists}}</small>
+      </div>
     </div>
-    <div class="player_Music_artist">
-       <small> {{song.artists}}</small>
+    <div class='btns'>
+      <div v-on:click="play_pause()" id="play-pause" class="iconfont  icon-play"></div>
+      <div id="duration" v-on:click="move_head">
+        <div id="progress"></div>
+      </div>
+      <div class="iconfont next icon-next"></div>
+      <div class="iconfont volume icon-next"></div>
+      <div id="max_volume" v-on:click="move_head">
+        <div id="current_vol"></div>
+      </div>
     </div>
-  </div>
-  <div class='btns'>
-    <div v-on:click="play_pause()" id="play-pause" class="iconfont  icon-play"></div>
-    <div class="duration">
-      <div id="progress"></div>
-    </div>
-    <div class="iconfont next icon-next"></div>
-  </div>
-
   </div>
 
 </template>
@@ -28,7 +31,6 @@ import $ from 'jquery'
 
 
 
-  $('#play-pause').click()
 //   $('.next').on('click', function(){
 //   aud.src = 'another audio source';
 // })
@@ -37,10 +39,22 @@ import $ from 'jquery'
 export default {
   name: "MusicPlayer",
   data:()=>({
-    // cover: "",
-    // song: Object
+
   }),
   methods:{
+    getLeft(str) {
+      var el = document.getElementById(str)
+      return el.getBoundingClientRect().left;
+    },
+    getRight(str) {
+      var el = document.getElementById(str)
+      return el.getBoundingClientRect().right;
+    },
+    getTargetProgress(x){
+      var target =  (x - this.getLeft("progress")) /
+          (this.getRight("duration") - this.getLeft("progress"))
+      return target
+    },
     play_pause: function(){
       var aud = $('audio')[0];
 
@@ -58,7 +72,16 @@ export default {
         $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
       }
 
-    }
+    },
+    move_head: function(event){
+      var aud = $('audio')[0];
+      var target = this.getTargetProgress(event.clientX)
+      aud.currentTime = aud.duration * target
+      $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
+      console.log(target + "*" + aud.duration)
+
+    },
+
     /*,
     next : function (){
       var aud = $('audio')[0]
@@ -68,6 +91,14 @@ export default {
 
 
   },
+  async created() {
+    var aud = $('audio')[0];
+    if (aud.paused) {
+        aud.play();
+        $('#play-pause').removeClass('icon-play');
+        $('#play-pause').addClass('icon-stop');
+      }
+  }
 
 }
 </script>
@@ -106,19 +137,23 @@ export default {
     /*height: 5px;*/
     /*left: 0;*/
     /*top: 0;*/
-
+    margin-top: -1px;
     width: 0;
     background-color: #000000;
-    height: 3px;
+    height: 7px;
+    border-radius: 10px;
 
 
   }
-  .duration{
+  #duration{
     width: 40vw;
     margin: 10px 5vw;
-    height: 2px;
+    height: 5px;
     background-color: #8c8b8b;
-
+    border-radius: 10px;
+  }
+  #duration:hover{
+    cursor: pointer;
   }
 
   .btns {
@@ -129,7 +164,9 @@ export default {
     flex-flow: row nowrap;
 
   }
-
+  .iconfont:hover{
+    cursor: pointer;
+  }
   #play-pause{
     height: 25px;
     width: 25px;

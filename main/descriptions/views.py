@@ -36,7 +36,7 @@ def deleteDesc(response, id):
 def listDesc(response):
     if response.user.is_authenticated:
         dList = Description.objects.all()
-        return render(response, "main/descriptions/descriptionList.html", )
+        return render(response, "main/descriptions/descriptionList.html", {"list" : dList} )
     return HttpResponseRedirect('/login/')
 
 def createDescription(response):

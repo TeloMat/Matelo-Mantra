@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%  extends "main/base.html" %}
 
-</body>
-</html>
+
+
+{% block title %}
+Description list
+{% endblock %}
+
+{% block content %}
+    <div class="h2">
+        Descriptions
+    </div>
+     <br>
+
+        <a href="/api/descriptions/create/">  <div class="col-md-3 border-right">Create new Description</div> </a>
+
+    <div class="card-group">
+       {% for p in list %}
+            <div class="card">
+            <a href="/api/description/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
+                  {% if p.cover %}
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{p.picture }}" alt="Card image cap">
+                {% endif %}
+                  <h5 class="card-title">{{ p.name }}</h5>
+                <h5 class="card-title"><small class="text-muted">{{ p.quote }}</small></h5>
+
+                  <p class="card-text">{{ p.text }}</p>
+            <a href="/api/description/{{ p.id }}/delete" class="btn btn-danger btn-sm rounded-0" type="button"
+                    data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+
+
+
+
+
+{% endblock %}
+

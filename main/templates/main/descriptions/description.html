@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%  extends "main/base.html" %}
+{% load crispy_forms_filters %}
 
-</body>
-</html>
+
+
+{% block title %}
+    Edit description
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="h2">
+                Edit Album
+    </div>
+    <div><img class="card-img-top" src="{{ MEDIA_URL }}{{description.picture }}" alt="Card image cap"></div>
+    <form method="post" action="/api/descriptions/{{ form.id }}/" class="form-group" enctype="multipart/form-data">
+    </form>
+        {% csrf_token %}
+        {{ form|crispy }}
+            <button type="submit", name="save" class="btn btn-success">
+                Save changes
+            </button>
+    </form>
+
+{% endblock %}

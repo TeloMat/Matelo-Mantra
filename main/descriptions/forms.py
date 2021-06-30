@@ -6,6 +6,9 @@ class CreateNewDescription(forms.Form):
     text = forms.CharField(label="Description text", widget=forms.Textarea)
     quote = forms.CharField(label="Description Quote")
     picture = forms.ImageField(label="Profile picture")
+    musician = forms.ImageField(label="Musician picture", required=True)
+    writer = forms.ImageField(label="writer picture", required=True)
+    traveler = forms.ImageField(label="traveler picture", required=True)
     public = forms.BooleanField(label="Use this description")
 
 
@@ -38,4 +41,7 @@ class EditDescription(forms.Form):
     text = forms.CharField()
     quote = forms.CharField()
     picture = forms.ImageField(label="Description picture", required=False)
+    musician = forms.ImageField(label="Musician picture", required=False)
+    writer = forms.ImageField(label="writer picture", required=False)
+    traveler = forms.ImageField(label="traveler picture", required=False)
     public = forms.BooleanField()

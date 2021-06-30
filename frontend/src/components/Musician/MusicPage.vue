@@ -204,6 +204,9 @@ export default {
   float: left;
 
 }
+.play:hover{
+  cursor: pointer;
+}
 .song_title{
   float: left;
   width: 100%;
