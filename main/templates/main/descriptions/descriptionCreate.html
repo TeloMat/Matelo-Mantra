@@ -9,7 +9,7 @@
          Create a new description
      </div>
 
-    <form method="post" action="/api/description/create/" class="form-group" enctype="multipart/form-data">
+    <form method="post" action="/api/descriptions/create/" class="form-group" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit", name="save" class="btn btn-success">

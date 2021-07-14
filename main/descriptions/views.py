@@ -1,8 +1,8 @@
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
-from main.descriptions.forms import EditDescription, CreateNewDescription
-from main.descriptions.models import Description
+from .forms import EditDescription, CreateNewDescription
+from .models import Description
 
 
 def indexDesc(response, id):
@@ -42,17 +42,30 @@ def listDesc(response):
 def createDescription(response):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
+
     if response.method == "POST":
         form = CreateNewDescription(response.POST)
+        print(form.is_valid())
         if form.is_valid():
+
             name = form.cleaned_data["name"]
             text = form.cleaned_data["text"]
             quote = form.cleaned_data["quote"]
             public = form.cleaned_data["public"]
             desc = Description(name=name, text=text, quote=quote, public=public)
+            desc.save()
+
             if response.FILES.get('picture'):
                 desc.picture.save(desc.name + "_pp.jpg", response.FILES.get('picture'))
+            if response.FILES.get('musician'):
+                desc.picture.save(desc.name + "_menu1.jpg", response.FILES.get('musician'))
+            if response.FILES.get('traveler'):
+                desc.picture.save(desc.name + "_menu2.jpg", response.FILES.get('traveler'))
+            if response.FILES.get('writer'):
+                desc.picture.save(desc.name + "_menu3.jpg", response.FILES.get('writer'))
+
             desc.save()
             return HttpResponseRedirect("/api/descriptions/")
+
     form = CreateNewDescription()
-    return render(response, "main/descriptions/descriptionCreate.html")
+    return render(response, "main/descriptions/descriptionCreate.html", {"form":form})

@@ -33,7 +33,6 @@ def deletePost(response, id):
     Post.objects.get(id=id).delete()
     return redirect('/api/post/')
 
-
 def listPost(response):
     if response.user.is_authenticated:
         pList = Post.objects.all()

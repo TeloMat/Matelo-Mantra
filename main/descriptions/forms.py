@@ -4,12 +4,13 @@ from django import forms
 class CreateNewDescription(forms.Form):
     name = forms.CharField(label="Description name")
     text = forms.CharField(label="Description text", widget=forms.Textarea)
-    quote = forms.CharField(label="Description Quote")
+    quote = forms.CharField(label="Description quote")
     picture = forms.ImageField(label="Profile picture")
-    musician = forms.ImageField(label="Musician picture", required=True)
-    writer = forms.ImageField(label="writer picture", required=True)
-    traveler = forms.ImageField(label="traveler picture", required=True)
-    public = forms.BooleanField(label="Use this description")
+    musician = forms.ImageField(label="Menu Picture : Musician Item picture", required=False)
+    writer = forms.ImageField(label="Menu Picture : Writer Item Picture", required=False)
+    traveler = forms.ImageField(label="Menu Picture : Traveler Item Picture", required=False)
+    public = forms.BooleanField(label="Select this description for display (Selecting this box will disable display on any other existing description)",
+                                required=False)
 
 
 

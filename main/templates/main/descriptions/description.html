@@ -13,6 +13,7 @@
     </div>
     <div><img class="card-img-top" src="{{ MEDIA_URL }}{{description.picture }}" alt="Card image cap"></div>
     <form method="post" action="/api/descriptions/{{ form.id }}/" class="form-group" enctype="multipart/form-data">
+
     </form>
         {% csrf_token %}
         {{ form|crispy }}
