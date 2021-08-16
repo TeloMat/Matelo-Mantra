@@ -1,8 +1,9 @@
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import EditDescription, CreateNewDescription
 from .models import Description
+from .serializers import DescriptionSerializer
 
 
 def indexDesc(response, id):
@@ -33,19 +34,20 @@ def deleteDesc(response, id):
     desc.delete()
     return redirect('/api/descriptions/')
 
+
 def listDesc(response):
     if response.user.is_authenticated:
         dList = Description.objects.all()
-        return render(response, "main/descriptions/descriptionList.html", {"list" : dList} )
+        return render(response, "main/descriptions/descriptionList.html", {"list": dList})
     return HttpResponseRedirect('/login/')
+
 
 def createDescription(response):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-
     if response.method == "POST":
         form = CreateNewDescription(response.POST)
-        print(form.is_valid())
+        print(form.errors)
         if form.is_valid():
 
             name = form.cleaned_data["name"]
@@ -68,4 +70,11 @@ def createDescription(response):
             return HttpResponseRedirect("/api/descriptions/")
 
     form = CreateNewDescription()
-    return render(response, "main/descriptions/descriptionCreate.html", {"form":form})
+    return render(response, "main/descriptions/descriptionCreate.html", {"form": form})
+
+
+def get_curr_description(request):
+    if request.method == 'GET':
+        description = Description.objects.filter(public=True)[0]
+        serializer = DescriptionSerializer(description)
+        return JsonResponse(serializer.data, safe=False)

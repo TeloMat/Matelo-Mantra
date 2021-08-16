@@ -4,17 +4,9 @@
   <div class="wrapper">
     <div class="panel-title"><h1>Travels</h1></div>
     <div class="grid-view">
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
+      <div v-for="album in albums" :key="album.id" class="grid_case">
+        <PictureAlbumView :album="album"/>
+      </div>
     </div>
   </div>
 </template>
@@ -23,11 +15,22 @@
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
 import PictureAlbumView from "@/components/Traveler/PictureAlbumView";
+
+
 export default {
 name: "Traveler",
   components: {PictureAlbumView, MenuBar, Background},
+  data(){
+    return{albums: []}
+  },
   methods:{
-
+    async fetchAlbums(){
+      const res = await fetch('http://localhost:8000/api/travels/albums/list/')
+      return await res.json()
+    }
+  },
+   async created() {
+    this.albums = await this.fetchAlbums()
   }
 }
 </script>
@@ -44,7 +47,6 @@ name: "Traveler",
   margin: 2% 2%;
   max-width: 100%;
   height: 33vh;
-  border: 2px outset #333333 ;
   box-shadow: 10px 10px 10px 5px grey;
   transition: margin 0.5s;
 }

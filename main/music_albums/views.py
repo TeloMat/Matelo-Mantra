@@ -26,7 +26,8 @@ def createMAlbum(response):
             album = MusicAlbum()
             album.title = cd.get('title')
             album.artist = cd.get('artist')
-            album.description = cd.get('description')
+            if cd.get('descrption'):
+                album.description = cd.get('description')
             album.public = cd.get('public')
             if response.FILES.get('cover'):
                 album.cover.save(album.title + "_cover.jpg", response.FILES.get('cover'))
@@ -133,6 +134,7 @@ def malbum_list(request):
         serializer = MAlbumSerializer(albums, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+
 def malbum(request, id):
     if request.method == 'GET':
         album = MusicAlbum.objects.get(public=True, id=id)
@@ -144,14 +146,16 @@ def malbum(request, id):
 def song_list(request, id):
     if request.method == 'GET':
         album = MusicAlbum.objects.get(id=id)
-        if album.public == True:
+        if album.public != True:
             return JsonResponse()
-        songs = Song.objects.filter(album_id= id)
+        songs = Song.objects.filter(album_id=id)
         serializer = SongSerializer(songs, many=True)
         return JsonResponse(serializer.data, safe=False)
+    return JsonResponse()
+
 
 def song(request, id):
-    if request.method =='GET':
+    if request.method == 'GET':
         song = Song.objects.get(id=id)
         album = MusicAlbum.objects.get(id=song.album_id)
         if album.public == True:

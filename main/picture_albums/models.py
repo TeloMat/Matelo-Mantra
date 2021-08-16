@@ -13,7 +13,7 @@ class PictureAlbum(models.Model):
 
 
 class Picture(models.Model):
-    album = models.ForeignKey(PictureAlbum, on_delete=models.CASCADE)
+    album = models.ForeignKey(PictureAlbum, related_name='pictures', on_delete=models.CASCADE)
     caption = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(upload_to='travels/pictures', blank=False)

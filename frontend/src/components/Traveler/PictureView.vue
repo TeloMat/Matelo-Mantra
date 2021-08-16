@@ -1,21 +1,21 @@
 <template>
   <div class="container">
-      <img class="container_img" :src="album.thumbnail">
-    <div class="album_text">
-      <p class="text">{{ album.title}}</p>
+      <img class="container_img" :src="picture.photo">
+    <div class="picture_text">
+      <p class="text">{{ picture.caption}}</p>
     </div>
-    <router-link :to="{ name: 'Travel_details', params: {id: album.id}}"><div class="album_button"> Discover this trip </div> </router-link>
+    <router-link :to="{ name: 'Travel_details', params: {id: picture.id}}"><div class="picture_button"> Discover this trip </div> </router-link>
 
   </div>
 </template>
 
 <script>
 export default {
-  name: "PictureAlbumView",
+  name: "PictureView",
   components:{
   },
   props:{
-    album: Object
+    picture: Object
   },
   methods: {
   }
@@ -44,7 +44,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.album_text{
+.picture_text{
   padding: 2.5% 6%;
   font-size: 15px;
   visibility: hidden;
@@ -62,11 +62,11 @@ export default {
   margin: -60% 5% 5% 5%;
 }
 
-.container:hover .album_text{
+.container:hover .picture_text{
   visibility: visible;
   transform: scale(1);
 }
-.container:hover .album_button{
+.container:hover .picture_button{
   visibility: visible;
   transform: scale(1);
 }
@@ -76,12 +76,12 @@ export default {
 ::-webkit-scrollbar {
     width: 12px;
 }
-.album_text p{
+.picture_text p{
   max-height: 85%;
   margin: 5%;
 
 }
-.album_button{
+.picture_button{
   visibility: hidden;
   width: 40%;
   margin: 5% 27.5%;

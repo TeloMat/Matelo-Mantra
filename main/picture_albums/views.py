@@ -1,22 +1,11 @@
 from random import random
 
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import *
 from .models import *
-
-
-# def indexAlbum(response, id):
-#     if not response.user.is_authenticated:
-#         return HttpResponseForbidden()
-#     album = PictureAlbum.objects.get(id=id)
-#     if response.method == "Post":
-#         pass
-#
-#     # form = EditAlbum(album)
-#
-#    pass
+from .serializers import PAlbumSerializer, PictureSerializer, PAlbumDetailsSerializer
 
 
 def indexPAlbum(response, id):
@@ -28,7 +17,8 @@ def indexPAlbum(response, id):
         form = EditPAlbum(album, response.POST)
         if form.is_valid():
             album.title = form.cleaned_data["title"]
-            album.text = form.cleaned_data["description"]
+            if form.cleaned_data["description"]:
+                album.description = form.cleaned_data["description"]
             album.public = form.cleaned_data["public"]
             if response.FILES.get('thumbnail'):
                 album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
@@ -116,7 +106,7 @@ def addPAlbumTag(response, id):
         tag_val = form.cleaned_data["val"]
         album.picturetag_set.create(val=tag_val)
 
-    return HttpResponseRedirect("/api/travels/" + str(id))
+    return HttpResponseRedirect("/api/travels/" + str(id)+'/')
 
 
 def displayPicture(response, id):
@@ -126,3 +116,32 @@ def displayPicture(response, id):
     picture = Picture.objects.get(id=id)
     url = picture.photo.url
     return HttpResponseRedirect(url)
+
+
+def palbum_list(request):
+    if request.method == 'GET':
+        albums = PictureAlbum.objects.filter(public=True)
+        serializer = PAlbumSerializer(albums, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    return JsonResponse()
+
+
+def palbum(request, id):
+    if request.method == 'GET':
+        album = PictureAlbum.objects.get(public=True, id=id)
+        serializer = PAlbumDetailsSerializer(album)
+        return JsonResponse(serializer.data)
+    return JsonResponse()
+
+
+def picture_list(request, id):
+    if request.method == 'GET':
+        album = PictureAlbum.objects.get(id=id)
+        if album.public != True:
+            return JsonResponse()
+        pictures = Picture.objects.filter(album_id=id)
+        serializer = PictureSerializer(pictures, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    return JsonResponse()
+
+

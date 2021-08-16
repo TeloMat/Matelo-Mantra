@@ -14,15 +14,15 @@ class CreateNewPAlbum(forms.Form):
 class EditPAlbum(forms.Form):
     def __init__(self, album, *args, **kwargs):
         super(EditPAlbum, self).__init__(*args, **kwargs)
+        self.fields['description'] = forms.CharField(label="Album description",
+                                                     required=False,
+                                                     widget=forms.Textarea(
+                                                         attrs={'placeholder': album.description}
+                                                     ))
         self.fields['title'] = forms.CharField(label="Album title",
                                                widget=forms.TextInput(
                                                    attrs={'value': album.title}
                                                ))
-        self.fields['description'] = forms.CharField(label="Album description",
-                                                     required=False,
-                                                     widget=forms.Textarea(
-                                                         attrs={'placeholder': album.title}
-                                                     ))
         self.id = album.id
         if album.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,

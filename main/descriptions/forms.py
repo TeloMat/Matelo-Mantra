@@ -2,10 +2,10 @@ from django import forms
 
 
 class CreateNewDescription(forms.Form):
-    name = forms.CharField(label="Description name")
-    text = forms.CharField(label="Description text", widget=forms.Textarea)
-    quote = forms.CharField(label="Description quote")
-    picture = forms.ImageField(label="Profile picture")
+    name = forms.CharField(label="Description name", max_length=200)
+    text = forms.CharField(label="Description text", widget=forms.Textarea, max_length=800)
+    quote = forms.CharField(label="Description quote", max_length=300)
+    picture = forms.ImageField(label="Profile picture", required=False)
     musician = forms.ImageField(label="Menu Picture : Musician Item picture", required=False)
     writer = forms.ImageField(label="Menu Picture : Writer Item Picture", required=False)
     traveler = forms.ImageField(label="Menu Picture : Traveler Item Picture", required=False)
@@ -27,6 +27,10 @@ class EditDescription(forms.Form):
                                                   attrs={
                                                     'placeholder': description.text
                                                   }
+                                              ))
+        self.fields['quote'] = forms.CharField(label="Description quote",
+                                              widget=forms.TextInput(
+                                                  attrs={'value': description.name}
                                               ))
         self.id = description.id
         if description.public:

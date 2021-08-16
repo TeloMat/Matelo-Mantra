@@ -1,6 +1,6 @@
 <template>
 <div class="topnav">
-  <div class="home" ><router-link to="/"><img src="../assets/Matelo_Mantra_VF_(2).png"> </router-link></div>
+  <div class="home" ><router-link :to="{name: 'Home'}"><img src="../assets/Matelo_Mantra_VF_(2).png"> </router-link></div>
 
   <div class="menu_items">
   <router-link  class="item" :to="{name: 'Musician'}"><div > Musician </div></router-link>

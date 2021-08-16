@@ -7,31 +7,21 @@
       <div class="album_info">
 
         <div class="album_thumbnail">
-          <img src="../../assets/album2.jpg">
+          <img :src="album.thumbnail">
         </div>
         <div class="album_text">
           <div class="album_title">
-            <p>Album title</p>
+            <p>{{album.title}}</p>
           </div>
           <div class="album_description">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>{{album.description}}</p>
           </div>
         </div>
       </div>
 
     </div>
      <div class="grid-view">
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
-      <div class="grid_case"><PictureAlbumView/></div>
+      <div class="grid_case" v-for="picture in album.pictures" :key="picture.id" ><PictureView :picture="picture"/></div>
     </div>
   </div>
 </template>
@@ -39,11 +29,27 @@
 <script>
 import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
-import PictureAlbumView from "@/components/Traveler/PictureAlbumView";
+import PictureView from "@/components/Traveler/PictureView";
 
 export default {
 name: "PicAlbumPage",
-  components: {PictureAlbumView, MenuBar, Background}
+  components: {PictureView, MenuBar, Background},
+  props: ['id'],
+  data(){
+    return{
+      album:[]
+    }
+  },
+  methods:{
+    async fetchData(id){
+      const res = await fetch("http://localhost:8000/api/travels/albums/"+ id +"/")
+      return await res.json()
+    },
+  },
+  async created() {
+      this.album = await this.fetchData(this.$route.params.id)
+      console.log(this.album)
+  }
 }
 </script>
 
@@ -129,7 +135,6 @@ name: "PicAlbumPage",
   margin: 2% 2%;
   max-width: 100%;
   height: 33vh;
-  border: 2px outset #333333 ;
   box-shadow: 10px 10px 10px 5px grey;
   transition: margin 0.5s;
 }

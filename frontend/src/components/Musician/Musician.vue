@@ -4,7 +4,7 @@
   <div class="wrapper">
     <div class="panel-title"><h1>Music</h1></div>
     <div class="recycler-view">
-    <AlbumVIew  v-for="album in albums" :key="album.id"  :album="album"/>
+      <AlbumVIew  v-for="album in albums" :key="album.id"  :album="album"/>
 
     </div>
   </div>

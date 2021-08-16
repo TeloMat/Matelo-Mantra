@@ -25,6 +25,12 @@ const routes = [
         component: Traveler,
     },
     {
+        path: "/travels/:id",
+        name: "Travel_details",
+        props: true,
+        component: PicAlbumPage,
+    },
+    {
         path: '/writer',
         name: 'Writer',
         component: Writer,

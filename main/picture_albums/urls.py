@@ -10,6 +10,10 @@ urlpatterns = [
     path("<int:id>/addImage/", views.addPAlbumImage, name="addPAlbumImage"),
     path("<int:id>/deleteImg/", views.deletePAlbumImg, name="deletePAlbumImage"),
     path("<int:id>/addTag/", views.addPAlbumTag, name="addPAlbumTag"),
-    path("pic/<int:id>/", views.displayPicture, name="displayPicture")
+    path("pic/<int:id>/", views.displayPicture, name="displayPicture"),
+
+    path("albums/list/", views.palbum_list, name="restPalbumsList"),
+    path("albums/<int:id>/", views.palbum, name="restSinglePalbum"),
+    path("albums/pictures/album=<int:id>", views.picture_list, name="restPictureList")
 
 ]

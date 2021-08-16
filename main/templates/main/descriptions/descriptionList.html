@@ -17,15 +17,15 @@ Description list
     <div class="card-group">
        {% for p in list %}
             <div class="card">
-            <a href="/api/description/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
-                  {% if p.cover %}
+            <a href="/api/descriptions/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
+                  {% if p.picture %}
                 <img class="card-img-top" src="{{ MEDIA_URL }}{{p.picture }}" alt="Card image cap">
                 {% endif %}
                   <h5 class="card-title">{{ p.name }}</h5>
                 <h5 class="card-title"><small class="text-muted">{{ p.quote }}</small></h5>
 
                   <p class="card-text">{{ p.text }}</p>
-            <a href="/api/description/{{ p.id }}/delete" class="btn btn-danger btn-sm rounded-0" type="button"
+            <a href="/api/descriptions/{{ p.id }}/delete" class="btn btn-danger btn-sm rounded-0" type="button"
                     data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
 
             </a>
