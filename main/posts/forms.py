@@ -4,6 +4,7 @@ from django import forms
 class CreateNewPost(forms.Form):
     name = forms.CharField(label="Post title", max_length=200)
     text = forms.CharField(label="Post text", widget=forms.Textarea)
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
     public = forms.BooleanField(label="Make public", required=False)
 
 
@@ -18,7 +19,7 @@ class EditPost(forms.Form):
                                                   attrs={'placeholder': post.text}
                                               ))
         self.id = post.id
-        if post.public == True:
+        if post.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,
                                                        widget=forms.CheckboxInput(attrs={'checked': 'checked'}))
         else:
@@ -27,6 +28,7 @@ class EditPost(forms.Form):
 
     name = forms.CharField()
     text = forms.CharField()
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
     public = forms.BooleanField()
 
 
@@ -35,5 +37,5 @@ class AddPostTag(forms.Form):
 
 
 class AddPostCredit(forms.Form):
-    contributor = forms.CharField(label= "Contributor", max_length=50, required=True)
-    contribution = forms.CharField(label= "Contribution", max_length=50, required=False)
+    contributor = forms.CharField(label="Contributor", max_length=50, required=True)
+    contribution = forms.CharField(label="Contribution", max_length=50, required=False)

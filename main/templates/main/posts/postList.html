@@ -15,7 +15,7 @@ Post list
     <div class="list-group">
 
     {% for p in list %}
-  <a href="/api/post/{{ p.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a href="/api/post/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ p.name }}</h5>
       <small>{{ p.created_at }}</small>

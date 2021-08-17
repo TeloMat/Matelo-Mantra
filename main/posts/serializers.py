@@ -1,23 +1,19 @@
 from rest_framework import serializers
 
-from main.posts.models import Post
+from main.posts.models import Post, PostCredit
+
+
+class CreditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostCredit
+        fields = ('id', 'contributor', 'contribution')
 
 
 class PostSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.ImageField()
+    credits = CreditSerializer(many=True, read_only=True)
+
     class Meta:
         model = Post
-        fields = ('id', 'name', 'text', 'public', 'created_at')
+        fields = ('id', 'name', 'text', 'thumbnail', 'credits')
 
-# class PostCreditSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Post
-#         fields = ('id', 'name', 'text', 'public', 'created_at')
-#
-
-
-
-
-class CreatePostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = ('name',)

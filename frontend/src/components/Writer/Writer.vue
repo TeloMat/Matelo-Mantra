@@ -3,12 +3,7 @@
   <Menu-bar/>
   <div class="wrapper">
     <div class="panel-title"><h1>Writings</h1></div>
-    <PostView/>
-    <PostView/>
-    <PostView/>
-    <PostView/>
-    <PostView/>
-    <PostView/>
+    <PostView v-for="post in posts" :key="post.id" :post="post"/>
 
   </div>
 </template>
@@ -18,8 +13,21 @@ import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
 import PostView from "@/components/Writer/PostView";
 export default {
-name: "Writer",
-  components: {PostView, MenuBar, Background}
+  name: "Writer",
+  components: {PostView, MenuBar, Background},
+  data(){
+    return{posts:[]}
+  },
+  methods:{
+    async fetchPosts(){
+      const res = await fetch('http://localhost:8000/api/post/rest/list/')
+      return res.json();
+    }
+  },
+  async created(){
+    this.posts = await this.fetchPosts()
+  }
+
 }
 </script>
 

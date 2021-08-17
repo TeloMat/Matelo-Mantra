@@ -14,14 +14,17 @@ class Post(models.Model):
 
 
 class PostCredit(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, related_name='credits', on_delete=models.CASCADE, null=True)
     contributor = models.CharField(max_length=50, )
     contribution = models.CharField(max_length=200, blank=True)
+
     def __str__(self):
         return self.contributor + ": " + self.contribution
+
 
 class PostTag(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     val = models.CharField(max_length=15)
+
     def __str__(self):
         return self.val

@@ -26,7 +26,7 @@ name: "Traveler",
   methods:{
     async fetchAlbums(){
       const res = await fetch('http://localhost:8000/api/travels/albums/list/')
-      return await res.json()
+      return res.json();
     }
   },
    async created() {

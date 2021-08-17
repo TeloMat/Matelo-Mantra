@@ -1,18 +1,23 @@
 <template>
  <div class="post_card">
-    <div class="post_cover"><img src="../../assets/album1.jpg"></div>
+    <div class="post_cover"><img :src="post.thumbnail"></div>
     <div class="post_content">
 
-      <router-link to=post_details><div class="post_title"><p>Post title</p></div></router-link>
-      <div class="post_text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</div>
-      <div class="post_credits">Credits :<br> producer : Matelo Mantra <br> Writer : Matelo Mantra</div>
+      <router-link to=post_details><div class="post_title"><p>{{ post.title }}</p></div></router-link>
+      <div class="post_text">{{post.text}}.</div>
+      <div class="post_credits">Credits :<div v-for="credit in post.credits" :key="credit.id"><br> {{credit.contribution}} : {{credit.contributor}}<br> Writer : Matelo Mantra</div></div>
     </div>
  </div>
 </template>
 
 <script>
 export default {
-name: "PostView"
+name: "PostView",
+  components:{},
+  props:{
+    post: Object
+  },
+  methods:{}
 }
 </script>
 

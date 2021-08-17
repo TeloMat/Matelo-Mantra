@@ -8,7 +8,6 @@ from .music_albums import urls as mAlbums
 from .descriptions import urls as descriptions
 #from .views import PostView, CreatePostView
 from .posts import urls
-from .views import PostView
 
 urlpatterns = [
 

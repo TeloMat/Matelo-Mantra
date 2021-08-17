@@ -1,8 +1,9 @@
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 
 from .forms import EditPost, CreateNewPost, AddPostCredit, AddPostTag
 from .models import Post
+from .serializers import PostSerializer
 
 
 def indexPost(response, id):
@@ -14,7 +15,11 @@ def indexPost(response, id):
         form = EditPost(post, response.POST)
         if form.is_valid():
             post.name = form.cleaned_data["name"]
-            post.text = form.cleaned_data["text"]
+            if form.cleaned_data["text"]:
+                post.text = form.cleaned_data["text"]
+            if response.FILES.get('thumbnail'):
+                post.thumbnail.save(post.name + "_tb.jpg", response.FILES.get('thumbnail'))
+
             post.public = form.cleaned_data["public"]
             post.save()
             return redirect('/api/post/')
@@ -27,11 +32,13 @@ def indexPost(response, id):
                   {"post": post, "form": form,
                    "tagForm": tagForm, "creditForm": creditForm})
 
+
 def deletePost(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
     Post.objects.get(id=id).delete()
     return redirect('/api/post/')
+
 
 def listPost(response):
     if response.user.is_authenticated:
@@ -51,10 +58,13 @@ def createPost(response):
             t = form.cleaned_data["text"]
             pub = form.cleaned_data["public"]
             p = Post(name=n, text=t, public=pub)
+            if response.FILES.get('thumbnail'):
+                p.thumbnail.save(p.name + "_tb.jpg", response.FILES.get('thumbnail'))
+
             p.save()
             return HttpResponseRedirect("/api/post/")
     form = CreateNewPost()
-    return render(response, "main/posts/postCreate.html", {"form":form})
+    return render(response, "main/posts/postCreate.html", {"form": form})
 
 
 def addPostTag(response, id):
@@ -66,7 +76,8 @@ def addPostTag(response, id):
         tag_val = form.cleaned_data["val"]
         post.posttag_set.create(val=tag_val)
 
-    return HttpResponseRedirect("/api/post/"+str(id))
+    return HttpResponseRedirect("/api/post/" + str(id))
+
 
 def addPostCredit(response, id):
     if not response.user.is_authenticated:
@@ -77,4 +88,22 @@ def addPostCredit(response, id):
         contributor = form.cleaned_data["contributor"]
         contribution = form.cleaned_data["contribution"]
         post.postcredit_set.create(contributor=contributor, contribution=contribution)
-    return HttpResponseRedirect("/api/post/"+str(id))
+    return HttpResponseRedirect("/api/post/" + str(id)+"/")
+
+
+def post(request, id):
+    if request.method == 'GET':
+        post = Post.objects.get(id=id)
+        if not post.public:
+            return JsonResponse()
+        serializer = PostSerializer(post)
+        return JsonResponse(serializer.data)
+    # return JsonResponse()
+
+
+def post_list(request):
+    if request.method == 'GET':
+        posts = Post.objects.filter(public=True)
+        serializer = PostSerializer(posts, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    # return JsonResponse()

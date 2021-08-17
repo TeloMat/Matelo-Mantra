@@ -20,7 +20,7 @@ def indexPAlbum(response, id):
             if form.cleaned_data["description"]:
                 album.description = form.cleaned_data["description"]
             album.public = form.cleaned_data["public"]
-            if response.FILES.get('thumbnail'):
+            if response.FILES.get("thumbnail"):
                 album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
             album.save()
             return HttpResponseRedirect("/api/travels/")
@@ -123,7 +123,7 @@ def palbum_list(request):
         albums = PictureAlbum.objects.filter(public=True)
         serializer = PAlbumSerializer(albums, many=True)
         return JsonResponse(serializer.data, safe=False)
-    return JsonResponse()
+    # return JsonResponse()
 
 
 def palbum(request, id):
@@ -131,7 +131,7 @@ def palbum(request, id):
         album = PictureAlbum.objects.get(public=True, id=id)
         serializer = PAlbumDetailsSerializer(album)
         return JsonResponse(serializer.data)
-    return JsonResponse()
+    # return JsonResponse()
 
 
 def picture_list(request, id):
@@ -142,6 +142,4 @@ def picture_list(request, id):
         pictures = Picture.objects.filter(album_id=id)
         serializer = PictureSerializer(pictures, many=True)
         return JsonResponse(serializer.data, safe=False)
-    return JsonResponse()
-
-
+    # return JsonResponse()

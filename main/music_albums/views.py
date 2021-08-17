@@ -140,7 +140,7 @@ def malbum(request, id):
         album = MusicAlbum.objects.get(public=True, id=id)
         serializer = MAlbumSerializer(album)
         return JsonResponse(serializer.data)
-    return JsonResponse()
+    # return JsonResponse()
 
 
 def song_list(request, id):
@@ -151,7 +151,7 @@ def song_list(request, id):
         songs = Song.objects.filter(album_id=id)
         serializer = SongSerializer(songs, many=True)
         return JsonResponse(serializer.data, safe=False)
-    return JsonResponse()
+    # return JsonResponse()
 
 
 def song(request, id):
@@ -161,4 +161,4 @@ def song(request, id):
         if album.public == True:
             serializer = SongPlayerSerializer(song)
             return JsonResponse(serializer.data, safe=True)
-    return JsonResponse()
+    # return JsonResponse()
