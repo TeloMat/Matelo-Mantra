@@ -26,7 +26,7 @@ def createMAlbum(response):
             album = MusicAlbum()
             album.title = cd.get('title')
             album.artist = cd.get('artist')
-            if cd.get('descrption'):
+            if cd.get('description'):
                 album.description = cd.get('description')
             album.public = cd.get('public')
             if response.FILES.get('cover'):
@@ -54,7 +54,7 @@ def indexMAlbum(response, id):
             album.description = cd.get('description')
             album.public = cd.get('public')
             if response.FILES.get('cover'):
-                album.cover.save(album.title + "cover",
+                album.cover.save(album.title + "cover.jpg",
                                  response.FILES.get('cover'))
             album.save()
             return HttpResponseRedirect("/api/music/")

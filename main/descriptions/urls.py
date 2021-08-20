@@ -7,4 +7,5 @@ urlpatterns = [
     path("<int:id>/delete", views.deleteDesc, name="deleteDesc"),
     path("create/", views.createDescription, name="createDescription"),
 
+    path("rest/", views.get_curr_description, name="getRestDescription")
 ]

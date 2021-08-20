@@ -1,13 +1,30 @@
 <template>
   <div class="menu">
-    <div class="title"><img src="../assets/Matelo_Mantra_VF.png"></div>
+    <div class="title">
+      <img src="../assets/Matelo_Mantra_VF.png"></div>
     <div class="grid_container">
-<!--      <div class="grid_background"><img src="../assets/background4.jpg" alt="Error loading img"> </div>-->
       <div class="grid_content">
         <div class="grid_content_item">        <router-link to=music>
-<img id="musician" src="../assets/music.jpg" alt="Error loading img"> </router-link><div class="grid_content_item_text">Musician</div></div>
-        <div class="grid_content_item"><router-link to=travels> <img src="../assets/travel.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text"> Traveler</div></div>
-        <div class="grid_content_item"><router-link to=writer><img src="../assets/writer.jpg" alt="Error loading img"></router-link><div class="grid_content_item_text">Writer</div></div>
+          <img v-if="description.musician" :src="description.musician">
+          <img v-else src="../assets/music.jpg" alt="Error loading img">
+        </router-link>
+          <div class="grid_content_item_text">Musician</div>
+        </div>
+        <div class="grid_content_item">
+          <router-link to=travels>
+            <img v-if="description.traveler" :src="description.traveler">
+            <img v-else src="../assets/travel.jpg" alt="Error loading img">
+          </router-link>
+          <div class="grid_content_item_text"> Traveler</div>
+        </div>
+        <div class="grid_content_item">
+          <router-link to=writer>
+            <img v-if="description.writer" :src="description.writer">
+            <img v-else src="../assets/writer.jpg" alt="Error loading img">
+          </router-link>
+          <div class="grid_content_item_text">Writer</div>
+        </div>
+
       </div>
 
     </div>
@@ -16,7 +33,11 @@
 
 <script>
 export default {
-  name: "Menu"
+  name: "Menu",
+  components:{},
+  props:{
+    description:Object
+  }
 }
 </script>
 
@@ -118,7 +139,7 @@ export default {
     transition: transform 0.5s; /* Animation */
   }
 
-  #musician{
+  .musician{
     margin: 0 -110%;
     left: -30%;
   }

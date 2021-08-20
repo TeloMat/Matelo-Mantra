@@ -10,8 +10,8 @@ class CreditSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    thumbnail = serializers.ImageField()
     credits = CreditSerializer(many=True, read_only=True)
+    thumbnail = serializers.ImageField()
 
     class Meta:
         model = Post

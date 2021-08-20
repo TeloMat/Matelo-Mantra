@@ -15,7 +15,7 @@ class Post(models.Model):
 
 class PostCredit(models.Model):
     post = models.ForeignKey(Post, related_name='credits', on_delete=models.CASCADE, null=True)
-    contributor = models.CharField(max_length=50, )
+    contributor = models.CharField(max_length=50)
     contribution = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

@@ -9,27 +9,27 @@ from .serializers import PostSerializer
 def indexPost(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-    post = Post.objects.get(id=id)
+    p = Post.objects.get(id=id)
     # if redirecting from edit
     if response.method == "POST":
-        form = EditPost(post, response.POST)
+        form = EditPost(p, response.POST)
         if form.is_valid():
-            post.name = form.cleaned_data["name"]
+            p.name = form.cleaned_data["name"]
             if form.cleaned_data["text"]:
-                post.text = form.cleaned_data["text"]
+                p.text = form.cleaned_data["text"]
+
             if response.FILES.get('thumbnail'):
-                post.thumbnail.save(post.name + "_tb.jpg", response.FILES.get('thumbnail'))
+                p.thumbnail.save(p.name + "_tb.jpg", response.FILES.get('thumbnail'))
+            p.public = form.cleaned_data["public"]
+            p.save()
+            return HttpResponseRedirect("/api/post/")
 
-            post.public = form.cleaned_data["public"]
-            post.save()
-            return redirect('/api/post/')
-
-    form = EditPost(post)
+    form = EditPost(p)
     tagForm = AddPostTag()
     creditForm = AddPostCredit()
 
     return render(response, "main/posts/post.html",
-                  {"post": post, "form": form,
+                  {"post": p, "form": form,
                    "tagForm": tagForm, "creditForm": creditForm})
 
 
@@ -52,15 +52,15 @@ def createPost(response):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
     if response.method == "POST":
-        form = CreateNewPost(response.POST)
+        form = CreateNewPost(response.POST, response.FILES)
+
         if form.is_valid():
             n = form.cleaned_data["name"]
             t = form.cleaned_data["text"]
             pub = form.cleaned_data["public"]
             p = Post(name=n, text=t, public=pub)
-            if response.FILES.get('thumbnail'):
+            if response.FILES.get("thumbnail"):
                 p.thumbnail.save(p.name + "_tb.jpg", response.FILES.get('thumbnail'))
-
             p.save()
             return HttpResponseRedirect("/api/post/")
     form = CreateNewPost()

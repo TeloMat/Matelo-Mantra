@@ -9,7 +9,7 @@
 {% block content %}
         Create Post
 
-    <form method="post" action="/api/post/create/" class="form-group">
+    <form method="post" action="/api/post/create/" class="form-group" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ form|crispy }}

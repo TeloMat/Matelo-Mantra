@@ -3,7 +3,7 @@
     <div class="post_cover"><img :src="post.thumbnail"></div>
     <div class="post_content">
 
-      <router-link to=post_details><div class="post_title"><p>{{ post.title }}</p></div></router-link>
+      <router-link to=post_details><div class="post_title"><p>{{ post.name }}</p></div></router-link>
       <div class="post_text">{{post.text}}.</div>
       <div class="post_credits">Credits :<div v-for="credit in post.credits" :key="credit.id"><br> {{credit.contribution}} : {{credit.contributor}}<br> Writer : Matelo Mantra</div></div>
     </div>

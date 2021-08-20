@@ -1,32 +1,15 @@
 <template>
-  <div class="bar">
-    <div class="bar_msg wrapper">
-      <img src="../assets/thumbsup.png">          Like my content? consider sharing it with your friends!
-    </div>
-    <div class="bar_content wrapper">
-
-      <div class="bar_social">
-      <a class="fa fa-instagram"></a>
-
-      </div>
-
-      <div class="bar_social">
-         <a href="#" class="fa fa-facebook"></a>
-      </div>
-      <div class="bar_social">
-        <a href="#" class="fa fa-twitter"></a>
-
-      </div>
-      <div class="bar_social">
-        <a href="#" class="fa fa-youtube"></a>
-      </div>
-    </div>
-  </div>
+    <DescriptionView :description = "description"/>
 </template>
 
 <script>
+import DescriptionView from "./DescriptionView";
 export default {
-name: "Footer"
+name: "Footer",
+  components: {DescriptionView},
+  props:{
+    description: Object
+  },
 }
 </script>
 
@@ -35,13 +18,12 @@ name: "Footer"
   .bar{
     width: 100vw;
     background: #ebdeca;
-    text-align: left;
     height: fit-content;
+    text-align: center;
     padding-top: 5px;
     padding-bottom: 15px;
     margin-right: 0;
     font-family: "Brush Script MT";
-    text-align: center;
     font-size: 35px;
   }
 

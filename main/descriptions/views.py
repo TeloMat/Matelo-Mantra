@@ -75,6 +75,6 @@ def createDescription(response):
 
 def get_curr_description(request):
     if request.method == 'GET':
-        description = Description.objects.filter(public=True)[0]
+        description = Description.objects.get(public=True)
         serializer = DescriptionSerializer(description)
         return JsonResponse(serializer.data, safe=False)

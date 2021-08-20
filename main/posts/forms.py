@@ -4,7 +4,7 @@ from django import forms
 class CreateNewPost(forms.Form):
     name = forms.CharField(label="Post title", max_length=200)
     text = forms.CharField(label="Post text", widget=forms.Textarea)
-    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=True)
     public = forms.BooleanField(label="Make public", required=False)
 
 
@@ -28,8 +28,8 @@ class EditPost(forms.Form):
 
     name = forms.CharField()
     text = forms.CharField()
-    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
     public = forms.BooleanField()
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
 
 
 class AddPostTag(forms.Form):

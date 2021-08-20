@@ -13,6 +13,4 @@ urlpatterns = [
 
     path("rest/list/", views.post_list, name="restPostList"),
     path("rest/<int:id>/", views.post, name="restSinglePost")
-
-
 ]

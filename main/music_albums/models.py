@@ -8,6 +8,7 @@ class MusicAlbum(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     public = models.BooleanField(default=True)
     cover = models.ImageField(upload_to='music/covers', blank=True)
+
     def __str__(self):
         return self.title
 

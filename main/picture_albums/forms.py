@@ -8,7 +8,7 @@ class CreateNewPAlbum(forms.Form):
     description = forms.CharField(label="Album description",
                                   widget=forms.Textarea, max_length=250)
     public = forms.BooleanField(label="Make public", required=False)
-    thumbnail = forms.ImageField(label="Thumbnail picture", required=False)
+    thumbnail = forms.ImageField(label="Thumbnail picture", required=True)
 
 
 class EditPAlbum(forms.Form):

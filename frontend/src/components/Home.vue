@@ -1,9 +1,9 @@
 <template>
     <Background/>
     <div class="wrapper">
-      <Menu></Menu>
+      <Menu :description="description"></Menu>
     </div>
-    <Footer></Footer>
+    <Footer :description="description"></Footer>
 </template>
 
 <script>
@@ -12,7 +12,22 @@ import Footer from "@/components/Footer";
 import Background from "@/components/Background";
 export default {
   name: "Home",
-  components: {Background, Footer, Menu}
+  components: {Background, Footer, Menu},
+  data(){
+    return{
+      description: null
+    }
+  },
+  methods:{
+    async fetchData(){
+      const res = await fetch('http://localhost:8000/api/descriptions/rest/')
+      console.log("test")
+      return res.json()
+    }
+  },
+  async create(){
+    this.description = await this.fetchData()
+  }
 }
 </script>
 
