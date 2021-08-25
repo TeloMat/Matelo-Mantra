@@ -23,7 +23,6 @@ name: "Footer",
     padding-top: 5px;
     padding-bottom: 15px;
     margin-right: 0;
-    font-family: "Brush Script MT";
     font-size: 35px;
   }
 

@@ -3,16 +3,16 @@
     <div class="wrapper">
       <Menu :description="description"></Menu>
     </div>
-    <Footer :description="description"></Footer>
+    <Description-view :description="description"></Description-view>
 </template>
 
 <script>
 import Menu from "@/components/Menu";
-import Footer from "@/components/Footer";
 import Background from "@/components/Background";
+import DescriptionView from "./DescriptionView";
 export default {
   name: "Home",
-  components: {Background, Footer, Menu},
+  components: {DescriptionView, Background, Menu},
   data(){
     return{
       description: null
@@ -25,7 +25,7 @@ export default {
       return res.json()
     }
   },
-  async create(){
+  async created(){
     this.description = await this.fetchData()
   }
 }

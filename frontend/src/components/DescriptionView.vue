@@ -1,6 +1,6 @@
 <template>
 <div class="description-box">
-  <img v-if="description.picture" src="description.picture">
+  <img v-if="description.picture" :src="description.picture">
 
 </div>
 </template>

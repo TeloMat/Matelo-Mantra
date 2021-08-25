@@ -4,29 +4,28 @@
       <img src="../assets/Matelo_Mantra_VF.png"></div>
     <div class="grid_container">
       <div class="grid_content">
-        <div class="grid_content_item">        <router-link to=music>
-          <img v-if="description.musician" :src="description.musician">
-          <img v-else src="../assets/music.jpg" alt="Error loading img">
-        </router-link>
-          <div class="grid_content_item_text">Musician</div>
+        <div class="grid_content_item">
+          <router-link :to="{ name: 'Musician'}">
+            <img :src="description.musician">
+<!--            <img v-else src="../assets/music.jpg" alt="Error loading img">-->
+          </router-link>
+          <div class="grid_content_item_text" id="musician">Musician</div>
         </div>
         <div class="grid_content_item">
-          <router-link to=travels>
-            <img v-if="description.traveler" :src="description.traveler">
-            <img v-else src="../assets/travel.jpg" alt="Error loading img">
+          <router-link :to="{ name: 'Travels'}">
+            <img :src="description.traveler">
+<!--            <img v-else src="../assets/travel.jpg" alt="Error loading img">-->
           </router-link>
-          <div class="grid_content_item_text"> Traveler</div>
+          <div class="grid_content_item_text" id="traveler"> Traveler</div>
         </div>
         <div class="grid_content_item">
-          <router-link to=writer>
-            <img v-if="description.writer" :src="description.writer">
-            <img v-else src="../assets/writer.jpg" alt="Error loading img">
+          <router-link :to="{ name: 'Writer'}">
+            <img :src="description.writer">
+<!--            <img v-else src="../assets/writer.jpg" alt="Error loading img">-->
           </router-link>
-          <div class="grid_content_item_text">Writer</div>
+          <div class="grid_content_item_text" id="writer">Writer</div>
         </div>
-
       </div>
-
     </div>
   </div>
 </template>
@@ -98,7 +97,7 @@ export default {
     margin:  0 10%;
     align-content: center;
     border-radius: 10px;
-    transition: transform 0.5s; /* Animation */
+    transition: all 0.5s; /* Animation */
     z-index: 0;
   }
 
@@ -128,21 +127,31 @@ export default {
 
   .grid_content_item_text{
     display: inline-block;
-    position: relative;
+    position: absolute;
     color: white;
     mix-blend-mode: difference;
     font-size: 35px;
     width: 100%;
-    top: -55%;
+    top: 45%;
+    right: 0;
     text-align: center;
     padding: 0;
-    transition: transform 0.5s; /* Animation */
+    transition: transform 0.5s;
+    /* Animation */
   }
 
-  .musician{
-    margin: 0 -110%;
-    left: -30%;
-  }
+  /*#musician{*/
+  /*  margin: 0 -110%;*/
+  /*  left: -30%;*/
+  /*}*/
 
+  /*#writer{*/
+  /*  top: -46%;*/
+  /*  left: 10%;*/
 
+  /*!*}*!*/
+  /*#traveler{*/
+  /*  top: -47%;*/
+  /*  left: 10%;*/
+  /* }*/
 </style>

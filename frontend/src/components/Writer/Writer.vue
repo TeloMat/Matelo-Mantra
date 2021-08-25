@@ -4,7 +4,6 @@
   <div class="wrapper">
     <div class="panel-title"><h1>Writings</h1></div>
     <PostView v-for="post in posts" :key="post.id" :post="post"/>
-
   </div>
 </template>
 

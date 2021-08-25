@@ -19,6 +19,12 @@ def indexDesc(response, id):
             description.save()
             if response.FILES.get('picture'):
                 description.picture.save(description.name + "_pp.jpg", response.FILES.get('picture'))
+            if response.FILES.get('musician'):
+                description.musician.save(description.name + "_musician.jpg", response.FILES.get('musician'))
+            if response.FILES.get('traveler'):
+                description.traveler.save(description.name + "_traveler.jpg", response.FILES.get('traveler'))
+            if response.FILES.get('writer'):
+                description.writer.save(description.name + "_writer.jpg", response.FILES.get('writer'))
             return redirect('/api/descriptions/')
 
     form = EditDescription(description)
