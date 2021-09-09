@@ -42,7 +42,8 @@ name: "PicAlbumPage",
   },
   methods:{
     async fetchData(id){
-      const res = await fetch("http://localhost:8000/api/travels/albums/"+ id +"/")
+      // const res = await fetch("http://localhost:8000/api/travels/albums/"+ id +"/")
+      const res = await fetch("http://localhost:5001/api/travels/albums/"+ id +"/")
       return await res.json()
     },
   },

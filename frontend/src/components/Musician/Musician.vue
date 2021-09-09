@@ -24,7 +24,9 @@ export default {
   },
   methods:{
     async fetchAlbums(){
-      const res = await fetch('http://localhost:8000/api/music/Albums/list/')
+      // const res = await fetch('http://localhost:8000/api/music/Albums/list/')
+      const res = await fetch('http://localhost:5001/api/music/Albums/list/')
+
       return await res.json()
     }
   },

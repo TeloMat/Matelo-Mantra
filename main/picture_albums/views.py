@@ -22,6 +22,12 @@ def indexPAlbum(response, id):
             album.public = form.cleaned_data["public"]
             if response.FILES.get("thumbnail"):
                 album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
+            if response.FILES.get("musician"):
+                album.thumbnail.save(album.title + "_musician.jpg", response.FILES.get('musician'))
+            if response.FILES.get("writer"):
+                album.thumbnail.save(album.title + "_writer.jpg", response.FILES.get('writer'))
+            if response.FILES.get("traveler"):
+                album.thumbnail.save(album.title + "_traveler.jpg", response.FILES.get('traveler'))
             album.save()
             return HttpResponseRedirect("/api/travels/")
 
@@ -54,6 +60,12 @@ def createPAlbum(response):
             album.description = cd.get('description')
             if response.FILES.get('thumbnail'):
                 album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
+            if response.FILES.get("musician"):
+                album.thumbnail.save(album.title + "_musician.jpg", response.FILES.get('musician'))
+            if response.FILES.get("writer"):
+                album.thumbnail.save(album.title + "_writer.jpg", response.FILES.get('writer'))
+            if response.FILES.get("traveler"):
+                album.thumbnail.save(album.title + "_traveler.jpg", response.FILES.get('traveler'))
             album.save()
             return HttpResponseRedirect("/api/travels/")
     form = CreateNewPAlbum()

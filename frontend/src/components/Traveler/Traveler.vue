@@ -25,7 +25,8 @@ name: "Traveler",
   },
   methods:{
     async fetchAlbums(){
-      const res = await fetch('http://localhost:8000/api/travels/albums/list/')
+      // const res = await fetch('http://localhost:8000/api/travels/albums/list/')
+      const res = await fetch('http://localhost:5001/api/travels/albums/list/')
       return res.json();
     }
   },

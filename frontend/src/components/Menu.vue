@@ -1,7 +1,8 @@
 <template>
   <div class="menu">
     <div class="title">
-      <img src="../assets/Matelo_Mantra_VF.png"></div>
+      <img src="../assets/Matelo_Mantra_VF.png">
+    </div>
     <div class="grid_container">
       <div class="grid_content">
         <div class="grid_content_item">
@@ -35,8 +36,10 @@ export default {
   name: "Menu",
   components:{},
   props:{
-    description:Object
-  }
+    description: Object
+  },methods: {
+
+  },
 }
 </script>
 
@@ -46,8 +49,7 @@ export default {
   }
 
   .title{
-    height: 20vh;
-    margin: 20px 30px;
+    margin: 0px 30px;
   }
 
   .title img{

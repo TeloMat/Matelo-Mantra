@@ -19,7 +19,8 @@ export default {
   },
   methods:{
     async fetchPosts(){
-      const res = await fetch('http://localhost:8000/api/post/rest/list/')
+      // const res = await fetch('http://localhost:8000/api/post/rest/list/')
+      const res = await fetch('http://localhost:5001/api/post/rest/list/')
       return res.json();
     }
   },

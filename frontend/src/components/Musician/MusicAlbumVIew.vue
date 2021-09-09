@@ -31,6 +31,7 @@ export default {
     album: Object
   },
   methods: {
+
   }
 }
 </script>

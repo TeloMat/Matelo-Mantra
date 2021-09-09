@@ -79,25 +79,21 @@ export default {
       aud.currentTime = aud.duration * target
       $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
       console.log(target + "*" + aud.duration)
-
     },
-
     /*,
     next : function (){
       var aud = $('audio')[0]
       aud.src = "new source"
     }*/
-
-
-
   },
+
   async created() {
     var aud = $('audio')[0];
     if (aud.paused) {
         aud.play();
         $('#play-pause').removeClass('icon-play');
         $('#play-pause').addClass('icon-stop');
-      }
+    }
   }
 
 }

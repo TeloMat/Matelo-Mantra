@@ -47,16 +47,18 @@ export default {
   props:['id'],
   data(){
     return{
-      album: []
+      album: [],
     }
   },
   methods:{
     async fetchData(id){
-      const res = await fetch("http://localhost:8000/api/music/Albums/"+ id+ "/")
+      // const res = await fetch("http://localhost:8000/api/music/Albums/"+ id+ "/")
+      const res = await fetch("http://localhost:5001/api/music/Albums/"+ id+ "/")
       return await res.json()
     },
     async fetchSong(id) {
-      const res = await fetch("http://localhost:8000/api/music/Albums/songs/" + id + "/")
+      // const res = await fetch("http://localhost:8000/api/music/Albums/songs/" + id + "/")
+      const res = await fetch("http://localhost:5001/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
     play: async function (id){

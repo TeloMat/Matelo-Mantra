@@ -1,9 +1,9 @@
 <template>
     <Background/>
-    <div class="wrapper">
+    <div class="wrapper" v-if="!isFetching">
       <Menu :description="description"></Menu>
+      <Description-view :description="description"></Description-view>
     </div>
-    <Description-view :description="description"></Description-view>
 </template>
 
 <script>
@@ -15,18 +15,20 @@ export default {
   components: {DescriptionView, Background, Menu},
   data(){
     return{
-      description: null
+      description: null,
+      isFetching: true,
     }
   },
   methods:{
     async fetchData(){
-      const res = await fetch('http://localhost:8000/api/descriptions/rest/')
-      console.log("test")
+      const res = await fetch('http://localhost:5001/api/descriptions/rest/')
+      // const res = await fetch('http://localhost:8000/api/descriptions/rest/')
       return res.json()
     }
   },
   async created(){
     this.description = await this.fetchData()
+    this.isFetching = false
   }
 }
 </script>
@@ -35,7 +37,8 @@ export default {
 
 
 
- .wrapper{
+  .wrapper{
+    margin-top: 0;
     margin-right: auto; /* 1 */
     margin-left:  auto; /* 1 */
 
