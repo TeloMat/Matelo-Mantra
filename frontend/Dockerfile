@@ -1,39 +1,22 @@
-# We don't want to start from scratch.
-# That is why we tell node here to use the current node image as base.
-FROM node:alpine3.11
+FROM node:lts-alpine
 
-# Create an application directory
-RUN mkdir /
+# install simple http server for serving static content
+RUN npm install -g http-server
 
-# The /app directory should act as the main application directory
-WORKDIR /
+# make the 'app' folder the current working directory
+WORKDIR /app
 
-# Copy the app package and package-lock.json file
+# copy both 'package.json' and 'package-lock.json' (if available)
 COPY package*.json ./
 
-# Install node packages
+# install project dependencies
 RUN npm install
 
-# Copy or project directory (locally) in the current directory of our docker image (/app)
-COPY / .
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY . .
 
-# Build the app
+# build app for production with minification
 RUN npm run build
+EXPOSE 8080
 
-# Expose $PORT on container.
-# We use a varibale here as the port is something that can differ on the environment.
-EXPOSE $PORT
-
-# Set host to localhost / the docker image
-ENV NUXT_HOST=0.0.0.0
-
-# Set app port
-ENV NUXT_PORT=$PORT
-
-# Set the base url
-
-# Set the browser base url
-
-# Start the app
-CMD npm run serve
-
+CMD [ "http-server", "dist" ]

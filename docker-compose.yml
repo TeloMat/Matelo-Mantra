@@ -1,16 +1,14 @@
 version: '3'
+
 services:
-  matelo-mantra-frontend:
-    image: matelo-mantra-frontend:latest
-    environment:
-      PORT: 8080
+  backend:
+    build : ./
+    container_name: matelo-mantra-backend-1
+    ports:
+      - 5001:8000
 #      PROXY_API: http://playground-web-backend:8080/
+  frontend:
+    build: ./frontend/
+    container_name: matelo-mantra-frontend
     ports:
-      - 8080:8080
-  playground-web-backend:
-    image: matelo-mantra-backend:latest
-    environment:
-      PORT: 8000
-    #      MONGODB_URI: mongodb://playground-web-db:27017/playground-web
-    ports:
-      - 8000:8000
+      - 5002:8080
