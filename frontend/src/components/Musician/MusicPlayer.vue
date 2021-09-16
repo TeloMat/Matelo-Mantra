@@ -2,7 +2,7 @@
   <audio id="audio" :src="song.track" preload="auto"> </audio>
 
   <div class="player">
-    <div class="player_Music_cover"><img :src="cover"></div>
+    <div class="player_Music_cover"><img v-bind:src="'http://127.0.0.1:8000/'+ cover"></div>
     <div class="player_Music_text">
       <div class="player_Music_name">
         {{song.title}}

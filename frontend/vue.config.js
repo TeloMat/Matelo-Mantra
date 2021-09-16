@@ -1,8 +1,13 @@
 const BundleTracker = require("webpack-bundle-tracker");
 
 module.exports = {
-    publicPath: "http://127.0.0.1:5002/",
+    publicPath: "http://localhost:8080/",
     outputDir: './dist/',
+    // Access-Control-Allow-Origin: "http://localhost:3000",
+    devServer: {
+        proxy: 'http://localhost:8000/'
+
+    },
 
     chainWebpack: config => {
 
@@ -17,7 +22,7 @@ module.exports = {
             .set('__STATIC__', 'static')
 
         config.devServer
-            .public('http://127.0.0.1:8080')
+            .public('http://localhost:8080')
             .host('127.0.0.1')
             .port(8080)
             .hotOnly(true)

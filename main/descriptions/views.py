@@ -14,7 +14,8 @@ def indexDesc(response, id):
         form = EditDescription(description, response.POST)
         if form.is_valid():
             description.name = form.cleaned_data["name"]
-            description.text = form.cleaned_data["text"]
+            if form.cleaned_data["text"]:
+                description.text = form.cleaned_data["text"]
             description.public = form.cleaned_data["public"]
             description.save()
             if response.FILES.get('picture'):

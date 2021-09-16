@@ -7,21 +7,21 @@
       <div class="grid_content">
         <div class="grid_content_item">
           <router-link :to="{ name: 'Musician'}">
-            <img :src="description.musician">
+            <img v-bind:src="'http://127.0.0.1:8000/'+ description.musician">
 <!--            <img v-else src="../assets/music.jpg" alt="Error loading img">-->
           </router-link>
           <div class="grid_content_item_text" id="musician">Musician</div>
         </div>
         <div class="grid_content_item">
           <router-link :to="{ name: 'Travels'}">
-            <img :src="description.traveler">
+            <img v-bind:src="'http://127.0.0.1:8000/'+ description.traveler">
 <!--            <img v-else src="../assets/travel.jpg" alt="Error loading img">-->
           </router-link>
           <div class="grid_content_item_text" id="traveler"> Traveler</div>
         </div>
         <div class="grid_content_item">
           <router-link :to="{ name: 'Writer'}">
-            <img :src="description.writer">
+            <img v-bind:src="'http://127.0.0.1:8000/'+ description.writer">
 <!--            <img v-else src="../assets/writer.jpg" alt="Error loading img">-->
           </router-link>
           <div class="grid_content_item_text" id="writer">Writer</div>
@@ -40,6 +40,9 @@ export default {
   },methods: {
 
   },
+  async created() {
+    
+  }
 }
 </script>
 

@@ -7,7 +7,7 @@
       <div class="album_info">
 
         <div class="album_thumbnail">
-          <img :src="album.thumbnail">
+          <img v-bind:src="'http://127.0.0.1:5001/'+ album.thumbnail">
         </div>
         <div class="album_text">
           <div class="album_title">
@@ -42,8 +42,8 @@ name: "PicAlbumPage",
   },
   methods:{
     async fetchData(id){
-      // const res = await fetch("http://localhost:8000/api/travels/albums/"+ id +"/")
-      const res = await fetch("http://localhost:5001/api/travels/albums/"+ id +"/")
+      const res = await fetch("http://localhost:8080/api/travels/albums/"+ id +"/")
+      // const res = await fetch("http://localhost:5001/api/travels/albums/"+ id +"/")
       return await res.json()
     },
   },

@@ -21,8 +21,8 @@ export default {
   },
   methods:{
     async fetchData(){
-      const res = await fetch('http://localhost:5001/api/descriptions/rest/')
-      // const res = await fetch('http://localhost:8000/api/descriptions/rest/')
+      // const res = await fetch('http://localhost:5002/api/descriptions/rest/')
+      const res = await fetch('http://localhost:8080/api/descriptions/rest/')
       return res.json()
     }
   },

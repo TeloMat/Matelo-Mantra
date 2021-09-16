@@ -5,7 +5,7 @@
     <div class="album_card">
     <div class="album_title"><p>{{album.title}}</p></div>
     <div class="album_content">
-      <div class="album_cover"><img :src="album.cover"></div>
+      <div class="album_cover"><img v-bind:src="'http://127.0.0.1:8000/'+ album.cover"></div>
       <div class="album_text">
       <div class="album_credits">Credits :<br>Artist : {{ album.artist }}</div>
       <div class="album_description"><p>
@@ -52,13 +52,13 @@ export default {
   },
   methods:{
     async fetchData(id){
-      // const res = await fetch("http://localhost:8000/api/music/Albums/"+ id+ "/")
-      const res = await fetch("http://localhost:5001/api/music/Albums/"+ id+ "/")
+      const res = await fetch("http://localhost:8080/api/music/Albums/"+ id+ "/")
+      // const res = await fetch("http://localhost:5002/api/music/Albums/"+ id+ "/")
       return await res.json()
     },
     async fetchSong(id) {
-      // const res = await fetch("http://localhost:8000/api/music/Albums/songs/" + id + "/")
-      const res = await fetch("http://localhost:5001/api/music/Albums/songs/" + id + "/")
+      const res = await fetch("http://localhost:8080/api/music/Albums/songs/" + id + "/")
+      // const res = await fetch("http://localhost:5001/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
     play: async function (id){
@@ -70,7 +70,7 @@ export default {
       const body = document.body
       var audio_player = defineComponent({extends: MusicPlayer,
         data: () => ({
-        song : song,
+        song : 'http://127.0.0.1:8000/'+song,
         cover: this.album.cover
         })
       })
