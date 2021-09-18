@@ -1,13 +1,17 @@
 const BundleTracker = require("webpack-bundle-tracker");
 
 module.exports = {
-    publicPath: "http://localhost:8080/",
+    publicPath: `${process.env.FRONTEND_URL}`,
     outputDir: './dist/',
-    // Access-Control-Allow-Origin: "http://localhost:3000",
-    devServer: {
-        proxy: 'http://localhost:8000/'
 
-    },
+    // devServer: {
+    //     // proxy: {
+    //     //     "^/api":{
+    //     //         port: process.env.PORT,
+    //     //         target: `http://localhost:${process.env.SERVER_PORT}`
+    //     //     }
+    //     // }
+    // },
 
     chainWebpack: config => {
 
@@ -22,9 +26,9 @@ module.exports = {
             .set('__STATIC__', 'static')
 
         config.devServer
-            .public('http://localhost:8080')
+            .public(`${process.env.VUE_APP_API}`)
             .host('127.0.0.1')
-            .port(8080)
+            .port(`${process.env.PORT}`)
             .hotOnly(true)
             .watchOptions({poll: 1000})
             .https(false)

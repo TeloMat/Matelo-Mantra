@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'Music_details', params: {id: album.id}}"><div class="album_title"><p>{{ album.title }}</p></div></router-link>
     <div class="album_content">
       <div class="album_details">
-      <div class="album_cover"><img v-bind:src="'http://127.0.0.1:8080/'+ album.cover" ></div>
+      <div class="album_cover"><img v-bind:src="base_url + album.cover" ></div>
       <div class="album_credits">Credits :<br> Artist : {{ album.artist }}</div>
       </div>
       <div class="album_songs">
@@ -26,6 +26,11 @@
 export default {
   name: "AlbumVIew",
   components:{
+  },
+  data(){
+    return{
+      base_url : process.env.VUE_APP_API
+    }
   },
   props:{
     album: Object

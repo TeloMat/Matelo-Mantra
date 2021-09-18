@@ -7,7 +7,7 @@
       <div class="album_info">
 
         <div class="album_thumbnail">
-          <img v-bind:src="'http://127.0.0.1:5001/'+ album.thumbnail">
+          <img v-bind:src="base_url+ album.thumbnail">
         </div>
         <div class="album_text">
           <div class="album_title">
@@ -32,18 +32,20 @@ import MenuBar from "@/components/MenuBar";
 import PictureView from "@/components/Traveler/PictureView";
 
 export default {
-name: "PicAlbumPage",
+  name: "PicAlbumPage",
   components: {PictureView, MenuBar, Background},
   props: ['id'],
   data(){
     return{
-      album:[]
+      album:[],
+      base_url : process.env.VUE_APP_API
     }
   },
   methods:{
     async fetchData(id){
-      const res = await fetch("http://localhost:8080/api/travels/albums/"+ id +"/")
-      // const res = await fetch("http://localhost:5001/api/travels/albums/"+ id +"/")
+
+      const res = await fetch(process.env.VUE_APP_API +"/api/travels/albums/"+ id +"/")
+
       return await res.json()
     },
   },

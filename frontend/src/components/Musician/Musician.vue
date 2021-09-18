@@ -19,19 +19,21 @@ export default {
   components: {MenuBar, AlbumVIew, Background},
   data(){
     return {
-      albums: []
+      albums: [],
+      isFetching: true,
+
     }
   },
   methods:{
     async fetchAlbums(){
-      const res = await fetch('http://localhost:8080/api/music/Albums/list/')
-      // const res = await fetch('http://localhost:5001/api/music/Albums/list/')
+      const res = await fetch(process.env.VUE_APP_API + '/api/music/Albums/list/')
 
       return await res.json()
     }
   },
   async created() {
     this.albums = await this.fetchAlbums()
+    this.isFetching = false
   }
 }
 </script>

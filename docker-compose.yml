@@ -7,6 +7,9 @@ services:
     ports:
       - 5001:8000
 #      PROXY_API: http://playground-web-backend:8080/
+    volumes:
+      - ./mounts/db.sqlite3:/app/db.sqlite3
+      - ./media:/app/media
   frontend:
     build: ./frontend/
     container_name: matelo-mantra-frontend

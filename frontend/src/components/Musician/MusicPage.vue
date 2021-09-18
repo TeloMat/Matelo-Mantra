@@ -2,10 +2,10 @@
   <Background/>
   <MenuBar/>
   <div class="wrapper">
-    <div class="album_card">
+    <div class="album_card" v-if="!isFetching">
     <div class="album_title"><p>{{album.title}}</p></div>
     <div class="album_content">
-      <div class="album_cover"><img v-bind:src="'http://127.0.0.1:8000/'+ album.cover"></div>
+      <div class="album_cover"><img v-bind:src="base_url + album.cover"></div>
       <div class="album_text">
       <div class="album_credits">Credits :<br>Artist : {{ album.artist }}</div>
       <div class="album_description"><p>
@@ -16,19 +16,19 @@
     </div>
 
     <div class="album_songs">
-        <div class="song" :key="song.id" v-for="song in album.songs" >
-          <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
-          <div class="song_text">
-            <div class="song_title"><p>{{ song.title }}</p></div>
-            <div class="song_artist"><small>{{ song.artists }}</small></div>
-          </div>
-          <div class="play"  v-on:click="play(song.id)">
-
-          </div>
-          <div class="song_duration">1:22</div>
+      <div class="song" :key="song.id" v-for="song in album.songs" >
+        <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
+        <div class="song_text">
+          <div class="song_title"><p>{{ song.title }}</p></div>
+          <div class="song_artist"><small>{{ song.artists }}</small></div>
         </div>
+        <div class="play"  v-on:click="play(song.id)">
 
         </div>
+        <div class="song_duration">1:22</div>
+      </div>
+
+      </div>
 
     </div>
   </div>
@@ -48,29 +48,31 @@ export default {
   data(){
     return{
       album: [],
+      isFetching: true,
+      base_url: process.env.VUE_APP_API,
     }
   },
   methods:{
     async fetchData(id){
-      const res = await fetch("http://localhost:8080/api/music/Albums/"+ id+ "/")
-      // const res = await fetch("http://localhost:5002/api/music/Albums/"+ id+ "/")
+      const res = await fetch(process.env.VUE_APP_API + '/api/music/Albums/'+ id + '/' )
       return await res.json()
     },
     async fetchSong(id) {
-      const res = await fetch("http://localhost:8080/api/music/Albums/songs/" + id + "/")
-      // const res = await fetch("http://localhost:5001/api/music/Albums/songs/" + id + "/")
+      const res = await fetch(process.env.VUE_APP_API + "/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
     play: async function (id){
+      this.isFetching = true
       var previous_player = document.getElementById("player-container")
       if(document.body.contains(previous_player)){
         previous_player.remove()
       }
       var song = await this.fetchSong(id)
+      song.track = ""
       const body = document.body
       var audio_player = defineComponent({extends: MusicPlayer,
         data: () => ({
-        song : 'http://127.0.0.1:8000/'+song,
+        song : song,
         cover: this.album.cover
         })
       })
@@ -83,8 +85,9 @@ export default {
   },
   async created(){
     this.album = await this.fetchData(this.$route.params.id)
+    this.isFetching = false
+    console.log(this.album)
   },
-
 }
 </script>
 

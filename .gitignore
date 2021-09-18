@@ -9,4 +9,8 @@
 /media/descriptions/
 /media/posts/
 
-/main/migrations/
+/register/migrations/
+/Mainproject/.env
+/frontend/.env
+!/main/migrations/0001_initial.py
+!/main/migrations/

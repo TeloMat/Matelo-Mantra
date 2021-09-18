@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <img class="container_img" :src="picture.photo">
+      <img class="container_img" :src="base_url + picture.photo">
     <div class="picture_text">
       <p class="text">{{ picture.caption}}</p>
     </div>
@@ -13,6 +13,11 @@
 export default {
   name: "PictureView",
   components:{
+  },
+  data(){
+    return{
+      base_url : process.env.VUE_APP_API
+    }
   },
   props:{
     picture: Object

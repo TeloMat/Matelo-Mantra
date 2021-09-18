@@ -20,7 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c_l7&*68n#b3hn5recfd3@)pcfsbmf73z*7%cvm9$@lhu1xhcd'
+with open(os.path.join(BASE_DIR, 'secret_key.txt'))as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
@@ -38,13 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'register.apps.RegisterConfig',
+    'corsheaders',
     'main.apps.MainConfig',
     'rest_framework',
     'webpack_loader',
+
     # 'frontend.apps.FrontendConfig'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -151,3 +155,10 @@ MEDIA_URL = '/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ORIGINS = [
+#     'http://localhost:8080'
+# ]
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = False

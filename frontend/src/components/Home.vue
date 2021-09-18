@@ -21,8 +21,7 @@ export default {
   },
   methods:{
     async fetchData(){
-      // const res = await fetch('http://localhost:5002/api/descriptions/rest/')
-      const res = await fetch('http://localhost:8080/api/descriptions/rest/')
+      const res = await fetch(process.env.VUE_APP_API + '/api/descriptions/rest/')
       return res.json()
     }
   },

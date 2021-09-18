@@ -8,11 +8,10 @@ from .forms import RegisterForm
 def register(response):
     if response.method == "POST":
         form = RegisterForm(response.POST)
-        print(form.is_valid())
         if form.is_valid():
             form.save()
-            return redirect("/login")
-        return redirect("/register")
+            return redirect("/login/")
+        return redirect("/account/register/")
     else:
         form = RegisterForm()
     return render(response, "register/signup.html", {"form":form})
@@ -20,5 +19,5 @@ def register(response):
 
 def signin(response):
     if response.user.is_authenticated:
-        return redirect("/signin")
-    return redirect("/home")
+        return redirect("/signin/")
+    return redirect("/home/")

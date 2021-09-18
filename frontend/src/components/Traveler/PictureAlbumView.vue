@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <img class="container_img" :src="album.thumbnail">
+      <img class="container_img" :src="base_url + album.thumbnail">
     <div class="album_text">
       <p class="text">{{ album.title}}</p>
     </div>
@@ -13,6 +13,11 @@
 export default {
   name: "PictureAlbumView",
   components:{
+  },
+  data(){
+    return{
+      base_url : process.env.VUE_APP_API
+    }
   },
   props:{
     album: Object

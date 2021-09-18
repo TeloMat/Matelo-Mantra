@@ -5,7 +5,7 @@
   </div>
   <div class="description-box">
   <div v-if="description.picture" class="description-image">
-    <img v-bind:src=" 'http://127.0.0.1:8000/'+ description.picture">
+    <img v-bind:src=" base_url + description.picture">
   </div>
   <div class="description-content">
     <div class="description-content_title">
@@ -26,6 +26,11 @@
 export default {
   name: "DescriptionView",
   components:{
+  },
+  data(){
+    return{
+      base_url : process.env.VUE_APP_API
+    }
   },
   props:{
     description : Object
