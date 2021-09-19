@@ -10,8 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
 
+env = environ.Env(
+    # # set casting, default value
+    # DEBUG=(bool, False)
+)
+
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(os.path.join(BASE_DIR, 'secret_key.txt'))as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = env('SECRET_KEY')
+# with open(os.path.join(BASE_DIR, 'secret_key.txt'))as f:
+#     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG', default=1))
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+# ALLOWED_HOSTS = ["https://matelo-frontend.herokuapp.com/", "https://matelo-backend.herokuapp.com/"]
 
 # Application definition
 
@@ -159,6 +168,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOW_ORIGINS = [
 #     'http://localhost:8080'
 # ]
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 # SECURE_SSL_REDIRECT = False
