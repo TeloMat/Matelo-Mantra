@@ -14,6 +14,13 @@ COPY requirements.txt .
 RUN pip install -r ./requirements.txt
 
 COPY . .
-RUN chmod +x ./start.sh
-CMD ./start.sh
+
+ADD ./mounts ./
+
+ADD ./media ./
+
+VOLUME ./db.sqlite3
+
+COPY ./Mainproject/.env.heroku ./Mainproject/.env
+CMD python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT
 

@@ -34,8 +34,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
-# ALLOWED_HOSTS = ["https://matelo-frontend.herokuapp.com/", "https://matelo-backend.herokuapp.com/"]
+# ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ["matelo-frontend.herokuapp.com", "matelo-backend.herokuapp.com"]
 
 # Application definition
 
