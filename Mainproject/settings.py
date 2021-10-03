@@ -161,10 +161,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 APPEND_SLASH = True
 
-
-
-
-
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': DEBUG,
