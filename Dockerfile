@@ -15,12 +15,12 @@ RUN pip install -r ./requirements.txt
 
 COPY . .
 
-ADD ./mounts ./
+#ADD ./mounts ./
+#
+#ADD ./media ./
+#
+#VOLUME ./db.sqlite3
 
-ADD ./media ./
-
-VOLUME ./db.sqlite3
-
-COPY ./Mainproject/.env.heroku ./Mainproject/.env
-CMD python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT
+COPY ./.env.heroku ./.env
+CMD ["gunicorn", "--bind", ":8000", "--workers","3", "core.wsgi:application"]
 
