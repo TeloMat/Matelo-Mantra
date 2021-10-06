@@ -10,12 +10,26 @@ services:
       - .env
     ports:
       - 5001:8000
+  db:
+    image: postgres:11.5-alpine
+    restart: always
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+      - ./db:/docker-entrypoint-initdb.d/
+#    env_file: .env-db
+    environment:
+      - POSTGRES_USER=mateloadmin
+      - POSTGRES_PASSWORD=mantra
+      - POSTGRES_DB=matelodb
+    ports:
+      - 5432:5432
+
   nginx:
     build: ./nginx
     volumes:
       - static:/static
     ports:
-      - "80:80"
+      - 8000:80
     depends_on:
       - backend
 
@@ -28,3 +42,4 @@ services:
 
 volumes:
   static:
+  postgres_data:
