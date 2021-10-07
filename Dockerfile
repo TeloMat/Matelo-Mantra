@@ -15,7 +15,7 @@ RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install -r ./requirements.txt
 
-#COPY ./.env.heroku ./.env
+COPY ./.env.staging ./.env
 #CMD ["gunicorn", "--bind", ":8000", "--workers","3", "core.wsgi:application"]
 
 ENTRYPOINT ["sh", "start.sh"]
