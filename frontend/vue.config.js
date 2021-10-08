@@ -26,7 +26,7 @@ module.exports = {
             .set('__STATIC__', 'static')
 
         config.devServer
-            .public(`${process.env.VUE_APP_API}`)
+            .public(`${process.env.FRONTEND_URL}`)
             .host('127.0.0.1')
             .port(`${process.env.PORT}`)
             .hotOnly(true)

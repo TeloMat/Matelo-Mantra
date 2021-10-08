@@ -1,17 +1,45 @@
-version: '3'
+version: '3.7'
 
 services:
   backend:
     build : ./
-    container_name: matelo-mantra-backend-1
+    container_name: matelo-mantra-backend
+    volumes:
+      - static:/static
+    env_file:
+      - .env
     ports:
       - 5001:8000
-#      PROXY_API: http://playground-web-backend:8080/
+  db:
+    image: postgres:11.5-alpine
+    restart: always
     volumes:
-      - ./mounts/db.sqlite3:/app/db.sqlite3
-      - ./media:/app/media
+      - ./postgres_data:/var/lib/postgresql/data/
+      - ./db:/docker-entrypoint-initdb.d/
+#    env_file: .env-db
+    environment:
+      - POSTGRES_USER=mateloadmin
+      - POSTGRES_PASSWORD=mantra
+      - POSTGRES_DB=matelodb
+    ports:
+      - 5432:5432
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+
+  #      PROXY_API: http://playground-web-backend:8080/
   frontend:
     build: ./frontend/
     container_name: matelo-mantra-frontend
     ports:
       - 5002:8080
+
+volumes:
+  static:
+  postgres_data:

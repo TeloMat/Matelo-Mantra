@@ -10,7 +10,9 @@
 /media/posts/
 
 /register/migrations/
-/Mainproject/.env
+/.env
 /frontend/.env
 !/main/migrations/0001_initial.py
 !/main/migrations/
+!/.env
+/postgres_data/
