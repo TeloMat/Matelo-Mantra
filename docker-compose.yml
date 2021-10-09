@@ -6,7 +6,7 @@ services:
     container_name: matelo-mantra-backend
     volumes:
       - static:/static
-      - media:/media
+      - media:/app/media
     env_file:
       - .env
     ports:
