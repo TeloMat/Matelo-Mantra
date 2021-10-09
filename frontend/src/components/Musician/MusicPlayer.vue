@@ -82,7 +82,7 @@ export default {
       var target = this.getTargetProgress(event.clientX)
       aud.currentTime = aud.duration * target
       $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
-      console.log(target + "*" + aud.duration)
+      // console.log(target + "*" + aud.duration)
     },
     /*,
     next : function (){
