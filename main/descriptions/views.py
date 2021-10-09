@@ -54,7 +54,6 @@ def createDescription(response):
         return HttpResponseRedirect('/login/')
     if response.method == "POST":
         form = CreateNewDescription(response.POST)
-        print(form.errors)
         if form.is_valid():
 
             name = form.cleaned_data["name"]
