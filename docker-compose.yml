@@ -6,6 +6,7 @@ services:
     container_name: matelo-mantra-backend
     volumes:
       - static:/static
+      - media:/media
     env_file:
       - .env
     ports:
@@ -16,7 +17,6 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
       - ./db:/docker-entrypoint-initdb.d/
-      - ./media:./media
 #    env_file: .env-db
     environment:
       - POSTGRES_USER=mateloadmin
