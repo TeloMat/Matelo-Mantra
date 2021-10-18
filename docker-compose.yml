@@ -6,6 +6,7 @@ services:
     container_name: matelo-mantra-backend
     volumes:
       - static:/static
+      - media:/app/media
     env_file:
       - .env
     ports:
@@ -43,3 +44,4 @@ services:
 volumes:
   static:
   postgres_data:
+  media:

@@ -1,9 +1,9 @@
 <template>
-  <audio id="audio" :src="song.track" preload="auto"> </audio>
+  <audio id="audio" :src="base_url + song.track" preload="auto"> </audio>
   <div></div>
 
   <div class="player">
-    <div class="player_Music_cover"><img v-bind:src="process.env.VUE_APP_API + cover"></div>
+    <div class="player_Music_cover"><img v-bind:src="base_url + cover"></div>
     <div class="player_Music_text">
       <div class="player_Music_name">
         {{song.title}}
@@ -39,9 +39,12 @@ import $ from 'jquery'
 
 export default {
   name: "MusicPlayer",
-  data:()=>({
-
-  }),
+  props:['id'],
+  data(){
+    return{
+      base_url: process.env.VUE_APP_API
+    }
+  },
   methods:{
     getLeft(str) {
       var el = document.getElementById(str)
@@ -79,7 +82,7 @@ export default {
       var target = this.getTargetProgress(event.clientX)
       aud.currentTime = aud.duration * target
       $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
-      console.log(target + "*" + aud.duration)
+      // console.log(target + "*" + aud.duration)
     },
     /*,
     next : function (){

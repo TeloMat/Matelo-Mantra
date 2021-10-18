@@ -54,32 +54,32 @@ export default {
   },
   methods:{
     async fetchData(id){
-      const res = await fetch(process.env.VUE_APP_API + '/api/music/Albums/'+ id + '/' )
+      const res = await fetch(this.base_url + '/api/music/Albums/'+ id + '/' )
       return await res.json()
     },
     async fetchSong(id) {
-      const res = await fetch(process.env.VUE_APP_API + "/api/music/Albums/songs/" + id + "/")
+      const res = await fetch(this.base_url + "/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
     play: async function (id){
-      this.isFetching = true
-      var previous_player = document.getElementById("player-container")
-      if(document.body.contains(previous_player)){
-        previous_player.remove()
-      }
       var song = await this.fetchSong(id)
-      song.track = ""
       const body = document.body
-      var audio_player = defineComponent({extends: MusicPlayer,
-        data: () => ({
-        song : song,
-        cover: this.album.cover
+      var previous_player = document.getElementById("player-container")
+      if(song != null){
+        if(document.body.contains(previous_player)){
+          previous_player.remove()
+        }
+        var audio_player = defineComponent({extends: MusicPlayer,
+          data: () => ({
+          song : song,
+          cover: this.album.cover
+          })
         })
-      })
-      const div = document.createElement('div');
-      div.id = "player-container"
-      body.appendChild(div);
-      createApp(audio_player).mount(div)
+        const div = document.createElement('div');
+        div.id = "player-container"
+        body.appendChild(div);
+        createApp(audio_player).mount(div)
+      }
 
     }
   },

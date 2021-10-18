@@ -1,6 +1,5 @@
 /venv
 /db.sqlite3
-/media/*
 /frontend/dist
 /frontend/node_modules
 /frontend/webpack-stats.json
