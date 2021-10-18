@@ -1,24 +1,25 @@
 <template>
-  <div class="album_card">
-    <router-link :to="{ name: 'Music_details', params: {id: album.id}}"><div class="album_title"><p>{{ album.title }}</p></div></router-link>
-    <div class="album_content">
-      <div class="album_details">
-      <div class="album_cover"><img v-bind:src="base_url + album.cover" ></div>
-      <div class="album_credits">Credits :<br> Artist : {{ album.artist }}</div>
-      </div>
-      <div class="album_songs">
-        <div  class="song" :key="song.id" v-for="song in album.songs">
-          <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
-          <div class="song_text">
-            <div class="song_title">{{ song.title }}</div>
-            <div class="song_artist"><small>{{ song.artists }}</small></div>
-          </div>
-          <div class="song_duration">1:22</div>
+  <router-link :to="{ name: 'Music_details', params: {id: album.id}}">
+    <div class="album_card">
+        <div class="album_title"><p>{{ album.title }}</p></div>
+      <div class="album_content">
+        <div class="album_details">
+        <div class="album_cover"><img v-bind:src="base_url + album.cover" ></div>
+        <div class="album_credits">Credits :<br> Artist : {{ album.artist }}</div>
         </div>
-
+        <div class="album_songs">
+          <div  class="song" :key="song.id" v-for="song in album.songs">
+            <div class="song_number">{{ album.songs.indexOf(song) + 1}}</div>
+            <div class="song_text">
+              <div class="song_title">{{ song.title }}</div>
+              <div class="song_artist"><small>{{ song.artists }}</small></div>
+            </div>
+            <div class="song_duration">1:22</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>

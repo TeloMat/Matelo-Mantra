@@ -1,6 +1,6 @@
 <template>
  <div class="post_card">
-    <div class="post_cover"><img :src="post.thumbnail"></div>
+    <div class="post_cover"><img :src="base_url +post.thumbnail"></div>
     <div class="post_content">
 
       <router-link to=post_details><div class="post_title"><p>{{ post.name }}</p></div></router-link>
@@ -16,6 +16,11 @@ name: "PostView",
   components:{},
   props:{
     post: Object
+  },
+  data(){
+    return{
+      base_url: process.env.VUE_APP_API,
+    }
   },
   methods:{}
 }
