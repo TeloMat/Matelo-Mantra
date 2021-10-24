@@ -2,23 +2,22 @@
   <background/>
   <menu-bar/>
   <div class="wrapper">
-     <div class="post_card">
-    <div class="post_content">
-    <div class="post_cover"><img :src="base_url + "></div>
-      <div class="post_info">
-
-      <router-link to=post_details><div class="post_title"><p>Post title</p></div></router-link>
-      <div class="post_credits">Credits :<br> producer : Matelo Mantra <br> Writer : Matelo Mantra</div>
-    </div>
-    </div>
-    <div class="post_text"> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</div>
- </div>
-
+    <router-link to=post_details><div class="post_title"><p>{{ post.name}} </p></div>
+      <div class="post_card">
+         <div class="post_content">
+          <div class="post_cover"><img :src="base_url + post.thumbnail"></div>
+          <div class="post_info">
+            <div class="post_credits">Credits :<br>
+              <div class="post_credits_item" :key="credit.id" v-for="credit in post.credits">
+                <b>{{credit.contributor}}</b> - {{credit.contribution}}
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="post_text"> {{ post.text }}</div>
+      </div>
+    </router-link>
   </div>
-<div>
-
-</div>
-
 </template>
 
 <script>
@@ -29,10 +28,23 @@ export default {
   components: {MenuBar, Background},
   data(){
     return{
+      post: Object,
+      isFetching: true,
       base_url: process.env.VUE_APP_API,
     }
   },
+    methods:{
+    async fetchData(id){
 
+      const res = await fetch(process.env.VUE_APP_API +"/api/travels/albums/"+ id +"/")
+
+      return await res.json()
+    },
+  },
+  async created() {
+      this.post= await this.fetchData(this.$route.params.id)
+      this.isFetching = false
+  }
 }
 </script>
 

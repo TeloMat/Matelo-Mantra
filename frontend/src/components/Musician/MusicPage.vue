@@ -86,7 +86,6 @@ export default {
   async created(){
     this.album = await this.fetchData(this.$route.params.id)
     this.isFetching = false
-    console.log(this.album)
   },
 }
 </script>

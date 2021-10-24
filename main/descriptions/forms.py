@@ -5,13 +5,13 @@ class CreateNewDescription(forms.Form):
     name = forms.CharField(label="Description name", max_length=200)
     text = forms.CharField(label="Description text", widget=forms.Textarea, max_length=800)
     quote = forms.CharField(label="Description quote", max_length=300)
-    picture = forms.ImageField(label="Profile picture", required=False)
-    musician = forms.ImageField(label="Menu Picture : Musician Item picture", required=False)
-    writer = forms.ImageField(label="Menu Picture : Writer Item Picture", required=False)
-    traveler = forms.ImageField(label="Menu Picture : Traveler Item Picture", required=False)
-    public = forms.BooleanField(label="Select this description for display (Selecting this box will disable display on any other existing description)",
-                                required=False)
-
+    picture = forms.ImageField(label="Profile picture", required=True)
+    musician = forms.ImageField(label="Menu Picture : Musician Item picture", required=True)
+    writer = forms.ImageField(label="Menu Picture : Writer Item Picture", required=True)
+    traveler = forms.ImageField(label="Menu Picture : Traveler Item Picture", required=True)
+    public = forms.BooleanField(
+        label="Select this description for display (Selecting this box will disable display on any other existing description)",
+        required=False)
 
 
 class EditDescription(forms.Form):
@@ -25,13 +25,13 @@ class EditDescription(forms.Form):
                                               required=False,
                                               widget=forms.Textarea(
                                                   attrs={
-                                                    'placeholder': description.text
+                                                      'placeholder': description.text
                                                   }
                                               ))
         self.fields['quote'] = forms.CharField(label="Description quote",
-                                              widget=forms.TextInput(
-                                                  attrs={'value': description.name}
-                                              ))
+                                               widget=forms.TextInput(
+                                                   attrs={'value': description.quote}
+                                               ))
         self.id = description.id
         if description.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,

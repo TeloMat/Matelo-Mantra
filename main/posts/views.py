@@ -19,7 +19,7 @@ def indexPost(response, id):
                 p.text = form.cleaned_data["text"]
 
             if response.FILES.get('thumbnail'):
-                p.thumbnail.save(p.name + "_tb.jpg", response.FILES.get('thumbnail'))
+                p.thumbnail.save()
             p.public = form.cleaned_data["public"]
             p.save()
             return HttpResponseRedirect("/api/post/")

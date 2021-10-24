@@ -26,9 +26,10 @@ class EditMAlbum(forms.Form):
                                                      required=False,
                                                      max_length=250,
                                                      widget=forms.Textarea(
-                                                         attrs={'placeholder': album.title}
+                                                         attrs={'value': album.description}
                                                      ))
         self.id = album.id
+
         if album.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,
                                                        widget=forms.CheckboxInput(

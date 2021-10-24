@@ -21,13 +21,13 @@ def indexPAlbum(response, id):
                 album.description = form.cleaned_data["description"]
             album.public = form.cleaned_data["public"]
             if response.FILES.get("thumbnail"):
-                album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
+                album.thumbnail.save()
             if response.FILES.get("musician"):
-                album.thumbnail.save(album.title + "_musician.jpg", response.FILES.get('musician'))
+                album.thumbnail.save()
             if response.FILES.get("writer"):
-                album.thumbnail.save(album.title + "_writer.jpg", response.FILES.get('writer'))
+                album.thumbnail.save()
             if response.FILES.get("traveler"):
-                album.thumbnail.save(album.title + "_traveler.jpg", response.FILES.get('traveler'))
+                album.thumbnail.save()
             album.save()
             return HttpResponseRedirect("/api/travels/")
 

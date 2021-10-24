@@ -10,7 +10,6 @@ from .serializers import MAlbumSerializer, SongSerializer, SongPlayerSerializer
 def listMAlbum(response):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-
     albumList = MusicAlbum.objects.all()
     return render(response, "main/music_albums/albumList.html", {"list": albumList})
 
@@ -20,20 +19,10 @@ def createMAlbum(response):
         return HttpResponseRedirect('/login/')
 
     if response.method == "POST":
-        form = CreateNewMAlbum(response.POST, response.FILES)
-        if form.is_valid():
-            cd = form.cleaned_data
-            album = MusicAlbum()
-            album.title = cd.get('title')
-            album.artist = cd.get('artist')
-            if cd.get('description'):
-                album.description = cd.get('description')
-            album.public = cd.get('public')
-            if response.FILES.get('cover'):
-                album.cover.save(album.title + "_cover.jpg", response.FILES.get('cover'))
-            album.save()
+        success = MusicAlbum().create_album()
+        if success:
             return HttpResponseRedirect("/api/music/")
-
+        return HttpResponseRedirect("/api/home/")
     form = CreateNewMAlbum()
 
     return render(response, "main/music_albums/albumCreate.html", {"form": form})
@@ -42,27 +31,16 @@ def createMAlbum(response):
 def indexMAlbum(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-
     album = MusicAlbum.objects.get(id=id)
-
     if response.method == "POST":
-        form = EditMAlbum(album, response.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            album.title = cd.get('title')
-            album.artist = cd.get('artist')
-            album.description = cd.get('description')
-            album.public = cd.get('public')
-            if response.FILES.get('cover'):
-                album.cover.save(album.title + "cover.jpg",
-                                 response.FILES.get('cover'))
-            album.save()
-            return HttpResponseRedirect("/api/music/")
-
+        success = album.edit_album(response)
+        if not success:
+            return HttpResponseRedirect("/api/home/")
+        return HttpResponseRedirect("/api/music/")
     form = EditMAlbum(album)
-    songForm = AddNewSong()
+    song_form = AddNewSong()
     return render(response, "main/music_albums/album.html", {"album": album,
-                                                             "form": form, "songForm": songForm})
+                                                             "form": form, "songForm": song_form})
 
 
 def deleteMAlbum(response, id):
@@ -70,8 +48,7 @@ def deleteMAlbum(response, id):
         return HttpResponseRedirect('/login/')
 
     album = MusicAlbum.objects.get(id=id)
-    album.cover.delete()
-    album.delete()
+    album.delete_album()
     return HttpResponseRedirect("/api/music/")
 
 
@@ -79,20 +56,10 @@ def createSong(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
 
-    form = AddNewSong(response.POST, response.FILES)
-    if not response.FILES.get('track'):
-        return HttpResponseForbidden()
-    if form.is_valid():
-        album = MusicAlbum.objects.get(id=id)
-        cd = form.cleaned_data
-        album.songs.create(
-            title=cd.get('title'),
-            description=cd.get('description'),
-            artists=cd.get('artists'),
-            track=response.FILES.get('track')
-        )
-
-    return HttpResponseRedirect("/api/music/" + str(id) + "/")
+    success = MusicAlbum.objects.get(id=id).add_song(response)
+    if success:
+        return HttpResponseRedirect("/api/music/" + str(id) + "/")
+    return HttpResponseRedirect("/api/home/")
 
 
 def indexSong(response, id):
@@ -120,12 +87,8 @@ def indexSong(response, id):
 def deleteSong(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
-
-    song = Song.objects.get(id=id)
-    album_id = song.album_id
-    song.track.delete()
-    song.delete()
-    return HttpResponseRedirect('/api/music/' + str(album_id) + '/')
+    Song.objects.get(id=id).delete_song()
+    return HttpResponseRedirect('/api/music/')
 
 
 def malbum_list(request):
@@ -146,9 +109,9 @@ def malbum(request, id):
 def song_list(request, id):
     if request.method == 'GET':
         album = MusicAlbum.objects.get(id=id)
-        if album.public != True:
+        songs = album.get_songs()
+        if songs is not None:
             return JsonResponse()
-        songs = Song.objects.filter(album_id=id)
         serializer = SongSerializer(songs, many=True)
         return JsonResponse(serializer.data, safe=False)
     # return JsonResponse()

@@ -9,11 +9,9 @@ from .descriptions.models import *
 
 
 admin.site.register(Post)
-admin.site.register(PostTag)
 admin.site.register(PostCredit)
 admin.site.register(PictureAlbum)
 admin.site.register(Picture)
-admin.site.register(PictureTag)
 admin.site.register(MusicAlbum)
 admin.site.register(Description)
 admin.site.register(Song)
