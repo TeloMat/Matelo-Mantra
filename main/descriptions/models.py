@@ -25,7 +25,7 @@ class Description(models.Model):
             self.writer.save(self.name + "_menu3.jpg", cleaned_data.get('writer'))
 
     def handle_data(self, cleaned_data):
-        self.name =  cleaned_data.get("name")
+        self.name = cleaned_data.get("name")
         if cleaned_data.get("text"):
             self.text = cleaned_data.get("text")
         self.quote = cleaned_data.get("quote")

@@ -14,23 +14,10 @@ def indexPAlbum(response, id):
     album = PictureAlbum.objects.get(id=id)
     # if redirecting from edit
     if response.method == "POST":
-        form = EditPAlbum(album, response.POST)
-        if form.is_valid():
-            album.title = form.cleaned_data["title"]
-            if form.cleaned_data["description"]:
-                album.description = form.cleaned_data["description"]
-            album.public = form.cleaned_data["public"]
-            if response.FILES.get("thumbnail"):
-                album.thumbnail.save()
-            if response.FILES.get("musician"):
-                album.thumbnail.save()
-            if response.FILES.get("writer"):
-                album.thumbnail.save()
-            if response.FILES.get("traveler"):
-                album.thumbnail.save()
-            album.save()
+        success = album.edit_album(response)
+        if success:
             return HttpResponseRedirect("/api/travels/")
-
+        return HttpResponseRedirect("/api/home/")
     form = EditPAlbum(album)
     picForm = AddPAlbumPicture()
     tagForm = AddPAlbumTag()
@@ -51,23 +38,10 @@ def createPAlbum(response):
         return HttpResponseRedirect('/login/')
 
     if response.method == "POST":
-        form = CreateNewPAlbum(response.POST, response.FILES)
-        if form.is_valid():
-            cd = form.cleaned_data
-            album = PictureAlbum()
-            album.title = cd.get('title')
-            album.public = cd.get('public')
-            album.description = cd.get('description')
-            if response.FILES.get('thumbnail'):
-                album.thumbnail.save(album.title + "_tb.jpg", response.FILES.get('thumbnail'))
-            if response.FILES.get("musician"):
-                album.thumbnail.save(album.title + "_musician.jpg", response.FILES.get('musician'))
-            if response.FILES.get("writer"):
-                album.thumbnail.save(album.title + "_writer.jpg", response.FILES.get('writer'))
-            if response.FILES.get("traveler"):
-                album.thumbnail.save(album.title + "_traveler.jpg", response.FILES.get('traveler'))
-            album.save()
+        success = PictureAlbum().create_album(response)
+        if success:
             return HttpResponseRedirect("/api/travels/")
+        return HttpResponseRedirect("/api/home/")
     form = CreateNewPAlbum()
     return render(response, "main/picture_albums/albumCreate.html", {"form": form})
 
@@ -76,9 +50,7 @@ def deletePAlbum(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
 
-    album = PictureAlbum.objects.get(id=id)
-    album.thumbnail.delete()
-    album.delete()
+    PictureAlbum.objects.get(id=id).delete_album()
     return HttpResponseRedirect('/api/travels/')
 
 
@@ -89,22 +61,18 @@ def addPAlbumImage(response, id):
     form = AddPAlbumPicture(response.POST, response.FILES)
     if not response.FILES.get('photo'):
         return HttpResponseForbidden()
-    if form.is_valid():
-        album = PictureAlbum.objects.get(id=id)
-        cd = form.cleaned_data
-        album.pictures.create(caption=cd.get('caption'),
-                                 photo=response.FILES.get('photo'))
-
-    return HttpResponseRedirect("/api/travels/" + str(id)+"/")
+    album = PictureAlbum.objects.get(id=id)
+    success = album.add_picture(response)
+    if success:
+        return HttpResponseRedirect("/api/travels/" + str(id) + "/")
+    return HttpResponseRedirect("/api/home/")
 
 
 def deletePAlbumImg(response, id):
     if not response.user.is_authenticated:
         return HttpResponseRedirect('/login/')
 
-    picture = Picture.objects.get(id=id)
-    picture.photo.delete()
-    picture.delete()
+    Picture.objects.get(id=id).delete_picture()
     return redirect('/api/travels/' + str(id))
 
 
@@ -118,7 +86,7 @@ def addPAlbumTag(response, id):
         tag_val = form.cleaned_data["val"]
         album.picturetag_set.create(val=tag_val)
 
-    return HttpResponseRedirect("/api/travels/" + str(id)+'/')
+    return HttpResponseRedirect("/api/travels/" + str(id) + '/')
 
 
 def displayPicture(response, id):
@@ -149,7 +117,7 @@ def palbum(request, id):
 def picture_list(request, id):
     if request.method == 'GET':
         album = PictureAlbum.objects.get(id=id)
-        if album.public != True:
+        if not album.public:
             return JsonResponse()
         pictures = Picture.objects.filter(album_id=id)
         serializer = PictureSerializer(pictures, many=True)

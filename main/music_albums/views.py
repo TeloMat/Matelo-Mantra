@@ -68,17 +68,11 @@ def indexSong(response, id):
 
     song = Song.objects.get(id=id)
     if response.method == "POST":
-        form = EditSong(Song, response.POST, response.FILES)
-        if form.is_valid():
-            cd = form.cleaned_data
-            song.title = cd.get('title')
-            song.artists = cd.get('artists')
-            if cd.get('description'):
-                song.description = cd.get('description')
-            if cd.get('track'):
-                song.track = cd.get('track')
-            song.save()
-            return HttpResponseRedirect("/api/music/" + str(song.album_id) + "/")
+        success = song.edit_song(response)
+        if success:
+            return HttpResponseRedirect("/api/music/")
+        return HttpResponseRedirect("/api/home/")
+
     form = EditSong(song)
     return render(response, "main/music_albums/albumSong.html",
                   {"song": song, "form": form})

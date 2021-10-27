@@ -1,7 +1,5 @@
 from django import forms
 
-from main.picture_albums.models import PictureAlbum
-
 
 class CreateNewPAlbum(forms.Form):
     title = forms.CharField(label="Album title", max_length=50)

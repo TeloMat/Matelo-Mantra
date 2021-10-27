@@ -1,6 +1,6 @@
 from django.db import models
 
-from main.music_albums.forms import CreateNewMAlbum, AddNewSong, EditMAlbum
+from main.music_albums.forms import CreateNewMAlbum, AddNewSong, EditMAlbum, EditSong
 
 
 class MusicAlbum(models.Model):
@@ -30,8 +30,8 @@ class MusicAlbum(models.Model):
     def create_album(self, response, **kwargs):
         form = CreateNewMAlbum(response.POST, response.FILES)
         if form.is_valid():
-            cd = form.cleaned_data
-            self.handle_data(cd)
+            cleaned_data = form.cleaned_data
+            self.handle_data(cleaned_data)
             return True
         return False
 
@@ -46,8 +46,7 @@ class MusicAlbum(models.Model):
     def delete_album(self):
         self.cover.delete()
         for song in self.songs:
-            song.track.delete()
-            song.delete()
+            song.delete_song()
         for credit in self.credits:
             credit.delete()
         self.delete()
@@ -55,11 +54,11 @@ class MusicAlbum(models.Model):
     def add_song(self, response):
         form = AddNewSong(response.POST, response.FILES)
         if form.is_valid():
-            cd = form.cleaned_data
+            cleaned_data = form.cleaned_data
             self.songs.create(
-                title=cd.get('title'),
-                description=cd.get('description'),
-                artists=cd.get('artists'),
+                title=cleaned_data.get('title'),
+                description=cleaned_data.get('description'),
+                artists=cleaned_data.get('artists'),
                 track=response.FILES.get('track')
             )
             return True
@@ -89,6 +88,17 @@ class Song(models.Model):
         self.track.delete()
         self.delete()
 
+    def edit_song(self, response):
+        form = EditSong(self, response.POST, response.FILES)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
 
-
-
+            self.title = cleaned_data.get("title")
+            self.artists = cleaned_data.get("artists")
+            if cleaned_data.get("description"):
+                self.description = cleaned_data.get("description")
+            if cleaned_data.get("track"):
+                self.track.save(self.title + "_track.mp3", cleaned_data.get('track'))
+            self.save()
+            return True
+        return False
