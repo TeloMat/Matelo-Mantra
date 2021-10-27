@@ -46,6 +46,11 @@ class EditMAlbum(forms.Form):
     cover = forms.ImageField(label="Cover picture", required=False)
 
 
+class AddNewCredit(forms.Form):
+    contributor = forms.CharField(max_length=20)
+    contribution = forms.CharField(max_length=200, required=False)
+
+
 class AddNewSong(forms.Form):
     title = forms.CharField(label="Song Title", max_length=50)
     artists = forms.CharField(label="Artists", max_length=100)

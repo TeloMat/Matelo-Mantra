@@ -3,7 +3,6 @@ from . import views
 
 
 #from .views import PostView, CreatePostView
-
 urlpatterns = [
     path("", views.listMAlbum, name="listMAlbum"),
     path("create/", views.createMAlbum, name="createMAlbum"),
@@ -12,6 +11,8 @@ urlpatterns = [
     path("<int:id>/createSong/", views.createSong, name="createSong"),
     path("songs/<int:id>/", views.indexSong, name="indexSong"),
     path("songs/<int:id>/delete/", views.deleteSong, name="deleteSong"),
+    path("<int:id>/credits/create/", views.create_credit, name="create_credit"),
+    path("<int:id>/credits/delete/", views.delete_credit, name="delete_credit"),
 
     path("Albums/list/", views.malbum_list, name="restMalbumsList"),
     path("Albums/<int:id>/", views.malbum, name="restSingleMalbum"),
@@ -19,3 +20,4 @@ urlpatterns = [
     path("Albums/songs/<int:id>/", views.song, name="restSong"),
 
 ]
+

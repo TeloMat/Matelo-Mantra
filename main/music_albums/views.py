@@ -39,8 +39,10 @@ def indexMAlbum(response, id):
         return HttpResponseRedirect("/api/music/")
     form = EditMAlbum(album)
     song_form = AddNewSong()
+    credit_form = AddNewCredit()
     return render(response, "main/music_albums/album.html", {"album": album,
-                                                             "form": form, "songForm": song_form})
+                                                             "form": form, "songForm": song_form,
+                                                             "creditForm": credit_form})
 
 
 def deleteMAlbum(response, id):
@@ -119,3 +121,18 @@ def song(request, id):
             serializer = SongPlayerSerializer(song)
             return JsonResponse(serializer.data, safe=True)
     # return JsonResponse()
+
+
+def create_credit(request, id):
+    if request.method == 'POST':
+        success = MusicAlbum.objects.get(id).add_credit(request)
+        if success:
+            return HttpResponseRedirect("/api/travels/" + str(id) + "/")
+        return HttpResponseRedirect("/api/home/")
+
+
+def delete_credit(response, id):
+    if not response.user.is_authenticated:
+        return HttpResponseRedirect('/login/')
+    AlbumCredit.objects.get(id=id).delete_credit()
+    return HttpResponseRedirect('/api/music/')

@@ -1,6 +1,6 @@
 from django.db import models
 
-from main.music_albums.forms import CreateNewMAlbum, AddNewSong, EditMAlbum, EditSong
+from main.music_albums.forms import CreateNewMAlbum, AddNewSong, EditMAlbum, EditSong, AddNewCredit
 
 
 class MusicAlbum(models.Model):
@@ -69,11 +69,25 @@ class MusicAlbum(models.Model):
             return None
         return Song.objects.filter(self.id)
 
+    def add_credit(self, response):
+        form = AddNewCredit(response.POST, response.FILES)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            self.songs.create(
+                contributor=cleaned_data.get('contributor'),
+                contribution=cleaned_data.get('contribution'),
+            )
+            return True
+        return False
+
 
 class AlbumCredit(models.Model):
     album = models.ForeignKey(MusicAlbum, related_name='credits', on_delete=models.CASCADE)
     contributor = models.CharField(max_length=50)
     contribution = models.CharField(max_length=200, blank=True)
+
+    def delete_credit(self):
+        self.delete()
 
 
 class Song(models.Model):

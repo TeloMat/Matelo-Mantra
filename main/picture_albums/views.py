@@ -23,7 +23,7 @@ def indexPAlbum(response, id):
     tagForm = AddPAlbumTag()
 
     return render(response, "main/picture_albums/album.html",
-                  {"album": album, "form": form, "picForm": picForm, "tagForm": tagForm})
+                  {"album": album, "form": form, "picForm": picForm})
 
 
 def listPAlbum(response):
