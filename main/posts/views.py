@@ -18,7 +18,6 @@ def indexPost(response, id):
         return HttpResponseRedirect("/api/home/")
 
     form = EditPost(p)
-    tagForm = AddPostTag()
     creditForm = AddPostCredit()
 
     return render(response, "main/posts/post.html",

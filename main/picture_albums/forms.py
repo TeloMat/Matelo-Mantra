@@ -40,7 +40,3 @@ class EditPAlbum(forms.Form):
 class AddPAlbumPicture(forms.Form):
     caption = forms.CharField(label="Caption", max_length=255, widget=forms.Textarea)
     photo = forms.ImageField(label="Photo")
-
-
-class AddPAlbumTag(forms.Form):
-    val = forms.CharField(label="tag", max_length=15, required=True)

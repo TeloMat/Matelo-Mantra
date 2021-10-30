@@ -20,7 +20,6 @@ def indexPAlbum(response, id):
         return HttpResponseRedirect("/api/home/")
     form = EditPAlbum(album)
     picForm = AddPAlbumPicture()
-    tagForm = AddPAlbumTag()
 
     return render(response, "main/picture_albums/album.html",
                   {"album": album, "form": form, "picForm": picForm})
@@ -75,18 +74,6 @@ def deletePAlbumImg(response, id):
     Picture.objects.get(id=id).delete_picture()
     return redirect('/api/travels/' + str(id))
 
-
-def addPAlbumTag(response, id):
-    if not response.user.is_authenticated:
-        return HttpResponseRedirect('/login/')
-
-    form = AddPAlbumTag(response.POST)
-    if form.is_valid():
-        album = PictureAlbum.objects.get(id=id)
-        tag_val = form.cleaned_data["val"]
-        album.picturetag_set.create(val=tag_val)
-
-    return HttpResponseRedirect("/api/travels/" + str(id) + '/')
 
 
 def displayPicture(response, id):
