@@ -30,19 +30,18 @@
 
         Album pictures :
     </div>
-           <div class="card-group">
+           <div class="card_group">
 
     {% for p in album.pictures.all %}
-          <div class="card">
-              {% if p.photo %}
+        <div class="list-group-item list-group-item-action flex-column align-items-start card_item_link">
+          <div class="card_item">
                   <a href="/api/travels/pic/{{ p.id }}/">
-            <img class="card-img-top" src="{{ MEDIA_URL }}{{ p.photo }}" alt="Card image cap">
+            <img class="card_img_top" src="{{ MEDIA_URL }}{{ p.photo }}" alt="Card image cap">
             </a>
-              {% endif %}
 
-        <p class="card-text">{{ p.caption }}</p>
-       <a href="/api/travels/{{ p.id }}/deleteImg/" class="btn btn-danger btn-sm rounded-0" type="button">Delete</a>
-
+        <p class="card_caption">{{ p.caption }}</p>
+       <a href="/api/travels/{{ p.id }}/deleteImg/" class="btn_delete" type="button">Delete</a>
+</div>
                </div>
     {% endfor %}
            </div>

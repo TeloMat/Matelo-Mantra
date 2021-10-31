@@ -12,26 +12,27 @@ Description list
     </div>
      <br>
 
-        <a href="/api/descriptions/create/">  <div class="col-md-3 border-right">Create new Description</div> </a>
+        <a href="/api/descriptions/create/" class="create_button">Create new Description </a>
 
-    <div class="card-group">
+    <div class="card_group">
        {% for p in list %}
-            <div class="card">
-            <a href="/api/descriptions/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
-                  {% if p.picture %}
-                <img class="card-img-top" src="{{ MEDIA_URL }}{{p.picture }}" alt="Card image cap">
-                {% endif %}
-                  <h5 class="card-title">{{ p.name }}</h5>
-                <h5 class="card-title"><small class="text-muted">{{ p.quote }}</small></h5>
+            <div class="card_item">
+                <a href="/api/descriptions/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start card_item_link">
+                      {% if p.picture %}
+                    <img class="card_img_top" src="{{ MEDIA_URL }}{{p.picture }}" alt="Card image cap">
+                    {% endif %}
+                      <h5 class="card_title">{{ p.name }}</h5>
 
-                  <p class="card-text">{{ p.text }}</p>
-            <a href="/api/descriptions/{{ p.id }}/delete/" class="btn btn-danger btn-sm rounded-0" type="button"
-                    data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+                      <div class="card_text"><p >{{ p.text }}</p></div>
+                      <p class="card_timestamp"><small >{{ p.created_at }}</small></p>
 
-            </a>
+                    <a href="/api/descriptions/{{ p.id }}/delete/" class=" btn_delete" type="button"
+                            data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+
+                </a>
             </div>
         {% endfor %}
-        </div>
+    </div>
 
 
 

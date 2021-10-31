@@ -12,29 +12,28 @@ Music Album list
 </div>
         <br>
 
-        <a href="/api/music/create/">  <div class="col-md-3 border-right">Create new Album</div> </a>
+        <a href="/api/music/create/" class="create_button">Create new Album </a>
 
 
 
-       <div class="card-group">
-       {% for p in list %}
+       <div class="card_group">
+           {% for p in list %}
 
-        <div class="card">
-            <a href="/api/music/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
-                  {% if p.cover %}
-                <img class="card-img-top" src="{{ MEDIA_URL }}{{p.cover }}" alt="Card image cap">
-                {% endif %}
-                  <h5 class="card-title">{{ p.title }}</h5>
-                <h5 class="card-title"><small class="text-muted">{{ p.artist }}</small></h5>
+            <div class="card_item">
+                <a href="/api/music/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start card_item_link">
+                      {% if p.cover %}
+                    <img class="card_img_top" src="{{ MEDIA_URL }}{{p.cover }}" alt="Card image cap">
+                    {% endif %}
+                      <h5 class="card_title">{{ p.title }}</h5>
 
-                  <p class="card-text">{{ p.description }}</p>
-                  <p class="card-text"><small class="text-muted">{{ p.created_at }}</small></p>
-            <a href="/api/music/{{ p.id }}/delete/" class="btn btn-danger btn-sm rounded-0" type="button"
-                    data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+                      <div class="card_text"><p >{{ p.description }}</p></div>
+                      <p class="card_timestamp">{{ p.created_at }}</p>
+                <a href="/api/music/{{ p.id }}/delete/" class="btn_delete" type="button"
+                        data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
 
-            </a>
-        </div>
-        {% endfor %}
+                </a>
+            </div>
+            {% endfor %}
         </div>
 
 {% endblock %}

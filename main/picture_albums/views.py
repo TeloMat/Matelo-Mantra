@@ -72,7 +72,7 @@ def deletePAlbumImg(response, id):
         return HttpResponseRedirect('/login/')
 
     Picture.objects.get(id=id).delete_picture()
-    return redirect('/api/travels/' + str(id))
+    return redirect('/api/travels/' + str(id) +'/')
 
 
 

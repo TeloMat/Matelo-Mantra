@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 
-from .forms import EditPost, CreateNewPost, AddPostCredit, AddPostTag
+from .forms import EditPost, CreateNewPost, AddPostCredit
 from .models import Post
 from .serializers import PostSerializer
 
@@ -21,8 +21,7 @@ def indexPost(response, id):
     creditForm = AddPostCredit()
 
     return render(response, "main/posts/post.html",
-                  {"post": p, "form": form,
-                   "tagForm": tagForm, "creditForm": creditForm})
+                  {"post": p, "form": form, "creditForm": creditForm})
 
 
 def deletePost(response, id):
