@@ -48,7 +48,7 @@ export default {
   border-radius: 3vh;
   padding: 4vh 1vw;
   display: block;
-  height: 75vh;
+  height: 600px;
   margin: 30px 0;
   overflow: hidden;
   box-shadow: 0px 10px 20px 5px grey;
@@ -81,15 +81,14 @@ export default {
 }
 .album_cover{
   height: 60%;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 5px;
   margin-bottom: 10% ;
 }
 .album_cover img{
   object-fit: cover;
-  max-height: 100%;
+  width: 100%;
   margin: 0 -140%;
 }
 .album_credits{
@@ -97,10 +96,10 @@ export default {
   margin: 7.5% 0;
   text-align: left;
   width: 90%;
-  height: 25%;
+  height: 20%;
   overflow: scroll;
   font-family: Impact;
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: rgba(140, 139, 139,0.5);
 }
 
@@ -109,7 +108,7 @@ export default {
   padding: 2.5% 2.5%;
   border-radius: 1vw;
   width: 50%;
-  height: 73.5%;
+  height: 70%;
   background-color: #333333;
   color: #dddddd;
   display: block;

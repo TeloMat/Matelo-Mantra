@@ -99,7 +99,7 @@ export default {
   background-size: 25px 25px;
   background-color: inherit;
   background-repeat: no-repeat;
-  background-image: url("../../assets/play-button-arrowhead.png");
+  background-image: url("../../assets/Play.png");
 }
 .album_card{
   background-color: rgba(211, 211, 211, 0.5);

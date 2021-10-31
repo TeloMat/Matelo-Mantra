@@ -105,9 +105,11 @@ a{
 
 #player-container{
   position: fixed;
+  height: 120px;
   bottom: 0;
   left: 0;
   width: 100%;
+  transition: bottom 0.5s;
 }
 
 

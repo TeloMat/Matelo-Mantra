@@ -1,8 +1,7 @@
 <template>
   <audio id="audio" :src="base_url + song.track" preload="auto"> </audio>
-  <div></div>
-
-  <div class="player">
+  <div id="btn_hide_player" class="down" v-on:click="hide_show_player"></div>
+  <div id="player">
     <div class="player_Music_cover"><img v-bind:src="base_url + cover"></div>
     <div class="player_Music_text">
       <div class="player_Music_name">
@@ -42,9 +41,19 @@ export default {
   props:['id'],
   data(){
     return{
+      hidden: false,
       base_url: process.env.VUE_APP_API
     }
   },
+  async created() {
+    var aud = $('audio')[0];
+    if (aud.paused) {
+        aud.play();
+        $('#play-pause').removeClass('icon-play');
+        $('#play-pause').addClass('icon-stop');
+    }
+  },
+
   methods:{
     getLeft(str) {
       var el = document.getElementById(str)
@@ -89,15 +98,21 @@ export default {
       var aud = $('audio')[0]
       aud.src = "new source"
     }*/
-  },
 
-  async created() {
-    var aud = $('audio')[0];
-    if (aud.paused) {
-        aud.play();
-        $('#play-pause').removeClass('icon-play');
-        $('#play-pause').addClass('icon-stop');
-    }
+    hide_show_player(){
+      if(this.hidden !== true){
+        $('#player-container').css('bottom', '-80px')
+        $('#btn_hide_player').removeClass('down')
+        $('#btn_hide_player').addClass('up')
+        console.log("test")
+        this.hidden = true
+      }else{
+        $('#player-container').css('bottom', '0')
+        $('#btn_hide_player').removeClass('up')
+        $('#btn_hide_player').addClass('down')
+        this.hidden = false
+      }
+    },
   }
 
 }
@@ -107,14 +122,13 @@ export default {
 
 
 
-  .player{
+  #player{
     width: 100%;
     padding: 15px 15vw 10px 15vw ;
     display: flex;
-    background-color: rgba(51, 51, 51, 0.9);
+    background-color: rgba(255, 255, 255, 0.2);
     z-index: +10000;
     box-shadow: 0px 10px 20px 5px #000000;
-
 
   }
   .player_Music_text{
@@ -122,28 +136,19 @@ export default {
   }
   .player_Music_cover{
     margin:0  20px;
-    margin-bottom: 10px;
     width:50px;
     height:50px;
     overflow: hidden;
   }
   .player_Music_cover img{
-    max-height: 100%;
-    max-width: 100%;
+    height: 100%;
   }
-
   #progress {
-    /*position: absolute;*/
-    /*height: 5px;*/
-    /*left: 0;*/
-    /*top: 0;*/
     margin-top: -1px;
     width: 0;
-    background-color: #000000;
+    background-color: #333333;
     height: 7px;
     border-radius: 10px;
-
-
   }
   #duration{
     width: 40vw;
@@ -154,6 +159,27 @@ export default {
   }
   #duration:hover{
     cursor: pointer;
+  }
+  #btn_hide_player{
+    position: relative;
+    height: 40px;
+    width: 40px;
+    background-size: 40px 40px ;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 95%;
+    transition: background-image 0.5s;
+  }
+  #btn_hide_player img{
+    height: 100%;
+    width: 100%;
+
+  }
+  .down{
+    background-image: url("../../assets/arrow_down.png");
+  }
+  .up{
+    background-image: url("../../assets/arrow_up.png");
   }
 
   .btns {
@@ -178,18 +204,18 @@ export default {
   }
 
   .icon-play{
-    background-image: url("../../assets/play-button-arrowhead.png");
+    background-image: url("../../assets/Play.png");
   }
   .icon-stop{
 
-    background-image: url("../../assets/pause.png");
+    background-image: url("../../assets/Pause.png");
   }
   .next{
     padding: 5px;
     height: 25px;
     width: 25px;
     background-size: 25px 25px;
-    background-image: url("../../assets/next.png");
+    background-image: url("../../assets/Next.png");
     background-repeat: no-repeat;
     background-position: center;
 

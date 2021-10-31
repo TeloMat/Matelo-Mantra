@@ -112,7 +112,7 @@ export default {
 
   .grid_content_item:hover{
     transform: scale(1.3);
-    z-index: +1;
+    /*z-index: +1;*/
   }
 
   .grid_content_item:hover .grid_content_item_text{
