@@ -12,22 +12,24 @@ Post list
     </div>
     <br>
     <a href="/api/post/create/" class="create_button"> Create new post</a>
-    <div class="list-group">
+    <div class="card_group">
 
     {% for p in list %}
-  <a href="/api/post/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{ p.name }}</h5>
-      <small>{{ p.created_at }}</small>
+    <div class="card_item">
+        <a href="/api/post/{{ p.id }}/" class="list-group-item list-group-item-action flex-column align-items-start card_item_link">
+              {% if p.thumbnail %}
+            <img class="card_img_top" src="{{ MEDIA_URL }}{{p.thumbnail }}" alt="Card image cap">
+            {% endif %}
+              <h5 class="card_title">{{ p.name }}</h5>
+
+              <div class="card_text"><p >{{ p.text }}</p></div>
+              <p class="card_timestamp"><small >{{ p.created_at }}</small></p>
+
+            <a href="/api/descriptions/{{ p.id }}/delete/" class=" btn_delete" type="button"
+                    data-toggle="tooltip" data-placement="top" title="Delete">Delete</a>
+
+        </a>
     </div>
-    <p class="mb-1">{{ p.text }}</p>
-      {% if p.public == True %}
-    <small>public</small>
-        {% else %}
-    <small>private </small>
-    {% endif %}
-    <a href="/api/post/{{ p.id }}/delete/" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
-  </a>
 
     {% endfor %}
         </div>
