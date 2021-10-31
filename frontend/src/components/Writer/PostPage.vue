@@ -2,9 +2,9 @@
   <background/>
   <menu-bar/>
   <div class="wrapper">
-    <router-link to=post_details><div class="post_title"><p>{{ post.name}} </p></div>
+    <div class="post_title"><p>{{ post.name}} </p></div>
       <div class="post_card">
-         <div class="post_content">
+       <div class="post_content">
           <div class="post_cover"><img :src="base_url + post.thumbnail"></div>
           <div class="post_info">
             <div class="post_credits">Credits :<br>
@@ -16,7 +16,6 @@
         </div>
       <div class="post_text"> {{ post.text }}</div>
       </div>
-    </router-link>
   </div>
 </template>
 
@@ -36,9 +35,8 @@ export default {
     methods:{
     async fetchData(id){
 
-      const res = await fetch(process.env.VUE_APP_API +"/api/travels/albums/"+ id +"/")
-
-      return await res.json()
+      const res = await fetch(process.env.VUE_APP_API +"/api/post/rest/"+ id +"/")
+      return res.json();
     },
   },
   async created() {
@@ -53,7 +51,7 @@ export default {
   background-color: rgba(211, 211, 211, 0.5);
   border-radius: 25px;
   padding: 2.5% 3%;
-  height: 80vh;
+  height: 600px;
   margin: 30px 0;
 }
 .post_title{
@@ -72,23 +70,22 @@ export default {
 }
 .post_credits{
   padding: 2.5%;
-  margin: 5% 0;
+  margin-left: 5%;
   text-align: left;
-  width: 95%;
-  height: 60%;
+  width: 90%;
+  height: 100%;
   overflow: scroll;
   font-family: Impact;
   border-radius: 25px;
   background-color: rgba(140, 139, 139,0.5);
 }
 .post_info{
-  width: 55%;
+  width: 60%;
   margin: 0;
   padding: 0;
-  height: fit-content;
+  height: 80%;
 }
 .post_content{
-
   display: flex;
   flex-flow: column wrap;
   width: 100%;
@@ -96,15 +93,14 @@ export default {
   margin: 0;
 }
 .post_cover{
-  height: 100%;
-  margin: 2.5% 2%;
-  max-width: 40%;
+  height: 90%;
+  width: 40%;
+  overflow: hidden;
+  border-radius: 25px;
 }
 .post_cover img{
   object-fit: cover;
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: 25px;
+  width: 100%;
   margin: 0 -140%;
 }
 .post_text{
@@ -114,7 +110,7 @@ export default {
   background-color: rgba(32, 91, 80, 0.7);
   text-align: justify;
   width: 95%;
-  height: 40%;
+  height: 30%;
 
   overflow: scroll;
 }

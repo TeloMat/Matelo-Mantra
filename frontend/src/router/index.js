@@ -47,7 +47,7 @@ const routes = [
         component: PicAlbumPage
     },
     {
-        path: "/post_details",
+        path: "/post_details/:id",
         name: "Post_details",
         component: PostPage,
     },
