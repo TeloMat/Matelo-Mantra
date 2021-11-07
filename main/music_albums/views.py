@@ -19,7 +19,7 @@ def createMAlbum(response):
         return HttpResponseRedirect('/login/')
 
     if response.method == "POST":
-        success = MusicAlbum().create_album()
+        success = MusicAlbum().create_album(response)
         if success:
             return HttpResponseRedirect("/api/music/")
         return HttpResponseRedirect("/api/home/")

@@ -54,7 +54,7 @@ class Post(models.Model):
             cleaned_data = form.cleaned_data
             self.credits.create(
                 contributor=cleaned_data.get('contributor'),
-                contribution=response.FILES.get('contribution')
+                contribution=cleaned_data.get('contribution')
             )
             return True
         return False

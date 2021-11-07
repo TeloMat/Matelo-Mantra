@@ -1,12 +1,18 @@
 <template>
+      <a :href="base_url+picture.photo">
   <div class="container">
-      <img class="container_img" :src="base_url + picture.photo">
+
+    <img class="container_img" :src="base_url + picture.photo">
     <div class="picture_text">
       <p class="text">{{ picture.caption}}</p>
     </div>
-    <router-link :to="{ name: 'Travel_details', params: {id: picture.id}}"><div class="picture_button"> Discover this trip </div> </router-link>
+    <router-link :to="{ name: 'Travel_details', params: {id: picture.id}}">
+<!--      <div class="picture_button"> Discover this trip </div> -->
+    </router-link>
 
   </div>
+      </a>
+
 </template>
 
 <script>

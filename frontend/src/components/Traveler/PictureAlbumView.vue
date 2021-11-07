@@ -4,7 +4,9 @@
     <div class="album_text">
       <p class="text">{{ album.title}}</p>
     </div>
-    <router-link :to="{ name: 'Travel_details', params: {id: album.id}}"><div class="album_button"> Discover this trip </div> </router-link>
+    <router-link :to="{ name: 'Travel_details', params: {id: album.id}}">
+      <div class="album_button"> Discover this trip </div>
+    </router-link>
 
   </div>
 </template>
