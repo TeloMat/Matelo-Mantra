@@ -45,9 +45,9 @@ class MusicAlbum(models.Model):
 
     def delete_album(self):
         self.cover.delete()
-        for song in self.songs:
+        for song in self.songs.all():
             song.delete_song()
-        for credit in self.credits:
+        for credit in self.credits.all():
             credit.delete()
         self.delete()
 

@@ -44,7 +44,7 @@ class Post(models.Model):
 
     def delete_post(self):
         self.thumbnail.delete()
-        for credit in self.credits:
+        for credit in self.credits.all():
             credit.delete_credit()
         self.delete()
 

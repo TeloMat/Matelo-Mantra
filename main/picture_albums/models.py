@@ -44,7 +44,7 @@ class PictureAlbum(models.Model):
 
     def delete_album(self):
         self.thumbnail.delete()
-        for picture in self.pictures:
+        for picture in self.pictures.all():
             picture.delete_picture()
         self.delete()
 
