@@ -51,7 +51,6 @@ export default {
   },
   async created() {
       this.album = await this.fetchData(this.$route.params.id)
-      console.log(this.album)
   }
 }
 </script>
@@ -85,9 +84,8 @@ export default {
 }
 .album_text{
   margin: 2.5% 2.5% 5% 2.5%;
-  width: auto;
-  max-width: 45%;
-  max-height: 70%;
+  width: 50%;
+  height: 70%;
 }
 .album_text p{
   margin-top: 5px;
@@ -95,8 +93,8 @@ export default {
   text-align: center;
 }
 .album_title{
-  padding: 2% 10%;
-  margin-bottom: 5%;
+  padding: 2.5% 0%;
+  margin-bottom: 3%;
   border-radius: 25px;
   background-color: rgba(255, 255,255,0.3);
   height: 15%;
@@ -111,8 +109,7 @@ export default {
 
 .album_description{
   padding: 2% 5%;
-  max-height: 75%;
-  margin: 5% 0;
+  height: 68%;
   overflow: scroll;
   border-radius: 25px;
   color: #1e3136ff;

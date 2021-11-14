@@ -75,10 +75,7 @@ export default {
           cover: this.album.cover
           })
         })
-        const div = document.createElement('div');
-        div.id = "player-container"
-        body.appendChild(div);
-        createApp(audio_player).mount(div)
+        createApp(audio_player).mount(body)
       }
 
     }

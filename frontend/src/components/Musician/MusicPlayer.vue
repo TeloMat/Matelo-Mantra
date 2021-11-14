@@ -87,8 +87,8 @@ export default {
 
     },
     move_head: function(event){
-      var aud = $('audio')[0];
-      var target = this.getTargetProgress(event.clientX)
+      let aud = $('audio')[0];
+      let target = this.getTargetProgress(event.clientX);
       aud.currentTime = aud.duration * target
       $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
       // console.log(target + "*" + aud.duration)

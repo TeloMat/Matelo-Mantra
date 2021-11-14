@@ -75,6 +75,8 @@ body {
   z-index: -20;
   width: 100%;
   overflow: hidden;
+  transition: filter 0.5s;
+
 }
 .wrapper{
     margin-right: auto; /* 1 */
@@ -111,6 +113,36 @@ a{
   width: 100%;
   transition: bottom 0.5s;
 }
+#image_container{
+  position: fixed;
+  top: 15vh;
+  left: 15vw;
+  z-index: +10;
+  height: 70vh;
+  width: 70vw;
+  overflow: hidden;
+  transition: display 0.5s;
+
+}
+
+.blurred{
+  filter: blur(10px);
+}
+
+#image_perimeter{
+  position: fixed;
+  top: 0;
+  z-index: +1;
+  height: 1000vh;
+  width: 1000vw;
+}
+
+#image_container img{
+  width: 100%;
+  height: 100%;
+
+}
+
 
 
 </style>

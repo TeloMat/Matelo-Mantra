@@ -1,6 +1,5 @@
 <template>
-      <a :href="base_url+picture.photo">
-  <div class="container">
+  <div class="container" v-on:click="display_picture()">
 
     <img class="container_img" :src="base_url + picture.photo">
     <div class="picture_text">
@@ -11,11 +10,14 @@
     </router-link>
 
   </div>
-      </a>
 
 </template>
 
 <script>
+import $ from 'jquery'
+import PictureFullSize from "./PictureFullSize";
+import {createApp, defineComponent} from "vue";
+
 export default {
   name: "PictureView",
   components:{
@@ -29,6 +31,24 @@ export default {
     picture: Object
   },
   methods: {
+    display_picture: function (){
+      let url = this.base_url + this.picture.photo
+      const body = document.body
+      var previous_picture = document.getElementById("image_container")
+      if(document.body.contains(previous_picture)){
+          previous_picture.remove()
+        }
+      const div = document.createElement('div')
+      var picture = defineComponent({extends: PictureFullSize,
+          data: () => ({
+            url : url
+          })
+        })
+      body.appendChild(div)
+      createApp(picture).mount(div)
+      $('#app').addClass('blurred')
+
+    }
   }
 }
 </script>
@@ -39,6 +59,7 @@ export default {
   height: 100%;
   margin: 0;
   padding: 0;
+  z-index: +1;
   overflow: hidden;
   position: relative;
 }
@@ -62,7 +83,7 @@ export default {
   overflow: scroll;
   border-radius: 25px;
   max-width: 90%;
-  max-height: 30%;
+  max-height: 50%;
   z-index: -10;
 
   color: white;
@@ -70,7 +91,7 @@ export default {
   background-color: rgba(129, 116, 116, 0.3);
 
 
-  margin: -60% 5% 5% 5%;
+  margin: -50% 5% 5% 5%;
 }
 
 .container:hover .picture_text{

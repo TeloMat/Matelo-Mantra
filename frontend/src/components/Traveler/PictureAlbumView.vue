@@ -66,7 +66,7 @@ export default {
   background-color: rgba(129, 116, 116, 0.3);
 
 
-  margin: -60% 5% 5% 5%;
+  margin: -50% 5% 5% 5%;
 }
 
 .container:hover .album_text{
