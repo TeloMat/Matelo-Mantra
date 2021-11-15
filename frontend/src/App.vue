@@ -4,33 +4,6 @@
 </template>
 
 <script>
-
-
-// const Home = {template: '<Body></Body>'}
-
-
-// const routes = {
-//   '/': Home
-// }
-
-// new Vue({
-//   el: '#app',
-//   data: {
-//     currentRoute: window.location.pathname
-//   },
-//   computed:{
-//     ViewComponent (){
-//       return routes[this.currentRoute]
-//     }
-//   },
-//   render(h){
-//     return h(this.ViewComponent)
-//   }
-// })
-// import Vue from 'vue'
-// import axios from 'axios'
-// import VueAxios from 'vue-axios'
-// Vue.use(VueAxios, axios)
 export default {
   name: 'App',
   components: {
