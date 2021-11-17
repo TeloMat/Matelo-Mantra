@@ -39,7 +39,7 @@ services:
     build: ./frontend/
     container_name: matelo-mantra-frontend
     ports:
-      - 5002:80
+      - 80:8080
 
 volumes:
   static:
