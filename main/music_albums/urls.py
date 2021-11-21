@@ -12,7 +12,7 @@ urlpatterns = [
     path("songs/<int:id>/", views.indexSong, name="indexSong"),
     path("songs/<int:id>/delete/", views.deleteSong, name="deleteSong"),
     path("<int:id>/credits/create/", views.create_credit, name="create_credit"),
-    path("<int:id>/credits/delete/", views.delete_credit, name="delete_credit"),
+    path("credits/<int:id>/delete/", views.delete_credit, name="delete_credit"),
 
     path("Albums/list/", views.malbum_list, name="restMalbumsList"),
     path("Albums/<int:id>/", views.malbum, name="restSingleMalbum"),

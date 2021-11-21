@@ -4,8 +4,12 @@
         <div class="album_title"><p>{{ album.title }}</p></div>
       <div class="album_content">
         <div class="album_details">
-        <div class="album_cover"><img v-bind:src="base_url + album.cover" ></div>
-        <div class="album_credits">Credits :<br> Artist : {{ album.artist }}</div>
+          <div class="album_cover"><img v-bind:src="base_url + album.cover" ></div>
+          <div class="album_credits">Credits :<br> Artist : {{ album.artist }}
+            <br>
+            <div :key="credit.id" v-for="credit in album.credits">
+            {{ credit.contribution}} : {{credit.contributor}}
+          </div></div>
         </div>
         <div class="album_songs">
           <div  class="song" :key="song.id" v-for="song in album.songs">
@@ -14,7 +18,7 @@
               <div class="song_title">{{ song.title }}</div>
               <div class="song_artist"><small>{{ song.artists }}</small></div>
             </div>
-            <div class="song_duration">1:22</div>
+            <div class="song_duration">0:00</div>
           </div>
         </div>
       </div>
@@ -38,6 +42,9 @@ export default {
   },
   methods: {
 
+  },
+  async created(){
+    console.log(this.album)
   }
 }
 </script>

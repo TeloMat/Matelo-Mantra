@@ -70,10 +70,10 @@ class MusicAlbum(models.Model):
         return Song.objects.filter(self.id)
 
     def add_credit(self, response):
-        form = AddNewCredit(response.POST, response.FILES)
+        form = AddNewCredit(response.POST)
         if form.is_valid():
             cleaned_data = form.cleaned_data
-            self.songs.create(
+            self.credits.create(
                 contributor=cleaned_data.get('contributor'),
                 contribution=cleaned_data.get('contribution'),
             )

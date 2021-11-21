@@ -46,7 +46,15 @@
         </form>
     <br>
         <hr style="border-top: 1px solid #8c8b8b">
-
+    <div class="h4"> Album Credits:</div>
+        <div class="card" style="width: 18rem;">
+          <ul class="list-group list-group-flush">
+             {% for t in album.credits.all %}
+                 <li class="list-group-item"><b>{{ t.contributor }} :</b> {{ t.contribution }} <a href="/api/music/credits/{{ t.id }}/delete/" class="btn btn-danger btn-sm rounded-0" type="button"
+                data-toggle="tooltip" data-placement="top" title="Delete">Delete</a></li>
+             {% endfor %}
+          </ul>
+        </div>
     <div class="h4"> Add New credit to this album :</div>
     <form method="post" action="/api/music/{{ form.id }}/credits/create/" class="form-group" enctype="multipart/form-data">
 

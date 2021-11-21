@@ -125,9 +125,9 @@ def song(request, id):
 
 def create_credit(request, id):
     if request.method == 'POST':
-        success = MusicAlbum.objects.get(id).add_credit(request)
+        success = MusicAlbum.objects.get(id=id).add_credit(request)
         if success:
-            return HttpResponseRedirect("/api/travels/" + str(id) + "/")
+            return HttpResponseRedirect("/api/music/" + str(id) + "/")
         return HttpResponseRedirect("/api/home/")
 
 
