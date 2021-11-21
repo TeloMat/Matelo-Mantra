@@ -41,6 +41,7 @@ import Background from "@/components/Background";
 import MenuBar from "@/components/MenuBar";
 import MusicPlayer from "./MusicPlayer";
 import { defineComponent, createApp } from 'vue'
+import $ from "jquery";
 export default {
   name: "MusicPage",
   components: {MenuBar, Background},
@@ -61,8 +62,12 @@ export default {
       const res = await fetch(this.base_url + "/api/music/Albums/songs/" + id + "/")
       return await res.json()
     },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     play: async function (id){
       var song = await this.fetchSong(id)
+      let aud = $('audio')[0];
       const body = document.body
       var previous_player = document.getElementById("player_container")
       if(song != null){
@@ -78,6 +83,13 @@ export default {
         const div = document.createElement('div')
         body.appendChild(div)
         createApp(audio_player).mount(div)
+        while (aud == null){
+          this.sleep(100)
+          aud = $('audio')[0]
+        }
+        $('audio')[0].ontimeupdate = function(){
+          $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
+        }
       }
 
     }

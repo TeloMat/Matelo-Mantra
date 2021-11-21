@@ -48,9 +48,7 @@ export default {
     }
   },
   methods:{
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
+
     getLeft(str) {
       var el = document.getElementById(str)
       return el.getBoundingClientRect().left;
@@ -89,11 +87,6 @@ export default {
       $('#progress').css('width', (aud.currentTime / aud.duration) * 100 + '%')
       // console.log(target + "*" + aud.duration)
     },
-    /*,
-    next : function (){
-      var aud = $('audio')[0]
-      aud.src = "new source"
-    }*/
 
     hide_show_player(){
       if(this.hidden !== true){
@@ -109,6 +102,7 @@ export default {
       }
     },
     async created() {
+
 
     },
 
