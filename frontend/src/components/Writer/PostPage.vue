@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-      <div class="post_text"> {{ post.text }}</div>
+      <div class="post_text">{{ post.text }}</div>
       </div>
   </div>
 </template>

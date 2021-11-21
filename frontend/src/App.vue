@@ -76,24 +76,27 @@ a{
 
 
 
+.image{
+  overflow: scroll;
+  height: fit-content;
+}
 
-
-#player-container{
+#player_container{
   position: fixed;
   height: 120px;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   transition: bottom 0.5s;
 }
 #image_container{
-  position: fixed;
-  top: 15vh;
+  position: absolute;
+  top: 0;
   left: 15vw;
   z-index: +10;
-  height: 70vh;
+  height: auto;
   width: 70vw;
-  overflow: hidden;
+  margin: 20vh 0;
   transition: display 0.5s;
 
 }

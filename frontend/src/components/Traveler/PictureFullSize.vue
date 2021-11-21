@@ -1,7 +1,9 @@
 <template>
-  <div id="image_perimeter" v-on:click="remove_image"></div>
-  <div id="image_container">
-    <img id="image_content" v-bind:src="url">
+  <div id="image_overlay">
+    <div id="image_perimeter" v-on:click="remove_image"></div>
+    <div id="image_container">
+      <img id="image_content" v-bind:src="url">
+    </div>
   </div>
 </template>
 
@@ -19,6 +21,7 @@ export default {
     remove_image: function (){
       $('#image_perimeter').remove()
       $('#image_container').remove()
+      $('#image_overlay').remove()
       $('#app').removeClass('blurred')
     }
   },

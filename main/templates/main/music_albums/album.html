@@ -48,7 +48,7 @@
         <hr style="border-top: 1px solid #8c8b8b">
 
     <div class="h4"> Add New credit to this album :</div>
-    <form method="post" action="/api/music/{{ form.id }}/credit/create/" class="form-group" enctype="multipart/form-data">
+    <form method="post" action="/api/music/{{ form.id }}/credits/create/" class="form-group" enctype="multipart/form-data">
 
         {% csrf_token %}
         {{ creditForm|crispy }}

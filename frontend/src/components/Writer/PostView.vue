@@ -4,7 +4,7 @@
       <div class="post_cover"><img :src="base_url + post.thumbnail"></div>
       <div class="post_content">
         <div class="post_title"><p>{{ post.name }}</p></div>
-        <div class="post_text">{{post.text}}.</div>
+        <div class="post_text"><p>{{post.text}}</p></div>
         <div class="post_credits">Credits :<div v-for="credit in post.credits" :key="credit.id"><br> {{credit.contribution}} : {{credit.contributor}}<br> Writer : Matelo Mantra</div></div>
       </div>
     </div>
@@ -36,7 +36,7 @@ name: "PostView",
   height: 60vh;
   margin: 30px 0;
   flex-flow: column wrap;
-   box-shadow: 0px 10px 20px 5px grey;
+  box-shadow: 0px 10px 20px 5px grey;
 }
 .post_title{
   border-radius: 25px;

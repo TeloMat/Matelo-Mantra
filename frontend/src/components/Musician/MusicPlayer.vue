@@ -1,25 +1,27 @@
 <template>
-  <audio id="audio" :src="base_url + song.track" preload="auto"> </audio>
-  <div id="btn_hide_player" class="down" v-on:click="hide_show_player"></div>
-  <div id="player">
-    <div class="player_Music_cover"><img v-bind:src="base_url + cover"></div>
-    <div class="player_Music_text">
-      <div class="player_Music_name">
-        {{song.title}}
+  <div id="player_container">
+    <audio id="audio" :src="base_url + song.track" preload="auto" autoplay> </audio>
+    <div id="btn_hide_player" class="down" v-on:click="hide_show_player"></div>
+    <div id="player">
+      <div class="player_Music_cover"><img v-bind:src="base_url + cover"></div>
+      <div class="player_Music_text">
+        <div class="player_Music_name">
+          {{song.title}}
+        </div>
+        <div class="player_Music_artist">
+           <small> {{song.artists}}</small>
+        </div>
       </div>
-      <div class="player_Music_artist">
-         <small> {{song.artists}}</small>
-      </div>
-    </div>
-    <div class='btns'>
-      <div v-on:click="play_pause()" id="play-pause" class="iconfont  icon-play"></div>
-      <div id="duration" v-on:click="move_head">
-        <div id="progress"></div>
-      </div>
-      <div class="iconfont next icon-next"></div>
-      <div class="iconfont volume icon-next"></div>
-      <div id="max_volume" v-on:click="move_head">
-        <div id="current_vol"></div>
+      <div class='btns'>
+        <div v-on:click="play_pause()" id="play-pause" class="iconfont  icon-stop"></div>
+        <div id="duration" v-on:click="move_head">
+          <div id="progress"></div>
+        </div>
+        <div class="iconfont next icon-next"></div>
+        <div class="iconfont volume icon-next"></div>
+        <div id="max_volume" v-on:click="move_head">
+          <div id="current_vol"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,16 +47,10 @@ export default {
       base_url: process.env.VUE_APP_API
     }
   },
-  async created() {
-    var aud = $('audio')[0];
-    if (aud.paused) {
-        aud.play();
-        $('#play-pause').removeClass('icon-play');
-        $('#play-pause').addClass('icon-stop');
-    }
-  },
-
   methods:{
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     getLeft(str) {
       var el = document.getElementById(str)
       return el.getBoundingClientRect().left;
@@ -69,7 +65,7 @@ export default {
       return target
     },
     play_pause: function(){
-      var aud = $('audio')[0];
+      var aud = $('#audio')[0];
 
       if (aud.paused) {
         aud.play();
@@ -101,18 +97,21 @@ export default {
 
     hide_show_player(){
       if(this.hidden !== true){
-        $('#player-container').css('bottom', '-80px')
+        $('#player_container').css('bottom', '-80px')
         $('#btn_hide_player').removeClass('down')
         $('#btn_hide_player').addClass('up')
-        console.log("test")
         this.hidden = true
       }else{
-        $('#player-container').css('bottom', '0')
+        $('#player_container').css('bottom', '0')
         $('#btn_hide_player').removeClass('up')
         $('#btn_hide_player').addClass('down')
         this.hidden = false
       }
     },
+    async created() {
+
+    },
+
   }
 
 }
@@ -172,7 +171,7 @@ export default {
   }
   #btn_hide_player img{
     height: 100%;
-    width: 100%;
+    /*width: 100%;*/
 
   }
   .down{

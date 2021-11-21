@@ -64,7 +64,7 @@ export default {
     play: async function (id){
       var song = await this.fetchSong(id)
       const body = document.body
-      var previous_player = document.getElementById("player-container")
+      var previous_player = document.getElementById("player_container")
       if(song != null){
         if(document.body.contains(previous_player)){
           previous_player.remove()
@@ -75,7 +75,9 @@ export default {
           cover: this.album.cover
           })
         })
-        createApp(audio_player).mount(body)
+        const div = document.createElement('div')
+        body.appendChild(div)
+        createApp(audio_player).mount(div)
       }
 
     }
@@ -175,7 +177,7 @@ export default {
   padding: 2% 2%;
   border-radius: 25px;
   width: 90%;
-  height: 55%;
+  height: 50%;
   background-color: #333333;
   color: #dddddd;
   display: block;
@@ -287,7 +289,7 @@ export default {
     .album_songs{
       border-radius: 30px;
       width: 90%;
-      height: 80vh;
+      height: 80%;
       margin-bottom: 0;
       overflow: scroll;
     }
