@@ -9,13 +9,13 @@ class SongPlayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Song
-        fields = ('title', 'album', 'artists', 'track')
+        fields = ('title', 'album', 'artists', 'track', 'track_duration')
 
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('id', 'title', 'artists', 'description')
+        fields = ('id', 'title', 'artists', 'description', 'track_duration')
 
 
 class credit_serializer(serializers.ModelSerializer):

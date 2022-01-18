@@ -56,6 +56,11 @@ class AddNewSong(forms.Form):
     artists = forms.CharField(label="Artists", max_length=100)
     description = forms.CharField(label="Description", max_length=250, required=False, widget=forms.Textarea)
     track = forms.FileField(label="Track")
+    def validate_file_extension(value):
+        if not value.name.endswith('.mp3'):
+            return True
+        return False
+
 
 
 class EditSong(forms.Form):

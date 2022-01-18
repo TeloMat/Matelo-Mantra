@@ -16,3 +16,16 @@
 !/main/migrations/
 !/.env
 /postgres_data/
+
+/staticfiles
+main/posts/__pycache__
+main/picture_albums/__pycache__
+package-lock.json
+main/descriptions/__pycache__
+main/__pycache__
+Mainproject/__pycache__
+main/migrations/__pycache__
+register/__pycache__
+__pycache__
+frontend/package-lock.json
+

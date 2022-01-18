@@ -1,4 +1,6 @@
+from operator import mod
 from django.db import models
+from mutagen import mp3
 
 from main.music_albums.forms import CreateNewMAlbum, AddNewSong, EditMAlbum, EditSong, AddNewCredit
 
@@ -59,7 +61,8 @@ class MusicAlbum(models.Model):
                 title=cleaned_data.get('title'),
                 description=cleaned_data.get('description'),
                 artists=cleaned_data.get('artists'),
-                track=response.FILES.get('track')
+                track=response.FILES.get('track'),
+                track_duration=mp3.MP3(response.FILES.get('track')).info.length
             )
             return True
         return False
@@ -89,6 +92,10 @@ class AlbumCredit(models.Model):
     def delete_credit(self):
         self.delete()
 
+def validate_file_extension(value):
+    if not value.name.endswith('.mp3'):
+        raise ValidationError(u'Only mp3 files are supported!')
+
 
 class Song(models.Model):
     album = models.ForeignKey(MusicAlbum, related_name='songs', on_delete=models.CASCADE)
@@ -96,7 +103,8 @@ class Song(models.Model):
     artists = models.CharField(max_length=100, default="Matelo Mantra")
     description = models.CharField(max_length=250, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    track = models.FileField(upload_to='music/tracks')
+    track = models.FileField(upload_to='music/tracks', validators=[validate_file_extension])
+    track_duration = models.FloatField(default=0)
 
     def delete_song(self):
         self.track.delete()
@@ -116,3 +124,4 @@ class Song(models.Model):
             self.save()
             return True
         return False
+
