@@ -10,29 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-import environ
+from dotenv import load_dotenv
 from pathlib import Path
 
-env = environ.Env(
-    # # set casting, default value
-    # DEBUG=(bool, False)
-)
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 # with open(os.path.join(BASE_DIR, 'secret_key.txt'))as f:
 #     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -99,11 +95,11 @@ WSGI_APPLICATION = 'Mainproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DATABASE'),
-        'USER': env('DBUSER'),
-        'PASSWORD': env('DBPASSWORD'),
-        'HOST': env('DBURL'),
-        'PORT': env('DBPORT'),
+        'NAME': os.getenv('DATABASE'),
+        'USER': os.getenv('DBUSER'),
+        'PASSWORD': os.getenv('DBPASSWORD'),
+        'HOST': os.getenv('DBURL'),
+        'PORT': os.getenv('DBPORT'),
     }
 }
 
