@@ -2,9 +2,9 @@ from django import forms
 
 
 class CreateNewDescription(forms.Form):
-    name = forms.CharField(label="Description name", max_length=200)
-    text = forms.CharField(label="Description text", widget=forms.Textarea, max_length=800)
-    quote = forms.CharField(label="Description quote", max_length=300)
+    name = forms.CharField(label="Description name", max_length=100)
+    text = forms.CharField(label="Description text", widget=forms.Textarea, max_length=300)
+    quote = forms.CharField(label="Description quote", max_length=100)
     picture = forms.ImageField(label="Profile picture", required=True)
     musician = forms.ImageField(label="Menu Picture : Musician Item picture", required=True)
     writer = forms.ImageField(label="Menu Picture : Writer Item Picture", required=True)
@@ -20,18 +20,19 @@ class EditDescription(forms.Form):
         self.fields['name'] = forms.CharField(label="Description name",
                                               widget=forms.TextInput(
                                                   attrs={'value': description.name}
-                                              ))
+                                              ), max_length=100
+                                              )
         self.fields['text'] = forms.CharField(label="Description Text",
                                               required=False,
                                               widget=forms.Textarea(
                                                   attrs={
                                                       'placeholder': description.text
                                                   }
-                                              ))
+                                              ), max_length=350)
         self.fields['quote'] = forms.CharField(label="Description quote",
                                                widget=forms.TextInput(
                                                    attrs={'value': description.quote}
-                                               ))
+                                               ), max_length=100)
         self.id = description.id
         if description.public:
             self.fields['public'] = forms.BooleanField(label="Make public", required=False,

@@ -1,23 +1,22 @@
-/frontend/node_modules/
-/db.sqlite3
-/venv/
-/frontend/webpack-stats.json
-/frontend/src/assets/website/
-/media/music/
-/media/travels/
+frontend/node_modules/
+db.sqlite3
+venv/
+frontend/webpack-stats.json
+frontend/src/assets/website/
+media/music/
+media/travels/
 
-/media/descriptions/
-/media/posts/
+media/descriptions/
+media/posts/
 
-/register/migrations/
-/.env
-/frontend/.env
+register/migrations/
+.env
+frontend/.env
 !/main/migrations/0001_initial.py
 !/main/migrations/
-!/.env
-/postgres_data/
+postgres_data/
 
-/staticfiles
+staticfiles
 main/posts/__pycache__
 main/picture_albums/__pycache__
 package-lock.json

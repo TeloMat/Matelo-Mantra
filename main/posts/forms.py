@@ -2,7 +2,7 @@ from django import forms
 
 
 class CreateNewPost(forms.Form):
-    name = forms.CharField(label="Post title", max_length=200)
+    name = forms.CharField(label="Post title", max_length=300)
     text = forms.CharField(label="Post text", widget=forms.Textarea)
     thumbnail = forms.ImageField(label="Thumbnail picture", required=True)
     public = forms.BooleanField(label="Make public", required=False)

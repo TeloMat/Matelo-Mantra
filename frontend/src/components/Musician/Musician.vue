@@ -36,7 +36,9 @@ export default {
     this.albums.forEach((album) => {
       album.songs.forEach((song) => {
         song.seconds = parseInt(song.track_duration) % 60;
+        if (song.seconds < 10) song.seconds = "0" + song.seconds.toString();
         song.mins = (parseInt(song.track_duration) - song.seconds) / 60;
+        if (song.mins < 10) song.mins = "0" + song.mins.toString();
       });
     });
 

@@ -5,9 +5,9 @@ from .forms import CreateNewDescription, EditDescription
 
 
 class Description(models.Model):
-    name = models.CharField(max_length=200)
-    text = models.TextField(max_length=800, blank=True)
-    quote = models.CharField(max_length=300)
+    name = models.CharField(max_length=100)
+    text = models.TextField(max_length=350, blank=True)
+    quote = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='descriptions/profile', blank=False)
     musician = models.ImageField(upload_to='descriptions/musician', blank=False)
     writer = models.ImageField(upload_to='descriptions/writer', blank=False)
