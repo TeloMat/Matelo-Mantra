@@ -88,20 +88,35 @@ export default {
         );
       };
     },
-    move_head: function (event) {
-      let aud = $("audio")[0];
-      let target = this.getTargetProgress(event.clientX);
-      $("#play-pause").addClass("loading");
-      aud.pause();
-      $("#play-pause").removeClass("icon-stop");
-      $("#play-pause").removeClass("icon-play");
-      aud.load(this.song.track_duration * target);
-      aud.currentTime = this.song.track_duration * target;
-      $("#progress").css("width", (aud.currentTime / aud.duration) * 100 + "%");
-      aud.play();
+    onloadhandler: function (audio, song, target) {
+      // aud.load(this.song.track_duration * target);
+      audio.currentTime = song.track_duration * target;
+      $("#progress").css(
+        "width",
+        (this.currentTime / this.duration) * 100 + "%"
+      );
+      this.play();
       $("#play-pause").removeClass("loading");
       $("#play-pause").removeClass("icon-play");
       $("#play-pause").addClass("icon-stop");
+    },
+
+    move_head: function (event) {
+      // let aud = $("audio")[0];
+      let aud = document.getElementById("audio");
+      let target = this.getTargetProgress(event.clientX);
+
+      //audio is ready to play all the way through
+      $("#play-pause").addClass("loading");
+      $("#play-pause").removeClass("icon-stop");
+      $("#play-pause").removeClass("icon-play");
+      aud.pause();
+      // aud.load();
+      aud.addEventListener(
+        "canplaythrough",
+        this.onloadhandler.bind(aud, this.song, target)
+      );
+
       //   },
       //   false
       // );
