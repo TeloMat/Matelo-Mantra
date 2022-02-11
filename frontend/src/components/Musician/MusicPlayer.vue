@@ -101,6 +101,7 @@ export default {
       $("#play-pause").removeClass("icon-stop");
       $("#play-pause").removeClass("icon-play");
       aud.pause();
+      aud.load();
       aud.currentTime = this.song.track_duration * target;
       aud.play();
       $("#play-pause").removeClass("loading");
