@@ -49,7 +49,7 @@ export default {
   },
   methods: {},
   async created() {
-    console.log(this.album);
+    // console.log(this.album);
   },
 };
 </script>

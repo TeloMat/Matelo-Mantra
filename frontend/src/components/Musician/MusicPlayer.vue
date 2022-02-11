@@ -25,8 +25,15 @@
           id="play-pause"
           class="iconfont icon-stop"
         ></div>
-        <div id="duration" v-on:click="move_head">
-          <div id="progress"></div>
+        <div id="duration">
+          <input
+            type="range"
+            min="1"
+            max="1000"
+            id="progress"
+            step="1"
+            v-on:change="move_head()"
+          />
         </div>
         <div class="iconfont next icon-next"></div>
         <div class="iconfont volume icon-next"></div>
@@ -71,7 +78,10 @@ export default {
     },
     play_pause: function () {
       var aud = $("#audio")[0];
-
+      // aud.ontimeupdate = function () {
+      //   document.getElementById("progress").value = aud.currentTime * 1000;
+      // };
+      console.log((aud.currentTime / aud.duration) * 1000);
       if (aud.paused) {
         aud.play();
         $("#play-pause").removeClass("icon-play");
@@ -81,47 +91,21 @@ export default {
         $("#play-pause").removeClass("icon-stop");
         $("#play-pause").addClass("icon-play");
       }
-      $("audio")[0].ontimeupdate = function () {
-        $("#progress").css(
-          "width",
-          (aud.currentTime / aud.duration) * 100 + "%"
-        );
-      };
-    },
-    onloadhandler: function (audio, song, target) {
-      // aud.load(this.song.track_duration * target);
-      audio.currentTime = song.track_duration * target;
-      $("#progress").css(
-        "width",
-        (this.currentTime / this.duration) * 100 + "%"
-      );
-      this.play();
-      $("#play-pause").removeClass("loading");
-      $("#play-pause").removeClass("icon-play");
-      $("#play-pause").addClass("icon-stop");
     },
 
-    move_head: function (event) {
-      // let aud = $("audio")[0];
+    move_head: function () {
       let aud = document.getElementById("audio");
-      let target = this.getTargetProgress(event.clientX);
+      let target = document.getElementById("progress").value / 1000;
 
-      //audio is ready to play all the way through
       $("#play-pause").addClass("loading");
       $("#play-pause").removeClass("icon-stop");
       $("#play-pause").removeClass("icon-play");
       aud.pause();
-      // aud.load();
-      aud.addEventListener(
-        "canplaythrough",
-        this.onloadhandler.bind(aud, this.song, target)
-      );
-
-      //   },
-      //   false
-      // );
-
-      // console.log(target + "*" + aud.duration)
+      aud.currentTime = this.song.track_duration * target;
+      aud.play();
+      $("#play-pause").removeClass("loading");
+      $("#play-pause").removeClass("icon-play");
+      $("#play-pause").addClass("icon-stop");
     },
 
     hide_show_player() {
@@ -163,19 +147,26 @@ export default {
 .player_Music_cover img {
   height: 100%;
 }
-#progress {
+/* #progress {
   margin-top: -1px;
   width: 0;
   background-color: #333333;
   height: 7px;
   border-radius: 10px;
-}
+} */
 #duration {
   width: 40vw;
+}
+/* #duration input {
+  width: 100%;
+} */
+#progress {
   margin: 10px 5vw;
   height: 5px;
   background-color: #8c8b8b;
   border-radius: 10px;
+  width: 60%;
+  padding: 0;
 }
 #duration:hover {
   cursor: pointer;

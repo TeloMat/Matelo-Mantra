@@ -95,12 +95,11 @@ export default {
           this.sleep(100);
           aud = $("audio")[0];
         }
-        $("audio")[0].ontimeupdate = function () {
-          $("#progress").css(
-            "width",
-            (aud.currentTime / aud.duration) * 100 + "%"
-          );
+        aud.ontimeupdate = function () {
+          document.getElementById("progress").value =
+            (aud.currentTime / aud.duration) * 1000;
         };
+        // document.getElementById("#progress").value = 0;
       }
     },
   },
